@@ -1,0 +1,20 @@
+/* Import Poppins for headings */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* Import Inter for body text */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Import Noto Sans Devanagari for Hindi */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700;800&display=swap');
+
+/* Import Noto Sans Bengali for Bengali */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&display=swap');
+
+/* Multilingual font stack */
+body {
+  font-family: 'Inter', 'Noto Sans Devanagari', 'Noto Sans Bengali', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', 'Noto Sans Devanagari', 'Noto Sans Bengali', sans-serif;
+}

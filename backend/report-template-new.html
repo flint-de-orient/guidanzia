@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Guidance Report</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', 'Noto Sans Devanagari', 'Noto Sans Bengali', sans-serif;
+            line-height: 1.6;
+            color: #374151;
+            background: #f9fafb;
+        }
+        
+        .lang-hi { font-family: 'Noto Sans Devanagari', 'Inter', sans-serif; }
+        .lang-bn { font-family: 'Noto Sans Bengali', 'Inter', sans-serif; }
+        .lang-en { font-family: 'Inter', sans-serif; }
+        
+        .container { max-width: 900px; margin: 0 auto; padding: 0; background: white; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        
+        /* Professional Header Design */
+        .header { 
+            background: linear-gradient(135deg, #6366f1 0%, #7c3aed 50%, #946df0 100%);
+            color: white;
+            padding: 10%;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid #4f46e5;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        .header-top {
+            text-align: center;
+            /* margin-bottom: 20px; */
+            position: relative;
+            z-index: 1;
+        }
+        .header-title {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            /* opacity: 0.98; */
+        }
+        .header-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .badge-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .header-brand {
+            text-align: center;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .brand-name {
+            font-size: 48px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+        }
+        .role-title {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            opacity: 0.98;
+            line-height: 1.3;
+        }
+        .generation-date {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        /* Metrics Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            /* gap: 18px; */
+            /* margin: 28px 0 0 0; */
+            position: relative;
+            z-index: 1;
+        }
+        .metric-card {
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            /* padding: 20px 16px; */
+            border-radius: 14px;
+            text-align: center;
+            border: 1.5px solid rgba(191, 56, 245, 0.25);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .metric-value {
+            font-size: 24px;
+            font-weight: 800;
+            /* margin-bottom: 6px; */
+            display: block;
+        }
+        .metric-label {
+            font-size: 10px;
+            opacity: 0.92;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        
+        /* Content Area */
+        .content-area {
+            padding: 20px;
+        }
+        
+        /* Section Styling with Numbers */
+        .section { 
+            margin-top: 5%;
+            page-break-inside: avoid;
+        }
+        .section-title { 
+            font-size: 19px; 
+            font-weight: 800; 
+            color: #1f2937; 
+            margin-bottom: 28px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-bottom: 14px;
+            border-bottom: 3px solid #6366f1;
+        }
+        .section-number {
+            background: linear-gradient(135deg, #6366f1, #7c3aed);
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+            font-weight: 800;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+        }
+        .section-content { 
+            font-size: 14px; 
+            line-height: 1.7; 
+            color: #4b5563;
+            text-align: justify;
+        }
+        
+        .section-content p {
+            text-align: justify;
+        }
+        
+        /* Subsection Headers */
+        .subsection-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 20px 0 14px 0;
+        }
+        
+        /* Professional Table Styles */
+        .data-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 16px; 
+            background: white;
+            border: 1px solid #648bd8;
+            border-radius: 5px;
+            /* overflow: hidden; */
+        }
+        .data-table thead { 
+            background: linear-gradient(135deg, #7b74e7, #4f46e5);
+            color: white; 
+        }
+        .data-table th { 
+            padding: 12px 14px; 
+            text-align: left; 
+            font-weight: 700; 
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .data-table td { 
+            padding: 10px 14px; 
+            border: 1px solid #648bd8; 
+            font-size: 13px; 
+            color: #374151;
+            text-align: justify;
+        }
+        .data-table tbody tr:nth-child(even) { 
+            background: #f9fafb; 
+        }
+        .data-table tbody tr:hover { 
+            background: #f3f4f6; 
+        }
+        /* .data-table tbody tr:last-child td { 
+            border-bottom: none; 
+        } */
+        
+        /* Chart Container */
+        .chart-container { 
+            background: #fafafa; 
+            /* padding-top: 15px;  */
+            border-radius: 12px; 
+            margin: 25px 10px; 
+            border: 2px solid #c7d6f3;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .chart-title { 
+            font-size: 16px; 
+            font-weight: 700; 
+            color: #1f2937; 
+            margin-bottom: 20px; 
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Numbered Lists */
+        .numbered-list {
+            counter-reset: item;
+            list-style: none;
+            padding-left: 0;
+        }
+        .numbered-list li {
+            counter-increment: item;
+            margin-bottom: 10px;
+            padding-left: 35px;
+            position: relative;
+            text-align: justify;
+        }
+        .numbered-list li::before {
+            content: counter(item);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg, #7c3aed, #a78bfa);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        
+        /* Modern Bullet Lists */
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bullet-list li {
+            margin-bottom: 8px;
+            padding-left: 28px;
+            position: relative;
+            text-align: justify;
+            line-height: 1.6;
+        }
+        .bullet-list li::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 10px;
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: #f0f9ff;
+            border-left: 4px solid #6366f1;
+            padding: 14px 18px;
+            margin: 18px 0;
+            border-radius: 4px;
+        }
+        .info-box strong {
+            color: #6366f1;
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        .footer { 
+            background: #f9fafb;
+            padding: 25px 60px; 
+            border-top: 3px solid #6366f1;
+            text-align: center; 
+            font-size: 12px; 
+            color: #6b7280;
+        }
+        .footer p { 
+            margin: 8px 0; 
+            line-height: 1.6; 
+        }
+        .footer strong { 
+            color: #6366f1; 
+            font-weight: 700; 
+        }
+        
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .section, .job-card, .skill-item, .institute-item, .pathway-step { page-break-inside: avoid; }
+        }
+        
+        .text-content { word-wrap: break-word; overflow-wrap: break-word; hyphens: auto; text-align: justify; }
+        
+        /* Loading Overlay */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        #loading-overlay.hidden {
+            display: none;
+        }
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #e5e7eb;
+            border-top: 5px solid #6366f1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .loading-text {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .loading-percentage {
+            margin-top: 10px;
+            font-size: 32px;
+            font-weight: 800;
+            color: #6366f1;
+        }
+        .loading-status {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="lang-{{lang}}" data-translation-ready="false">
+    <div id="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Generating Your Career Report</div>
+        <div class="loading-percentage" id="loading-percentage">0%</div>
+        <div class="loading-status" id="loading-status">Initializing...</div>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <div class="header-title" id="header-main-title">PERSONALIZED CAREER GUIDANCE REPORT</div>
+                <div class="header-badges">
+                    <span class="badge-item" id="badge-ai">AI-POWERED CAREER REPORT</span>
+                    <span class="badge-item" id="badge-edition">2026 EDITION</span>
+                </div>
+            </div>
+            <div class="header-brand">
+                <div class="brand-name">EduBot</div>
+                <div class="role-title" id="report-title">Career Guidance Report</div>
+                <div class="generation-date" id="report-subtitle">Generated: <span id="generation-date"></span></div>
+            </div>
+            <div class="metrics-grid" id="metrics-container">
+                <!-- Metrics will be populated dynamically -->
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <div id="report-content">
+                <div>Loading report content...</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>EduBot Career Guidance System</strong></p>
+            <p id="footer-generated">Generated on: <span id="generation-date-footer"></span></p>
+            <p id="footer-tokens" style="display: none;">Tokens Used: <span id="token-count">0</span></p>
+            <p id="footer-note">This report is AI-generated and personalized for your career goals</p>
+        </div>
+    </div>
+    
+    <script>
+        // Set generation date with proper formatting
+        function setGenerationDate() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = now.toLocaleDateString('en-US', options);
+            const dateElements = document.querySelectorAll('#generation-date, #generation-date-footer');
+            dateElements.forEach(el => {
+                if (el) el.textContent = formattedDate;
+            });
+        }
+        setGenerationDate();
+        
+        function populateReportContent(data) {
+            const contentDiv = document.getElementById('report-content');
+
+            // Normalize language from backend/frontend variants into only: en | hi | bn
+            // (Frontend might send: "English", "Hindi", "Bengali", "en-US", "hi-IN", etc.)
+            let langRaw = (data.language || 'en').toString().trim().toLowerCase();
+            let lang = 'en';
+
+            if (
+                langRaw === 'hi' || langRaw === 'hindi' || langRaw.startsWith('hi-') || langRaw.includes('hi')
+            ) {
+                lang = 'hi';
+            } else if (
+                langRaw === 'bn' || langRaw === 'bengali' || langRaw.startsWith('bn-') || langRaw.includes('bn') ||
+                langRaw.includes('বাংলা') // Bengali script variant
+            ) {
+                lang = 'bn';
+            } else {
+                // English variants
+                lang = 'en';
+                if (
+                    langRaw === 'en' ||
+                    langRaw === 'english' ||
+                    langRaw.startsWith('en-') ||
+                    langRaw.includes('en')
+                ) {
+                    lang = 'en';
+                }
+            }
+            
+            // Translation map for headings
+            const translations = {
+                en: {
+                    overview: 'Career Overview',
+                    pathway: 'Academic Pathway',
+                    skills: 'Required Skills',
+                    roadmap: '90-Day Learning Roadmap',
+                    institutes: 'Recommended Institutes',
+                    certifications: 'Professional Certifications',
+                    salary: 'Salary Progression',
+                    jobmarket: 'Job Market Analysis',
+                    experts: 'Industry Expert Advice',
+                    govt: 'Government Institutes',
+                    private: 'Private Institutes',
+                    distance: 'Distance Learning',
+                    online: 'Online Platforms',
+                    musthave: 'Must-Have Skills',
+                    core: 'Core Skills',
+                    bonus: 'Bonus Skills',
+                    name: 'Name',
+                    location: 'Location',
+                    department: 'Department',
+                    rating: 'Rating',
+                    website: 'Website',
+                    provider: 'Provider',
+                    duration: 'Duration',
+                    cost: 'Cost',
+                    skill: 'Skill',
+                    description: 'Description',
+                    resources: 'Resources',
+                    experience: 'Experience',
+                    role: 'Role',
+                    salary_range: 'Salary Range',
+                    demand: 'Market Demand',
+                    success: 'Success Rate',
+                    openings: 'Monthly Openings',
+                    trends: 'Hiring Trends',
+                    companies: 'Top Companies',
+                    package: 'Package Range',
+                    locations: 'Locations',
+                    tips: 'Salary Growth Tips',
+                    insights: 'Key Insights'
+                },
+                hi: {
+                    overview: 'करियर अवलोकन',
+                    pathway: 'शैक्षणिक मार्ग',
+                    skills: 'आवश्यक कौशल',
+                    roadmap: '90-दिवसीय सीखने का रोडमैप',
+                    institutes: 'अनुशंसित संस्थान',
+                    certifications: 'व्यावसायिक प्रमाणपत्र',
+                    salary: 'वेतन वृद्धि',
+                    jobmarket: 'नौकरी बाजार विश्लेषण',
+                    experts: 'उद्योग विशेषज्ञ सलाह',
+                    govt: 'सरकारी संस्थान',
+                    private: 'निजी संस्थान',
+                    distance: 'दूरस्थ शिक्षा',
+                    online: 'ऑनलाइन प्लेटफॉर्म',
+                    musthave: 'आवश्यक कौशल',
+                    core: 'मुख्य कौशल',
+                    bonus: 'अतिरिक्त कौशल',
+                    name: 'नाम',
+                    location: 'स्थान',
+                    department: 'विभाग',
+                    rating: 'रेटिंग',
+                    website: 'वेबसाइट',
+                    provider: 'प्रदाता',
+                    duration: 'अवधि',
+                    cost: 'लागत',
+                    skill: 'कौशल',
+                    description: 'विवरण',
+                    resources: 'संसाधन',
+                    experience: 'अनुभव',
+                    role: 'भूमिका',
+                    salary_range: 'वेतन सीमा',
+                    demand: 'बाजार मांग',
+                    success: 'सफलता दर',
+                    openings: 'मासिक रिक्तियां',
+                    trends: 'भर्ती रुझान',
+                    companies: 'शीर्ष कंपनियां',
+                    package: 'पैकेज रेंज',
+                    locations: 'स्थान',
+                    tips: 'वेतन वृद्धि टिप्स',
+                    insights: 'मुख्य अंतर्दृष्टि',
+                    link: 'लिंक'
+                },
+                bn: {
+                    overview: 'ক্যারিয়ার সংক্ষিপ্ত বিবরণ',
+                    pathway: 'একাডেমিক পথ',
+                    skills: 'প্রয়োজনীয় দক্ষতা',
+                    roadmap: '৯০-দিনের শেখার রোডম্যাপ',
+                    institutes: 'প্রস্তাবিত প্রতিষ্ঠান',
+                    certifications: 'পেশাদার সার্টিফিকেশন',
+                    salary: 'বেতন বৃদ্ধি',
+                    jobmarket: 'চাকরির বাজার বিশ্লেষণ',
+                    experts: 'শিল্প বিশেষজ্ঞ পরামর্শ',
+                    govt: 'সরকারি প্রতিষ্ঠান',
+                    private: 'বেসরকারি প্রতিষ্ঠান',
+                    distance: 'দূরত্ব শিক্ষা',
+                    online: 'অনলাইন প্ল্যাটফর্ম',
+                    musthave: 'আবশ্যক দক্ষতা',
+                    core: 'মূল দক্ষতা',
+                    bonus: 'অতিরিক্ত দক্ষতা',
+                    name: 'নাম',
+                    location: 'অবস্থান',
+                    department: 'বিভাগ',
+                    rating: 'রেটিং',
+                    website: 'ওয়েবসাইট',
+                    provider: 'প্রদানকারী',
+                    duration: 'সময়কাল',
+                    cost: 'খরচ',
+                    skill: 'দক্ষতা',
+                    description: 'বিবরণ',
+                    resources: 'সম্পদ',
+                    experience: 'অভিজ্ঞতা',
+                    role: 'ভূমিকা',
+                    salary_range: 'বেতন পরিসীমা',
+                    demand: 'বাজার চাহিদা',
+                    success: 'সাফল্যের হার',
+                    openings: 'মাসিক খোলা',
+                    trends: 'নিয়োগের প্রবণতা',
+                    companies: 'শীর্ষ কোম্পানি',
+                    package: 'প্যাকেজ রেঞ্জ',
+                    locations: 'অবস্থান',
+                    tips: 'বেতন বৃদ্ধির টিপস',
+                    insights: 'মূল অন্তর্দৃষ্টি',
+                    link: 'লিংক'
+                }
+            };
+            
+            const t = translations[lang] || translations.en;
+            let html = '';
+            let sectionNumber = 1;
+            
+            // Translate header elements
+            const headerTranslations = {
+                en: { 
+                    mainTitle: 'PERSONALIZED CAREER GUIDANCE REPORT',
+                    aiPowered: 'AI-POWERED CAREER REPORT',
+                    edition: '2026 EDITION',
+                    generated: 'Generated:'
+                },
+                hi: { 
+                    mainTitle: 'व्यक्तिगत करियर मार्गदर्शन रिपोर्ट',
+                    aiPowered: 'AI-संचालित करियर रिपोर्ट',
+                    edition: '2026 संस्करण',
+                    generated: 'उत्पन्न:'
+                },
+                bn: { 
+                    mainTitle: 'ব্যক্তিগত ক্যারিয়ার নির্দেশিকা রিপোর্ট',
+                    aiPowered: 'AI-চালিত ক্যারিয়ার রিপোর্ট',
+                    edition: '২০২৬ সংস্করণ',
+                    generated: 'তৈরি:'
+                }
+            };
+            const ht = headerTranslations[lang] || headerTranslations.en;
+            document.getElementById('header-main-title').textContent = ht.mainTitle;
+            document.getElementById('badge-ai').textContent = ht.aiPowered;
+            document.getElementById('badge-edition').textContent = ht.edition;
+            
+            // Populate metrics in header
+            const metricsContainer = document.getElementById('metrics-container');
+            if (data.overview || data.jobMarket) {
+                const metricsLabels = {
+                    en: { match: 'AI Match', salary: 'Salary Range', growth: 'Growth Rate', demand: 'Market Demand' },
+                    hi: { match: 'AI मैच', salary: 'वेतन सीमा', growth: 'वृद्धि दर', demand: 'बाजार मांग' },
+                    bn: { match: 'AI ম্যাচ', salary: 'বেতন পরিসীমা', growth: 'বৃদ্ধির হার', demand: 'বাজার চাহিদা' }
+                };
+                const ml = metricsLabels[lang] || metricsLabels.en;
+                
+                metricsContainer.innerHTML = `
+                    <div class="metric-card">
+                        <span class="metric-value">95%</span>
+                        <span class="metric-label">${ml.match}</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">${data.salaryGrowth?.progression?.[0]?.salary || '₹4-8 LPA'}</span>
+                        <span class="metric-label">${ml.salary}</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">High</span>
+                        <span class="metric-label">${ml.growth}</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">${data.jobMarket?.demandLevel || 85}%</span>
+                        <span class="metric-label">${ml.demand}</span>
+                    </div>
+                `;
+            }
+            
+            // Translate footer
+            const footerTranslations = {
+                en: { generated: 'Generated on:', note: 'This report is AI-generated and personalized for your career goals' },
+                hi: { generated: 'उत्पन्न तिथि:', note: 'यह रिपोर्ट AI-जनित है और आपके करियर लक्ष्यों के लिए व्यक्तिगत है' },
+                bn: { generated: 'তৈরির তারিখ:', note: 'এই রিপোর্টটি AI-জনিত এবং আপনার ক্যারিয়ার লক্ষ্যের জন্য ব্যক্তিগতকৃত' }
+            };
+            const ft = footerTranslations[lang] || footerTranslations.en;
+            document.getElementById('footer-generated').innerHTML = `${ft.generated} <span id="generation-date-footer"></span>`;
+            document.getElementById('footer-note').textContent = ft.note;
+            setGenerationDate();
+            
+            if (data.title) {
+                document.getElementById('report-title').textContent = data.title;
+                const subtitleMap = {
+                    hi: 'व्यक्तिगत करियर रिपोर्ट',
+                    bn: 'ব্যক্তিগত ক্যারিয়ার রিপোর্ট',
+                    en: 'Personalized Career Report'
+                };
+                document.getElementById('report-subtitle').textContent = subtitleMap[lang] || subtitleMap.en;
+            }
+            
+            if (data.overview) {
+                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.overview.toUpperCase()}</h2><div class="section-content text-content">`;
+                html += `<p>${data.overview.description || ''}</p>`;
+                if (data.overview.keyResponsibilities && data.overview.keyResponsibilities.length > 0) {
+                    const respLabels = { en: 'Key Responsibilities', hi: 'मुख्य जिम्मेदारियां', bn: 'মূল দায়িত্ব' };
+                    html += `<h3 class="subsection-title">${respLabels[lang] || respLabels.en}</h3><ul class="bullet-list">`;
+                    data.overview.keyResponsibilities.forEach(resp => html += `<li>${resp}</li>`);
+                    html += '</ul>';
+                }
+                if (data.overview.whySuitable && data.overview.whySuitable.length > 0) {
+                    const whyLabels = { en: 'Why This Role Suits You', hi: 'यह भूमिका आपके लिए क्यों उपयुक्त है', bn: 'কেন এই ভূমিকা আপনার জন্য উপযুক্ত' };
+                    html += `<h3 class="subsection-title">${whyLabels[lang] || whyLabels.en}</h3>`;
+                    data.overview.whySuitable.forEach(reason => html += `<p>${reason}</p>`);
+                }
+                html += '</div></div>';
+            }
+            
+            if (data.careerPathway && data.careerPathway.steps) {
+                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.pathway.toUpperCase()}</h2><div class="section-content">`;
+                html += '<ul class="bullet-list">';
+                data.careerPathway.steps.forEach((step, index) => {
+                    html += `<li><strong>${step.phase}</strong> (${step.duration})<br>${step.description}</li>`;
+                });
+                html += '</ul></div></div>';
+            }
+            
+            if (data.skillsLearning) {
+                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.skills.toUpperCase()}</h2><div class="section-content">`;
+                const skillCategories = [
+                    { key: 'mustHave', title: t.musthave },
+                    { key: 'core', title: t.core },
+                    { key: 'bonus', title: t.bonus }
+                ];
+                skillCategories.forEach(category => {
+                    if (data.skillsLearning[category.key] && data.skillsLearning[category.key].length > 0) {
+                        html += `<h3 class="subsection-title">${category.title}</h3>`;
+                        html += `<table class="data-table"><thead><tr>`;
+                        html += `<th>${t.skill}</th><th>${t.resources}</th></tr></thead><tbody>`;
+                        data.skillsLearning[category.key].forEach(skill => {
+                            html += `<tr><td><strong>${skill.skill}</strong></td>`;
+                            html += `<td>`;
+                            if (skill.youtubeLink) {
+                                html += `<a href="${skill.youtubeLink}" style="color: #7c3aed; text-decoration: none; font-size: 11px; margin-right: 10px; font-weight: 600;">Youtube Video</a>`;
+                            }
+                            if (skill.courseUrl) {
+                                html += `<a href="${skill.courseUrl}" style="color: #7c3aed; text-decoration: none; font-size: 11px; font-weight: 600;">Course link</a>`;
+                            }
+                            html += `</td></tr>`;
+                        });
+                        html += '</tbody></table>';
+                    }
+                });
+                html += '</div></div>';
+            }
+            
+            if (data.roadmap90Days) {
+                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.roadmap.toUpperCase()}</h2><div class="section-content">`;
+                const phaseLabels = { en: ['Phase 1 (Days 1-30)', 'Phase 2 (Days 31-60)', 'Phase 3 (Days 61-90)'], hi: ['चरण 1 (दिन 1-30)', 'चरण 2 (दिन 31-60)', 'चरण 3 (दिन 61-90)'], bn: ['পর্যায় 1 (দিন 1-30)', 'পর্যায় 2 (দিন 31-60)', 'পর্যায় 3 (দিন 61-90)'] };
+                const subLabels = { en: { learning: 'Learning Goals:', action: 'Action Tasks:', progress: 'Progress Indicators:' }, hi: { learning: 'सीखने के लक्ष्य:', action: 'कार्य कार्य:', progress: 'प्रगति संकेतक:' }, bn: { learning: 'শেখার লক্ষ্য:', action: 'কর্ম কাজ:', progress: 'অগ্রগতি সূচক:' } };
+                const pl = phaseLabels[lang] || phaseLabels.en;
+                const sl = subLabels[lang] || subLabels.en;
+                const phases = [
+                    { key: 'phase1', title: pl[0] },
+                    { key: 'phase2', title: pl[1] },
+                    { key: 'phase3', title: pl[2] }
+                ];
+                phases.forEach(phase => {
+                    if (data.roadmap90Days[phase.key]) {
+                        const phaseData = data.roadmap90Days[phase.key];
+                        html += `<div style="margin-bottom: 18px; padding: 16px; border: 1px solid #4f46e5; border-radius: 10px; background: white;">`;
+                        html += `<h3 style="color: #6366f1; margin-bottom: 10px; font-size: 15px; font-weight: 700;">${phase.title}</h3>`;
+                        if (phaseData.learningGoals && phaseData.learningGoals.length > 0) {
+                            html += `<p style="font-weight: 600; margin-top: 10px; color: #374151; font-size: 13px;">${sl.learning}</p><ul class="bullet-list">`;
+                            phaseData.learningGoals.forEach(goal => html += `<li>${goal}</li>`);
+                            html += '</ul>';
+                        }
+                        if (phaseData.actionTasks && phaseData.actionTasks.length > 0) {
+                            html += `<p style="font-weight: 600; margin-top: 10px; color: #374151; font-size: 13px;">${sl.action}</p><ul class="bullet-list">`;
+                            phaseData.actionTasks.forEach(task => html += `<li>${task}</li>`);
+                            html += '</ul>';
+                        }
+                        if (phaseData.progressIndicators && phaseData.progressIndicators.length > 0) {
+                            html += `<p style="font-weight: 600; margin-top: 10px; color: #374151; font-size: 13px;">${sl.progress}</p><ul class="bullet-list">`;
+                            phaseData.progressIndicators.forEach(indicator => html += `<li>${indicator}</li>`);
+                            html += '</ul>';
+                        }
+                        html += '</div>';
+                    }
+                });
+                html += '</div></div>';
+            }
+            
+            if (data.topInstitutes) {
+                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.institutes.toUpperCase()}</h2><div class="section-content">`;
+                const instituteTypes = [
+                    { key: 'government', title: t.govt },
+                    { key: 'private', title: t.private },
+                    { key: 'distanceLearning', title: t.distance },
+                    { key: 'online', title: t.online }
+                ];
+                const visitLabels = { en: 'Visit', hi: 'देखें', bn: 'দেখুন' };
+                const vl = visitLabels[lang] || visitLabels.en;
+                instituteTypes.forEach(type => {
+                    if (data.topInstitutes[type.key] && data.topInstitutes[type.key].length > 0) {
+                        html += `<h3 class="subsection-title">${type.title}</h3>`;
+                        html += `<table class="data-table"><thead><tr>`;
+                        html += `<th>${t.name}</th><th>${t.location}</th><th>${t.department}</th><th>${t.rating}</th><th>${t.website}</th></tr></thead><tbody>`;
+                        data.topInstitutes[type.key].forEach(institute => {
+                            html += `<tr><td><strong>${institute.name}</strong></td>`;
+                            html += `<td>${institute.location}</td>`;
+                            html += `<td>${institute.department}</td>`;
+                            html += `<td><strong>${institute.rating}/5</strong></td>`;
+                            if (institute.website) {
+                                html += `<td><a href="${institute.website}" style="color: #7c3aed; text-decoration: none; font-size: 11px; font-weight: 600;">${vl}</a></td>`;
+                            } else {
+                                html += `<td>-</td>`;
+                            }
+                            html += `</tr>`;
+                        });
+                        html += '</tbody></table>';
+                    }
+                });
+                html += '</div></div>';
+            }
+
+            // Salary Progression
+            if (data.salaryGrowth) {
+                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.salary.toUpperCase()}</h2><div class="section-content">`;
+                if (data.salaryGrowth.cityComparison && data.salaryGrowth.cityComparison.length > 0) {
+                    html += `<h3 class="subsection-title">${t.salary_range ? t.salary_range : t.salary.toUpperCase()}</h3>`;
+                    html += `<table class="data-table"><thead><tr>`;
+                    html += `<th>${t.locations || t.city}</th><th>${t.salary_range || t.salary}</th></tr></thead><tbody>`;
+                    data.salaryGrowth.cityComparison.forEach(city => {
+                        html += `<tr><td><strong>${city.city}</strong></td>`;
+                        html += `<td style="color: #059669; font-weight: 600;">${city.salary}</td></tr>`;
+                    });
+                    html += '</tbody></table>';
+                }
+                if (data.salaryGrowth.salaryTips && data.salaryGrowth.salaryTips.length > 0) {
+                    html += '<div class="info-box">';
+                    html += `<strong>${t.tips}</strong><ul class="bullet-list" style="margin-top: 8px;">`;
+                    data.salaryGrowth.salaryTips.forEach(tip => html += `<li>${tip}</li>`);
+                    html += '</ul></div>';
+                }
+                html += '</div></div>';
+            }
+            
+            if (data.jobMarket) {
+                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.jobmarket.toUpperCase()}</h2><div class="section-content">`;
+                if (data.jobMarket.hiringTrends && data.jobMarket.hiringTrends.length > 0) {
+                    html += '<div class="chart-container">';
+                    html += `<div class="chart-title">${t.trends}</div>`;
+                    html += '<canvas id="hiringChart" width="800" height="320"></canvas>';
+                    html += '</div>';
+                }
+                if (data.jobMarket.keyInsights && data.jobMarket.keyInsights.length > 0) {
+                    html += `<h3 class="subsection-title">${t.insights}</h3><ul class="bullet-list">`;
+                    data.jobMarket.keyInsights.forEach(insight => html += `<li>${insight}</li>`);
+                    html += '</ul>';
+                }
+                if (data.jobMarket.topCompanies && data.jobMarket.topCompanies.length > 0) {
+                    html += `<h3 class="subsection-title">${t.companies}</h3>`;
+                    html += `<table class="data-table"><thead><tr><th>${t.name}</th><th>${t.package}</th><th>${t.locations}</th></tr></thead><tbody>`;
+                    data.jobMarket.topCompanies.forEach(company => {
+                        html += `<tr><td><strong>${company.name}</strong></td>`;
+                        html += `<td style="color: #059669; font-weight: 600;">${company.packageRange || company.package_range || '-'}</td>`;
+                        html += `<td>${(company.locations || [company.type || company.hiring_frequency || 'Multiple']).join(', ')}</td></tr>`;
+                    });
+                    html += '</tbody></table>';
+                }
+                html += '</div></div>';
+            }
+            
+            if (data.certifications && data.certifications.length > 0) {
+                const enrollLabels = { en: 'Enroll', hi: 'नामांकन', bn: 'নথিভুক্ত' };
+                const el = enrollLabels[lang] || enrollLabels.en;
+                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.certifications.toUpperCase()}</h2><div class="section-content">`;
+                html += `<table class="data-table"><thead><tr>`;
+                html += `<th>${t.name}</th><th>${t.provider}</th><th>${t.duration}</th><th>${t.cost}</th><th>${t.link || 'Link'}</th></tr></thead><tbody>`;
+                data.certifications.forEach(cert => {
+                    html += `<tr><td><strong>${cert.name}</strong></td>`;
+                    html += `<td>${cert.provider || cert.platform}</td>`;
+                    html += `<td>${cert.duration}</td>`;
+                    html += `<td style="color: #059669; font-weight: 600;">${cert.cost}</td>`;
+                    if (cert.link) {
+                        html += `<td><a href="${cert.link}" style="color: #6366f1; text-decoration: none; font-size: 11px; font-weight: 600;">${el}</a></td>`;
+                    } else {
+                        html += `<td>-</td>`;
+                    }
+                    html += `</tr>`;
+                });
+                html += '</tbody></table></div></div>';
+            }
+            
+            if (data.scholarships && ((data.scholarships.governmentPrivate && data.scholarships.governmentPrivate.length > 0) || (data.scholarships.bankLoans && data.scholarships.bankLoans.length > 0) || (data.scholarships.governmentSchemes && data.scholarships.governmentSchemes.length > 0))) {
+                // Use translated headings/columns from the `translations` map (t.*) to avoid English fallback
+                // Note: some columns (eligibility/amount/interest) are not present in t.*, so we map them below without en fallback.
+                const scholarshipTitleByLang = { en: 'Scholarships & Financial Aid', hi: 'छात्रवृत्ति और वित्तीय सहायता', bn: 'বৃত্তি এবং আর্থিক সহায়তা' };
+                const eligibilityByLang = { en: 'Eligibility', hi: 'पात्रता', bn: 'যোগ্যতা' };
+                const amountByLang = { en: 'Amount', hi: 'राशि', bn: 'পরিমাণ' };
+                
+                const providerTitleByLang = { en: 'Bank/Provider', hi: 'बैंक/प्रदाता', bn: 'ব্যাংক/প্রদানকারী' };
+                const maxAmountByLang = { en: 'Max Amount', hi: 'अधिकतम राशि', bn: 'সর্বোচ্চ পরিমাণ' };
+                const interestByLang = { en: 'Interest Rate', hi: 'ब्याज दर', bn: 'সুদের হার' };
+                
+                const schemeTitleByLang = { en: 'Government Schemes', hi: 'सरकारी योजनाएँ', bn: 'সরকারি প্রকল্প' };
+                const benefitsByLang = { en: 'Benefits', hi: 'लाभ', bn: 'সুবিধা' };
+                
+                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${scholarshipTitleByLang[lang]}</h2><div class="section-content">`;
+                
+                if (data.scholarships.governmentPrivate && data.scholarships.governmentPrivate.length > 0) {
+                    html += `<table class="data-table"><thead><tr>`;
+                    html += `<th>${t.name}</th><th>${eligibilityByLang[lang]}</th><th>${amountByLang[lang]}</th></tr></thead><tbody>`;
+                    data.scholarships.governmentPrivate.forEach(sch => {
+                        html += `<tr><td><strong>${sch.name}</strong></td>`;
+                        html += `<td>${sch.eligibility}</td>`;
+                        html += `<td style="color: #059669; font-weight: 600;">${sch.amount}</td></tr>`;
+                    });
+                    html += '</tbody></table>';
+                }
+                
+                if (data.scholarships.bankLoans && data.scholarships.bankLoans.length > 0) {
+                    html += `<h3 class="subsection-title">${(lang === 'hi' ? 'शिक्षा ऋण' : lang === 'bn' ? 'শিক্ষা ঋণ' : 'Education Loans')}</h3>`;
+                    html += `<table class="data-table"><thead><tr>`;
+                    html += `<th>${providerTitleByLang[lang]}</th><th>${maxAmountByLang[lang]}</th><th>${interestByLang[lang]}</th></tr></thead><tbody>`;
+                    data.scholarships.bankLoans.forEach(loan => {
+                        html += `<tr><td><strong>${loan.name}</strong></td>`;
+                        html += `<td style="color: #059669; font-weight: 600;">${loan.amount}</td>`;
+                        html += `<td>${loan.interestRate}</td></tr>`;
+                    });
+                    html += '</tbody></table>';
+                }
+
+                if (data.scholarships.governmentSchemes && data.scholarships.governmentSchemes.length > 0) {
+                    html += `<h3 class="subsection-title">${schemeTitleByLang[lang]}</h3>`;
+                    html += `<table class="data-table"><thead><tr>`;
+                    html += `<th>${t.name}</th><th>${benefitsByLang[lang]}</th><th>${eligibilityByLang[lang]}</th><th>${t.link || 'Link'}</th></tr></thead><tbody>`;
+                    data.scholarships.governmentSchemes.forEach(sch => {
+                        html += `<tr><td><strong>${sch.name}</strong></td>`;
+                        html += `<td>${sch.benefits || ''}</td>`;
+                        html += `<td>${sch.eligibility || ''}</td>`;
+                        html += `<td>`;
+                        if (sch.website) {
+                            html += `<a href="${sch.website}" style="color: #6366f1; text-decoration: none; font-size: 11px; font-weight: 600;">${t.link}</a>`;
+                        } else {
+                            html += `-`;
+                        }
+                        html += `</td></tr>`;
+                    });
+                    html += '</tbody></table>';
+                }
+                
+                html += '</div></div>';
+            }
+            
+            if (data.feesInvestment) {
+                const investLabels = { en: 'Investment Required', hi: 'आवश्यक निवेश', bn: 'প্রয়োজনীয় বিনিয়োগ' };
+                const breakdownLabels = { en: 'Fee Breakdown', hi: 'शुल्क विवरण', bn: 'ফি বিবরণ' };
+                const categoryLabels = { en: 'Category', hi: 'श्रेणी', bn: 'বিভাগ' };
+                const costLabels = { en: 'Cost', hi: 'लागत', bn: 'খরচ' };
+                const durationLabels = { en: 'Duration', hi: 'अवधि', bn: 'সময়কাল' };
+                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${investLabels[lang]}</h2><div class="section-content">`;
+                html += `<div class="info-box"><strong>${investLabels[lang]}:</strong> ${data.feesInvestment.totalRange}</div>`;
+                if (data.feesInvestment.description) {
+                    html += `<p style="margin: 12px 0;">${data.feesInvestment.description}</p>`;
+                }
+                if (data.feesInvestment.breakdown && data.feesInvestment.breakdown.length > 0) {
+                    html += `<h3 class="subsection-title">${breakdownLabels[lang]}</h3>`;
+                    html += `<table class="data-table"><thead><tr>`;
+                    html += `<th>${categoryLabels[lang]}</th><th>${costLabels[lang]}</th><th>${durationLabels[lang]}</th></tr></thead><tbody>`;
+                    data.feesInvestment.breakdown.forEach(item => {
+                        html += `<tr><td><strong>${item.phase}</strong></td>`;
+                        html += `<td style="color: #059669; font-weight: 600;">${item.cost}</td>`;
+                        html += `<td>${item.details || item.duration || '-'}</td></tr>`;
+                    });
+                    html += '</tbody></table>';
+                }
+                html += '</div></div>';
+            }
+            
+            if (data.industryExperts && data.industryExperts.length > 0) {
+                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.experts.toUpperCase()}</h2><div class="section-content">`;
+                data.industryExperts.forEach(expert => {
+                    html += `<div style="background: #f9fafb; padding: 16px 20px; border-radius: 8px; margin-bottom: 14px; border-left: 4px solid #6366f1;">`;
+                    html += `<div style="font-size: 15px; font-weight: 700; color: #1f2937; margin-bottom: 4px;">${expert.name}</div>`;
+                    html += `<div style="font-size: 12px; color: #6b7280; margin-bottom: 8px;">${expert.designation} at ${expert.company}</div>`;
+                    html += `<div style="font-style: italic; color: #4b5563; font-size: 13px;">"${expert.advice}"</div></div>`;
+                });
+                html += '</div></div>';
+            }
+            
+            contentDiv.innerHTML = html;
+            document.body.setAttribute('data-content-language', data.language);
+            document.body.setAttribute('data-translation-ready', 'true');
+            console.log(`Content populated in ${data.language}`);
+            
+            // Display token count if available
+            if (data.tokenCount) {
+                const tokenEl = document.getElementById('token-count');
+                const tokenParent = document.getElementById('footer-tokens');
+                if (tokenEl && tokenParent) {
+                    tokenEl.textContent = data.tokenCount.toLocaleString();
+                    tokenParent.style.display = 'block';
+                }
+            }
+            
+            // Render charts after content is populated
+            setTimeout(() => {
+                renderCharts(data);
+            }, 100);
+            
+            if (document.fonts) {
+                document.fonts.ready.then(() => console.log('All fonts loaded'));
+            }
+        }
+        
+        function renderCharts(data) {
+            // Polyfill for roundRect if not available
+            if (!CanvasRenderingContext2D.prototype.roundRect) {
+                CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+                    if (w < 2 * r) r = w / 2;
+                    if (h < 2 * r) r = h / 2;
+                    this.beginPath();
+                    this.moveTo(x + r, y);
+                    this.arcTo(x + w, y, x + w, y + h, r);
+                    this.arcTo(x + w, y + h, x, y + h, r);
+                    this.arcTo(x, y + h, x, y, r);
+                    this.arcTo(x, y, x + w, y, r);
+                    this.closePath();
+                    return this;
+                };
+            }
+            
+            // Render Salary Progression Chart with improved design
+            if (data.salaryGrowth && data.salaryGrowth.progression) {
+                const salaryCanvas = document.getElementById('salaryChart');
+                if (salaryCanvas) {
+                    const ctx = salaryCanvas.getContext('2d');
+                    const progression = data.salaryGrowth.progression;
+                    
+                    // Extract salary numbers
+                    const salaryValues = progression.map(p => {
+                        const match = p.salary.match(/\d+/);
+                        return match ? parseInt(match[0]) : 0;
+                    });
+                    
+                    const padding = 70;
+                    const chartWidth = 800 - padding * 2;
+                    const chartHeight = 320 - padding * 2;
+                    const maxValue = Math.max(...salaryValues) * 1.1;
+                    const stepX = chartWidth / (progression.length - 1);
+                    
+                    // Clear canvas
+                    ctx.clearRect(0, 0, 800, 320);
+                    
+                    // Draw grid lines
+                    ctx.strokeStyle = '#f3f4f6';
+                    ctx.lineWidth = 1;
+                    for (let i = 0; i <= 5; i++) {
+                        const y = padding + (chartHeight / 5) * i;
+                        ctx.beginPath();
+                        ctx.moveTo(padding, y);
+                        ctx.lineTo(800 - padding, y);
+                        ctx.stroke();
+                    }
+                    
+                    // Draw axes
+                    ctx.strokeStyle = '#9ca3af';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(padding, padding);
+                    ctx.lineTo(padding, 320 - padding);
+                    ctx.lineTo(800 - padding, 320 - padding);
+                    ctx.stroke();
+                    
+                    // Draw gradient area under line
+                    const areaGradient = ctx.createLinearGradient(0, padding, 0, 320 - padding);
+                    areaGradient.addColorStop(0, 'rgba(79, 70, 229, 0.2)');
+                    areaGradient.addColorStop(1, 'rgba(124, 58, 237, 0.05)');
+                    
+                    ctx.fillStyle = areaGradient;
+                    ctx.beginPath();
+                    ctx.moveTo(padding, 320 - padding);
+                    progression.forEach((p, i) => {
+                        const x = padding + i * stepX;
+                        const y = 320 - padding - (salaryValues[i] / maxValue) * chartHeight;
+                        ctx.lineTo(x, y);
+                    });
+                    ctx.lineTo(800 - padding, 320 - padding);
+                    ctx.closePath();
+                    ctx.fill();
+                    
+                    // Draw line with gradient
+                    const lineGradient = ctx.createLinearGradient(0, 0, 800, 0);
+                    lineGradient.addColorStop(0, '#4f46e5');
+                    lineGradient.addColorStop(1, '#7c3aed');
+                    
+                    ctx.strokeStyle = lineGradient;
+                    ctx.lineWidth = 4;
+                    ctx.lineCap = 'round';
+                    ctx.lineJoin = 'round';
+                    ctx.beginPath();
+                    progression.forEach((p, i) => {
+                        const x = padding + i * stepX;
+                        const y = 320 - padding - (salaryValues[i] / maxValue) * chartHeight;
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    });
+                    ctx.stroke();
+                    
+                    // Draw points with shadow
+                    progression.forEach((p, i) => {
+                        const x = padding + i * stepX;
+                        const y = 320 - padding - (salaryValues[i] / maxValue) * chartHeight;
+                        
+                        // Shadow
+                        ctx.shadowColor = 'rgba(79, 70, 229, 0.3)';
+                        ctx.shadowBlur = 8;
+                        ctx.shadowOffsetX = 0;
+                        ctx.shadowOffsetY = 2;
+                        
+                        // Outer circle
+                        ctx.fillStyle = '#ffffff';
+                        ctx.beginPath();
+                        ctx.arc(x, y, 8, 0, Math.PI * 2);
+                        ctx.fill();
+                        
+                        // Inner circle
+                        ctx.shadowBlur = 0;
+                        ctx.fillStyle = '#4f46e5';
+                        ctx.beginPath();
+                        ctx.arc(x, y, 5, 0, Math.PI * 2);
+                        ctx.fill();
+                        
+                        // Labels
+                        ctx.shadowBlur = 0;
+                        ctx.font = 'bold 12px Inter';
+                        ctx.textAlign = 'center';
+                        ctx.fillStyle = '#6b7280';
+                        ctx.fillText(p.experience, x, 320 - padding + 25);
+                        
+                        ctx.font = 'bold 13px Inter';
+                        ctx.fillStyle = '#4f46e5';
+                        ctx.fillText(p.salary, x, y - 18);
+                    });
+                }
+            }
+            
+            // Render Hiring Trends Chart - Professional 2D Design
+            if (data.jobMarket && data.jobMarket.hiringTrends) {
+                const hiringCanvas = document.getElementById('hiringChart');
+                if (hiringCanvas) {
+                    const ctx = hiringCanvas.getContext('2d');
+                    const trends = data.jobMarket.hiringTrends;
+                    
+                    const padding = 65;
+                    const chartWidth = 800 - padding * 2;
+                    const chartHeight = 320 - padding * 2;
+                    const maxValue = Math.max(...trends.map(t => t.openings)) * 1.15;
+                    const barWidth = (chartWidth / trends.length) * 0.68;
+                    const barSpacing = (chartWidth / trends.length) * 0.32;
+                    
+                    // Clear canvas
+                    ctx.clearRect(0, 0, 800, 320);
+                    
+                    // Background
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, 800, 320);
+                    
+                    // Draw grid lines
+                    ctx.strokeStyle = '#e5e7eb';
+                    ctx.lineWidth = 1;
+                    for (let i = 0; i <= 5; i++) {
+                        const y = padding + (chartHeight / 5) * i;
+                        ctx.beginPath();
+                        ctx.moveTo(padding, y);
+                        ctx.lineTo(800 - padding, y);
+                        ctx.stroke();
+                        
+                        // Y-axis labels
+                        ctx.fillStyle = '#6b7280';
+                        ctx.font = '600 11px Inter';
+                        ctx.textAlign = 'right';
+                        const value = Math.round(maxValue - (maxValue / 5) * i);
+                        ctx.fillText(value.toString(), padding - 10, y + 4);
+                    }
+                    
+                    // Draw axes
+                    ctx.strokeStyle = '#374151';
+                    ctx.lineWidth = 2.5;
+                    ctx.beginPath();
+                    ctx.moveTo(padding, padding);
+                    ctx.lineTo(padding, 320 - padding);
+                    ctx.lineTo(800 - padding, 320 - padding);
+                    ctx.stroke();
+                    
+                    // Draw bars - Clean 2D design
+                    trends.forEach((t, i) => {
+                        const x = padding + i * (chartWidth / trends.length) + barSpacing / 2;
+                        const barHeight = (t.openings / maxValue) * chartHeight;
+                        const y = 320 - padding - barHeight;
+                        
+                        // Bar gradient
+                        const barGradient = ctx.createLinearGradient(x, y, x, 320 - padding);
+                        barGradient.addColorStop(0, '#6366f1');
+                        barGradient.addColorStop(1, '#8b5cf6');
+                        
+                        // Draw bar with rounded corners
+                        ctx.fillStyle = barGradient;
+                        ctx.beginPath();
+                        ctx.roundRect(x, y, barWidth, barHeight, [8, 8, 0, 0]);
+                        ctx.fill();
+                        
+                        // Value on top
+                        ctx.fillStyle = '#1f2937';
+                        ctx.font = '700 12px Inter';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(t.openings.toString(), x + barWidth / 2, y - 8);
+                        
+                        // Month label
+                        ctx.fillStyle = '#374151';
+                        ctx.font = '600 10px Inter';
+                        ctx.fillText(t.month, x + barWidth / 2, 320 - padding + 18);
+                    });
+                    
+                    // Y-axis label
+                    ctx.fillStyle = '#1f2937';
+                    ctx.font = '700 11px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.save();
+                    ctx.translate(22, 190);
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.fillText('Job Openings', 0, 0);
+                    ctx.restore();
+                }
+            }
+        }
+        
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return { key: params.get('key') };
+        }
+        
+        function updateLoadingProgress(percentage, status) {
+            const percentageEl = document.getElementById('loading-percentage');
+            const statusEl = document.getElementById('loading-status');
+            if (percentageEl) percentageEl.textContent = percentage + '%';
+            if (statusEl) statusEl.textContent = status;
+        }
+        
+        function hideLoading() {
+            const overlay = document.getElementById('loading-overlay');
+            if (overlay) overlay.classList.add('hidden');
+        }
+        
+        async function fetchReportData() {
+            try {
+                updateLoadingProgress(10, 'Connecting to server...');
+                const params = getUrlParams();
+                if (!params.key) throw new Error('No data key provided');
+                
+                updateLoadingProgress(20, 'Fetching report data...');
+                console.log('Fetching report data with key:', params.key);
+                const response = await fetch(`/report-data?key=${params.key}`);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                
+                updateLoadingProgress(40, 'Processing data...');
+                const result = await response.json();
+                if (result.error) throw new Error(result.error);
+                
+                updateLoadingProgress(60, 'Generating content...');
+                console.log('Received report data:', result);
+                populateReportContent({ ...result.data, language: result.language, title: result.roleTitle });
+                
+                updateLoadingProgress(80, 'Rendering charts...');
+                setTimeout(() => {
+                    updateLoadingProgress(100, 'Complete!');
+                    setTimeout(hideLoading, 500);
+                }, 500);
+            } catch (error) {
+                console.error('Error fetching report data:', error);
+                hideLoading();
+                document.getElementById('report-content').innerHTML = `
+                    <div class="section">
+                        <h2 class="section-title">Content Generation Failed</h2>
+                        <div class="section-content">
+                            <p>Unable to generate content in requested language.</p>
+                            <p>Error: ${error.message}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', fetchReportData);
+        setTimeout(() => {
+            if (document.body.getAttribute('data-translation-ready') !== 'true') {
+                console.error('Content generation timeout');
+            }
+        }, 25000);
+    </script>
+</body>
+</html>
