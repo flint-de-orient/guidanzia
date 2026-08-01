@@ -81,6 +81,7 @@ export interface JobDetail {
       department: string;
       rating: number;
       website: string;
+      eligibility: string;
     }>;
     private: Array<{
       name: string;
@@ -88,6 +89,7 @@ export interface JobDetail {
       department: string;
       rating: number;
       website: string;
+      eligibility: string;
     }>;
     distanceLearning: Array<{
       name: string;
@@ -95,6 +97,7 @@ export interface JobDetail {
       department: string;
       rating: number;
       website: string;
+      eligibility: string;
     }>;
     online: Array<{
       name: string;
@@ -102,6 +105,7 @@ export interface JobDetail {
       department: string;
       rating: number;
       website: string;
+      eligibility: string;
     }>;
   };
   feesInvestment: {

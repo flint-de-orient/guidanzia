@@ -263,7 +263,7 @@ export function Profile() {
                       <Clock className="w-7 h-7 text-gray-400" />
                     </div>
                     <p className="text-gray-500 text-sm mb-4"><TranslatedText>No recent activity yet. Take the assessment to get started.</TranslatedText></p>
-                    <Link to="/onboarding">
+                    <Link to="/onboarding-new">
                       <Button size="sm" className="gradient-primary hover:opacity-90">
                         <TranslatedText>Start Assessment</TranslatedText>
                         <ArrowRight className="w-4 h-4 ml-2" />
@@ -283,7 +283,7 @@ export function Profile() {
                 <h2 className="text-base font-bold text-gray-900"><TranslatedText>Quick Actions</TranslatedText></h2>
               </div>
               <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <Link to="/onboarding">
+                <Link to="/onboarding-new">
                   <div className="flex items-center gap-3 p-4 rounded-xl border-2 border-indigo-100 bg-indigo-50 hover:border-indigo-300 hover:shadow-sm transition-all group cursor-pointer">
                     <span className="text-2xl">🎯</span>
                     <div>
@@ -293,7 +293,7 @@ export function Profile() {
                     <ArrowRight className="w-4 h-4 text-indigo-400 ml-auto group-hover:translate-x-0.5 transition-transform" />
                   </div>
                 </Link>
-                <Link to={hasRecommendations ? '/recommendations' : '/onboarding'}>
+                <Link to={hasRecommendations ? '/recommendations' : '/onboarding-new'}>
                   <div className="flex items-center gap-3 p-4 rounded-xl border-2 border-purple-100 bg-purple-50 hover:border-purple-300 hover:shadow-sm transition-all group cursor-pointer">
                     <span className="text-2xl">✨</span>
                     <div>

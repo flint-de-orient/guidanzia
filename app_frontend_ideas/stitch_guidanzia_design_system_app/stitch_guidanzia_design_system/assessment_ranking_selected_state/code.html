@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Career Assessment - Ranking Task</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500&amp;family=Hanken+Grotesk:wght@700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fcf8fd;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dbe1ff;
+            border-radius: 10px;
+        }
+
+        .gold-glow {
+            box-shadow: 0 4px 20px rgba(240, 192, 77, 0.3);
+        }
+
+        .card-press:active {
+            transform: scale(0.98);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Rank Transitions */
+        .rank-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Specific Rank Colors from Request */
+        .rank-1 { background-color: #f0c04d !important; border-color: #785a00 !important; color: #0b0a3d !important; }
+        .rank-2 { background-color: #c8e6c9 !important; border-color: #3a4d00 !important; color: #0b0a3d !important; }
+        .rank-3 { background-color: #b2ebf2 !important; border-color: #004f50 !important; color: #0b0a3d !important; }
+        
+        .rank-1 .rank-indicator { background-color: rgba(120, 90, 0, 0.1); }
+        .rank-2 .rank-indicator { background-color: rgba(58, 77, 0, 0.1); }
+        .rank-3 .rank-indicator { background-color: rgba(0, 79, 80, 0.1); }
+
+        .btn-continue-disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: grayscale(0.5);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#dbe1ff",
+                        "tertiary-container": "#4bdfdf",
+                        "outline": "#807663",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#546d00",
+                        "surface-container-low": "#f2f3ff",
+                        "primary": "#785a00",
+                        "surface-container-high": "#e3e7ff",
+                        "tertiary-fixed": "#69f7f7",
+                        "on-primary-fixed": "#251a00",
+                        "on-background": "#0b0a3d",
+                        "surface-container-highest": "#dbe1ff",
+                        "secondary-fixed-dim": "#abd533",
+                        "on-tertiary-container": "#006060",
+                        "on-primary-fixed-variant": "#5b4300",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#c6f24e",
+                        "surface-tint": "#785a00",
+                        "surface": "#fcf8fd",
+                        "inverse-on-surface": "#eff0ff",
+                        "tertiary": "#006a6a",
+                        "on-secondary-fixed": "#151f00",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#f0c04d",
+                        "on-surface-variant": "#4e4635",
+                        "primary-container": "#f5c451",
+                        "secondary": "#4f6700",
+                        "inverse-surface": "#282f48",
+                        "surface-dim": "#d2d9f9",
+                        "on-primary-container": "#6d5100",
+                        "primary-fixed": "#ffdf9d",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#3a4d00",
+                        "tertiary-fixed-dim": "#45dada",
+                        "on-tertiary-fixed": "#002020",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#004f50",
+                        "surface-bright": "#faf8ff",
+                        "inverse-primary": "#f0c04d",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#ebedff",
+                        "background": "#fcf8fd",
+                        "on-surface": "#0b0a3d",
+                        "secondary-container": "#c6f24e",
+                        "outline-variant": "#d2c5b0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "stack-md": "24px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "40px",
+                        "stack-lg": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Sora"],
+                        "headline-sm": ["Sora"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "label-bold": ["Hanken Grotesk"],
+                        "display-lg": ["Sora"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-md-mobile": ["Sora"],
+                        "display-xl": ["Sora"],
+                        "headline-md": ["Sora"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<header class="pt-8 px-margin-mobile flex flex-col gap-stack-md">
+<div class="flex items-center justify-between w-full">
+<span class="font-label-bold text-label-bold text-outline">QUESTION 08/20</span>
+<span class="font-label-bold text-label-bold text-primary">40% COMPLETE</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full w-[40%] bg-primary rounded-full transition-all duration-500 ease-out gold-glow"></div>
+</div>
+</header>
+<main class="flex-1 px-margin-mobile pt-10 pb-32">
+<div class="flex flex-col gap-6">
+<h1 class="font-headline-md-mobile text-headline-md-mobile leading-tight text-on-surface">
+            Rank your interest in <span class="text-secondary">Financial Systems</span> compared to other domains.
+        </h1>
+<div class="flex items-center gap-3 py-2 overflow-x-auto no-scrollbar">
+<div class="px-4 py-2 bg-surface-container border border-outline-variant rounded-xl flex items-center shrink-0">
+<span class="font-label-bold text-label-bold text-tertiary">FinTech Systems</span>
+</div>
+<span class="material-symbols-outlined text-outline shrink-0">arrow_forward</span>
+<div class="px-4 py-2 bg-surface-container border border-outline-variant rounded-xl flex items-center shrink-0">
+<span class="font-label-bold text-label-bold text-tertiary">Product Design</span>
+</div>
+</div>
+<div class="flex flex-col gap-4 mt-4" id="ranking-container">
+<!-- Rankable Item 1 -->
+<div class="rank-card group relative flex items-stretch min-h-[72px] bg-surface-container-low rounded-xl overflow-hidden card-press border border-outline-variant transition-all cursor-pointer" data-id="1">
+<div class="rank-indicator w-12 flex items-center justify-center font-display-lg text-headline-sm font-extrabold transition-colors">
+<span class="material-symbols-outlined text-outline-variant rank-icon">circle</span>
+</div>
+<div class="flex-1 p-5 flex items-center">
+<span class="font-label-bold text-label-bold text-[18px] transition-colors">Algorithmic Trading Models</span>
+</div>
+<div class="px-4 flex items-center text-outline-variant transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+</div>
+<!-- Rankable Item 2 -->
+<div class="rank-card group relative flex items-stretch min-h-[72px] bg-surface-container-low rounded-xl overflow-hidden card-press border border-outline-variant transition-all cursor-pointer" data-id="2">
+<div class="rank-indicator w-12 flex items-center justify-center font-display-lg text-headline-sm font-extrabold transition-colors">
+<span class="material-symbols-outlined text-outline-variant rank-icon">circle</span>
+</div>
+<div class="flex-1 p-5 flex items-center">
+<span class="font-label-bold text-label-bold text-[18px] transition-colors">Blockchain Architecture</span>
+</div>
+<div class="px-4 flex items-center text-outline-variant transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+</div>
+<!-- Rankable Item 3 -->
+<div class="rank-card group relative flex items-stretch min-h-[72px] bg-surface-container-low rounded-xl overflow-hidden card-press border border-outline-variant transition-all cursor-pointer" data-id="3">
+<div class="rank-indicator w-12 flex items-center justify-center font-display-lg text-headline-sm font-extrabold transition-colors">
+<span class="material-symbols-outlined text-outline-variant rank-icon">circle</span>
+</div>
+<div class="flex-1 p-5 flex items-center">
+<span class="font-label-bold text-label-bold text-[18px] transition-colors">Taxation Law Compliance</span>
+</div>
+<div class="px-4 flex items-center text-outline-variant transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+</div>
+<!-- Rankable Item 4 -->
+<div class="rank-card group relative flex items-stretch min-h-[72px] bg-surface-container-low rounded-xl overflow-hidden card-press border border-outline-variant transition-all cursor-pointer" data-id="4">
+<div class="rank-indicator w-12 flex items-center justify-center font-display-lg text-headline-sm font-extrabold transition-colors">
+<span class="material-symbols-outlined text-outline-variant rank-icon">circle</span>
+</div>
+<div class="flex-1 p-5 flex items-center">
+<span class="font-label-bold text-label-bold text-[18px] transition-colors">Customer Experience Design</span>
+</div>
+<div class="px-4 flex items-center text-outline-variant transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+</div>
+<!-- Rankable Item 5 -->
+<div class="rank-card group relative flex items-stretch min-h-[72px] bg-surface-container-low rounded-xl overflow-hidden card-press border border-outline-variant transition-all cursor-pointer" data-id="5">
+<div class="rank-indicator w-12 flex items-center justify-center font-display-lg text-headline-sm font-extrabold transition-colors">
+<span class="material-symbols-outlined text-outline-variant rank-icon">circle</span>
+</div>
+<div class="flex-1 p-5 flex items-center">
+<span class="font-label-bold text-label-bold text-[18px] transition-colors">Risk Management Strategy</span>
+</div>
+<div class="px-4 flex items-center text-outline-variant transition-colors">
+<span class="material-symbols-outlined">drag_indicator</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile pb-8 pt-6 bg-surface/90 backdrop-blur-xl border-t border-surface-container-high">
+<button class="flex items-center justify-center text-on-surface-variant px-6 py-4 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined mr-2">chevron_left</span>
+<span class="font-label-bold text-label-bold">Back</span>
+</button>
+<button class="flex items-center justify-center bg-primary-container text-on-primary-container rounded-full px-10 py-4 shadow-lg hover:opacity-90 transition-all active:scale-95 duration-200 btn-continue-disabled" id="btn-continue">
+<span class="font-label-bold text-label-bold mr-2">Continue</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</nav>
+<script>
+    const container = document.getElementById('ranking-container');
+    const cards = Array.from(container.querySelectorAll('.rank-card'));
+    const btnContinue = document.getElementById('btn-continue');
+    
+    // Store IDs in order of rank
+    let rankedIds = [];
+
+    function updateUI() {
+        cards.forEach(card => {
+            const id = card.getAttribute('data-id');
+            const rankIndex = rankedIds.indexOf(id);
+            const rankIcon = card.querySelector('.rank-icon');
+            const rankIndicator = card.querySelector('.rank-indicator');
+            const dragIcon = card.querySelector('.material-symbols-outlined:last-child');
+            const text = card.querySelector('span.text-\\[18px\\]');
+
+            // Clear existing rank classes
+            card.classList.remove('rank-1', 'rank-2', 'rank-3', 'border-2', 'gold-glow');
+            card.classList.add('bg-surface-container-low', 'border-outline-variant');
+            
+            if (rankIndex !== -1) {
+                const rank = rankIndex + 1;
+                card.classList.remove('bg-surface-container-low', 'border-outline-variant');
+                card.classList.add(`rank-${rank}`, 'border-2');
+                if (rank === 1) card.classList.add('gold-glow');
+                
+                rankIndicator.innerHTML = rank;
+                rankIndicator.classList.remove('text-outline-variant');
+                rankIndicator.classList.add('text-on-surface');
+                
+                dragIcon.classList.remove('text-outline-variant');
+                dragIcon.classList.add('text-on-surface', 'opacity-60');
+            } else {
+                rankIndicator.innerHTML = '<span class="material-symbols-outlined text-outline-variant rank-icon">circle</span>';
+                dragIcon.classList.add('text-outline-variant');
+                dragIcon.classList.remove('text-on-surface', 'opacity-60');
+            }
+        });
+
+        // Toggle Continue button
+        if (rankedIds.length >= 2) {
+            btnContinue.classList.remove('btn-continue-disabled');
+            btnContinue.classList.add('bg-primary-container', 'gold-glow');
+        } else {
+            btnContinue.classList.add('btn-continue-disabled');
+            btnContinue.classList.remove('gold-glow');
+        }
+    }
+
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            const id = card.getAttribute('data-id');
+            const rankIndex = rankedIds.indexOf(id);
+
+            if (rankIndex === -1) {
+                // Not ranked yet, assign next available rank (up to 3)
+                if (rankedIds.length < 3) {
+                    rankedIds.push(id);
+                    if (window.navigator.vibrate) window.navigator.vibrate(10);
+                }
+            } else {
+                // Already ranked, remove and shift others
+                rankedIds.splice(rankIndex, 1);
+                if (window.navigator.vibrate) window.navigator.vibrate(5);
+            }
+
+            updateUI();
+        });
+    });
+
+    // Initial State
+    updateUI();
+</script>
+</body></html>

@@ -1,20 +1,42 @@
-/* Import Poppins for headings */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+/* ============================================================================
+   GUIDANZIA TYPE
+   ----------------------------------------------------------------------------
+   Display: Sora (geometric, oversized headlines) — Latin only.
+   Body:    Inter (kept from the existing build; excellent at 16–18px).
+   Indic:   Noto Sans Devanagari / Bengali — Sora & Inter have NO Indic glyphs,
+            so Hindi/Bengali fall through to Noto via the token font stacks
+            (see theme.css: --font-display / --font-body).
 
-/* Import Inter for body text */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+   PRODUCTION TODO — self-host: replace the @import below with local @font-face
+   rules pointing at subset woff2 files in /public/fonts (Latin + Devanagari +
+   Bengali), font-display: swap, and <link rel="preload"> the display face.
+   The CDN import is a render-blocking third-party hop and a CSP/privacy cost.
+   The rest of this file (stacks + :lang metrics) does not change when you do.
+   ============================================================================ */
 
-/* Import Noto Sans Devanagari for Hindi */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap');
 
-/* Import Noto Sans Bengali for Bengali */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&display=swap');
+/* ----------------------------------------------------------------------------
+   Metric matching. Sora runs optically smaller and lighter than Noto Devanagari
+   / Bengali at the same px. Without correction, a 40–72px display heading looks
+   visibly off the moment the UI switches to Hindi or Bengali. font-size-adjust
+   normalises x-height where supported; the per-script nudges below tune line
+   spacing so the taller Indic glyphs don't crowd. <html lang> is kept in sync
+   by ThemeContext, so these :lang() rules activate automatically.
+   ---------------------------------------------------------------------------- */
 
-/* Multilingual font stack */
-body {
-  font-family: 'Inter', 'Noto Sans Devanagari', 'Noto Sans Bengali', sans-serif;
+:root {
+  font-size-adjust: 0.52; /* anchor cross-family x-heights (progressive) */
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', 'Noto Sans Devanagari', 'Noto Sans Bengali', sans-serif;
+:lang(hi),
+:lang(bn) {
+  /* Indic faces carry taller ascenders/descenders — give headings room. */
+  line-height: 1.35;
+}
+
+:lang(hi) h1, :lang(hi) h2, :lang(hi) h3,
+:lang(bn) h1, :lang(bn) h2, :lang(bn) h3 {
+  line-height: 1.3;
+  letter-spacing: 0; /* Sora's tight display tracking doesn't apply to Noto */
 }

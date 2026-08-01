@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;700&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        try {
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "on-tertiary": "#ffffff",
+                            "surface-variant": "#dbe1ff",
+                            "tertiary-container": "#4bdfdf",
+                            "outline": "#807663",
+                            "surface-container-lowest": "#ffffff",
+                            "on-secondary-container": "#546d00",
+                            "surface-container-low": "#f2f3ff",
+                            "primary": "#785a00", // Graduation Gold
+                            "surface-container-high": "#e3e7ff",
+                            "tertiary-fixed": "#69f7f7",
+                            "on-primary-fixed": "#251a00",
+                            "on-background": "#0b0a3d", // Deep Navy
+                            "surface-container-highest": "#dbe1ff",
+                            "secondary-fixed-dim": "#abd533",
+                            "on-tertiary-container": "#006060",
+                            "on-primary-fixed-variant": "#5b4300",
+                            "on-primary": "#ffffff",
+                            "secondary-fixed": "#c6f24e",
+                            "surface-tint": "#785a00",
+                            "surface": "#fcf8fd", // Cloud White
+                            "inverse-on-surface": "#eff0ff",
+                            "tertiary": "#006a6a",
+                            "on-secondary-fixed": "#151f00",
+                            "on-secondary": "#ffffff",
+                            "primary-fixed-dim": "#785a00",
+                            "on-surface-variant": "#4e4635",
+                            "primary-container": "#f5c451",
+                            "secondary": "#4f6700", // Lime
+                            "inverse-surface": "#282f48",
+                            "surface-dim": "#d2d9f9",
+                            "on-primary-container": "#6d5100",
+                            "primary-fixed": "#ffdf9d",
+                            "on-error": "#ffffff",
+                            "on-secondary-fixed-variant": "#3a4d00",
+                            "tertiary-fixed-dim": "#45dada",
+                            "on-tertiary-fixed": "#002020",
+                            "error-container": "#ffdad6",
+                            "error": "#ba1a1a",
+                            "on-tertiary-fixed-variant": "#004f50",
+                            "surface-bright": "#faf8ff",
+                            "inverse-primary": "#f0c04d",
+                            "on-error-container": "#93000a",
+                            "surface-container": "#ebedff",
+                            "background": "#fcf8fd",
+                            "on-surface": "#0b0a3d",
+                            "secondary-container": "#c6f24e",
+                            "outline-variant": "#d2c5b0"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "unit": "4px",
+                            "gutter": "16px",
+                            "margin-mobile": "20px",
+                            "stack-md": "24px",
+                            "stack-sm": "8px",
+                            "margin-desktop": "40px",
+                            "stack-lg": "48px"
+                        },
+                        "fontFamily": {
+                            "display-lg-mobile": ["Sora"],
+                            "headline-sm": ["Sora"],
+                            "body-md": ["Be Vietnam Pro"],
+                            "label-bold": ["Hanken Grotesk"],
+                            "display-lg": ["Sora"],
+                            "body-lg": ["Be Vietnam Pro"],
+                            "headline-md-mobile": ["Sora"],
+                            "display-xl": ["Sora"],
+                            "headline-md": ["Sora"]
+                        },
+                        "fontSize": {
+                            "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                            "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                            "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                            "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                            "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                            "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                            "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                            "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                        }
+                    },
+                },
+            }
+        } catch (_e) {}
+    </script>
+<style>
+        .option-card.card-selected {
+            border-color: #785a00;
+            background-color: #fcf8fd;
+            box-shadow: 0 4px 12px rgba(120, 90, 0, 0.1);
+        }
+        .active-icon {
+            color: #785a00 !important;
+        }
+        .btn-active {
+            background-color: #785a00 !important;
+            opacity: 1 !important;
+            cursor: pointer !important;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- Segmented Progress Rail -->
+<div class="w-full flex items-end h-8 px-0 gap-[2px] bg-surface-container-low/30">
+<!-- Ticks 1-5 (Completed) -->
+<div class="flex-1 h-1 bg-primary"></div>
+<div class="flex-1 h-1 bg-primary"></div>
+<div class="flex-1 h-1 bg-primary"></div>
+<div class="flex-1 h-1 bg-primary"></div>
+<div class="flex-1 h-1 bg-primary"></div>
+<!-- Tick 6 (Current - Lime & Taller) -->
+<div class="flex-1 h-2.5 bg-secondary shadow-[0_0_8px_rgba(79,103,0,0.4)]"></div>
+<!-- Ticks 7-20 (Remaining) -->
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+<div class="flex-1 h-1 bg-outline-variant/40"></div>
+</div>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-margin-mobile pt-stack-md pb-32">
+<!-- Subtitle Context -->
+<p class="text-on-surface-variant font-label-bold text-label-bold mb-4 opacity-70 uppercase tracking-wider">
+            Module 3 · Question 6 of 20
+        </p>
+<!-- Question Title -->
+<h1 class="text-[34px] leading-tight font-extrabold font-headline-md-mobile text-on-surface mb-stack-lg">
+            Which of these tasks makes you lose track of time?
+        </h1>
+<!-- Options Cards Stack -->
+<div class="flex flex-col gap-3">
+<!-- Option 1 -->
+<button class="option-card w-full h-[88px] flex items-center p-4 bg-white border border-outline-variant/50 rounded-xl text-left transition-all active:scale-[0.98] group hover:border-primary/50" onclick="selectOption(this)">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-center justify-center mr-4 group-hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="code">code</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-[17px] text-on-surface">Writing clean code</p>
+<p class="text-[14px] text-on-surface-variant line-clamp-1">Solving logic puzzles and architecture.</p>
+</div>
+</button>
+<!-- Option 2 -->
+<button class="option-card w-full h-[88px] flex items-center p-4 bg-white border border-outline-variant/50 rounded-xl text-left transition-all active:scale-[0.98] group hover:border-primary/50" onclick="selectOption(this)">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-center justify-center mr-4 group-hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="palette">palette</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-[17px] text-on-surface">Visual storytelling</p>
+<p class="text-[14px] text-on-surface-variant line-clamp-1">Designing layouts and crafting aesthetics.</p>
+</div>
+</button>
+<!-- Option 3 -->
+<button class="option-card w-full h-[88px] flex items-center p-4 bg-white border border-outline-variant/50 rounded-xl text-left transition-all active:scale-[0.98] group hover:border-primary/50" onclick="selectOption(this)">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-center justify-center mr-4 group-hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="leaderboard">leaderboard</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-[17px] text-on-surface">Analyzing data trends</p>
+<p class="text-[14px] text-on-surface-variant line-clamp-1">Finding hidden patterns in complex sets.</p>
+</div>
+</button>
+<!-- Option 4 -->
+<button class="option-card w-full h-[88px] flex items-center p-4 bg-white border border-outline-variant/50 rounded-xl text-left transition-all active:scale-[0.98] group hover:border-primary/50" onclick="selectOption(this)">
+<div class="w-12 h-12 rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-center justify-center mr-4 group-hover:bg-primary-container/20 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="forum">forum</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-[17px] text-on-surface">Leading a discussion</p>
+<p class="text-[14px] text-on-surface-variant line-clamp-1">Negotiating and persuading a team.</p>
+</div>
+</button>
+</div>
+</main>
+<!-- Bottom Anchored Action Bar -->
+<nav class="fixed bottom-0 left-0 w-full p-margin-mobile flex items-center justify-between z-50 backdrop-blur-xl bg-surface/90 border-t border-outline-variant/20">
+<!-- Back Action -->
+<button class="w-14 h-14 flex items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[32px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<!-- Continue CTA -->
+<button class="flex-1 ml-4 h-[56px] rounded-full bg-on-surface-variant/10 text-on-surface/40 font-bold text-lg cursor-not-allowed transition-all duration-300" disabled="" id="continue-btn">
+            Continue
+        </button>
+</nav>
+<script>
+        function selectOption(element) {
+            // Clear previous selections
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('card-selected');
+                card.querySelector('.material-symbols-outlined').classList.remove('active-icon');
+            });
+
+            // Set current selection
+            element.classList.add('card-selected');
+            element.querySelector('.material-symbols-outlined').classList.add('active-icon');
+
+            // Enable Continue Button
+            const btn = document.getElementById('continue-btn');
+            btn.disabled = false;
+            btn.classList.add('btn-active');
+            btn.classList.remove('bg-on-surface-variant/10', 'text-on-surface/40', 'cursor-not-allowed');
+            btn.classList.add('text-white', 'shadow-lg', 'shadow-primary/20');
+        }
+    </script>
+</body></html>

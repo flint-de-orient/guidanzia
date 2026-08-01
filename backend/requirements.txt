@@ -4,3 +4,4 @@ google-generativeai
 requests
 deep-translator
 playwright
+python-dotenv

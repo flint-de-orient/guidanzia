@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guidanzia Assessment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;700&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        .selected-glow {
+            box-shadow: 0 0 20px rgba(120, 90, 0, 0.15);
+        }
+        .continue-glow {
+            box-shadow: 0 4px 20px rgba(120, 90, 0, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#dbe1ff",
+                        "tertiary-container": "#4bdfdf",
+                        "outline": "#807663",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#546d00",
+                        "surface-container-low": "#f2f3ff",
+                        "primary": "#785a00", // Graduation Gold
+                        "surface-container-high": "#e3e7ff",
+                        "tertiary-fixed": "#69f7f7",
+                        "on-primary-fixed": "#251a00",
+                        "on-background": "#0b0a3d", // Deep Navy
+                        "surface-container-highest": "#dbe1ff",
+                        "secondary-fixed-dim": "#abd533",
+                        "on-tertiary-container": "#006060",
+                        "on-primary-fixed-variant": "#5b4300",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#c6f24e",
+                        "surface-tint": "#785a00",
+                        "surface": "#fcf8fd", // Cloud White
+                        "inverse-on-surface": "#eff0ff",
+                        "tertiary": "#006a6a",
+                        "on-secondary-fixed": "#151f00",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#f0c04d",
+                        "on-surface-variant": "#4e4635",
+                        "primary-container": "#f5c451",
+                        "secondary": "#4f6700", // Lime accent context
+                        "inverse-surface": "#282f48",
+                        "surface-dim": "#d2d9f9",
+                        "on-primary-container": "#6d5100",
+                        "primary-fixed": "#ffdf9d",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#3a4d00",
+                        "tertiary-fixed-dim": "#45dada",
+                        "on-tertiary-fixed": "#002020",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#004f50",
+                        "surface-bright": "#faf8ff",
+                        "inverse-primary": "#f0c04d",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#ebedff",
+                        "background": "#fcf8fd", // Cloud White
+                        "on-surface": "#0b0a3d", // Deep Navy
+                        "secondary-container": "#c6f24e", // Graduation Lime
+                        "outline-variant": "#d2c5b0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "24px",
+                        "margin-mobile": "20px",
+                        "unit": "4px",
+                        "stack-lg": "48px",
+                        "gutter": "16px",
+                        "margin-desktop": "40px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md-mobile": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "display-xl": ["Sora"],
+                        "label-bold": ["Hanken Grotesk"],
+                        "headline-sm": ["Sora"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "display-lg-mobile": ["Sora"],
+                        "display-lg": ["Sora"]
+                    },
+                    "fontSize": {
+                        "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col items-center">
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md flex justify-between items-center px-margin-mobile h-16 border-b border-outline-variant/30">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-on-background" data-icon="menu">menu</span>
+</div>
+<h1 class="font-headline-md-mobile text-[24px] text-on-background font-extrabold italic tracking-tight">Guidanzia</h1>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqtU3bIdIJ6c6AaLkvtd-pbWUJCJFVM5Fdp6AJgg-fdbXsPqO0Hcbv46rQ_AzzsOamHvqNv-l_twUkhQghEupK5VuqALtAV4eaXJsJS3KYhNtcsslrwvj_k4hM_tkHJFLqzMSZqqDnfGNsf8c_3i2ELfbIyoTCxisC7YWKXogrNYY6mgvGM8tNqhYY8i33kJ8bEqO_kotFCar2djfixAKDRRkWRSJGuLgTqwjUBT45pPyxjU86Y_8fs4FQKHb9co3-aOLFWRtZk24"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-md pt-24 pb-32 px-margin-mobile flex-1 flex flex-col">
+<!-- Progress Bar Section -->
+<div class="mb-stack-md">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-bold text-[12px] text-secondary-container bg-on-background px-2 py-0.5 rounded text-white uppercase tracking-widest">Stage 02</span>
+<span class="font-label-bold text-label-bold text-on-background/60">4/12 Questions</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container" style="width: 33%"></div>
+</div>
+</div>
+<!-- Question Header -->
+<div class="mb-stack-lg">
+<h2 class="font-headline-sm text-headline-sm text-on-background mb-stack-sm leading-tight">Which work environment fuels your energy most?</h2>
+<p class="font-body-md text-body-md text-on-background/70">Pick the setting where you feel most productive and creative.</p>
+</div>
+<!-- Option Cards -->
+<div class="space-y-stack-sm">
+<!-- Option 1 (Unselected) -->
+<button class="w-full group text-left bg-white border border-outline-variant/50 rounded-xl p-5 flex items-center gap-gutter transition-all duration-200 hover:border-primary/40 hover:bg-surface-container-low">
+<div class="w-12 h-12 flex-shrink-0 bg-surface-container rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-on-background/60" data-icon="hub">hub</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-bold text-label-bold text-on-background">Structured Teams</h3>
+<p class="text-sm text-on-background/60">Clear roles and collaborative hierarchy.</p>
+</div>
+</button>
+<!-- Option 2 (SELECTED STATE) -->
+<button class="w-full group text-left bg-primary-container/20 border-2 border-primary text-on-background rounded-xl p-5 flex items-center gap-gutter transition-all duration-300 transform -translate-y-0.5 selected-glow">
+<div class="w-12 h-12 flex-shrink-0 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white icon-fill" data-icon="rocket_launch" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-bold text-label-bold text-on-background">Fast-Paced Startups</h3>
+<p class="text-sm text-on-background/70 font-medium">Dynamic, high-impact, and rapidly evolving.</p>
+</div>
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+</div>
+</button>
+<!-- Option 3 (Unselected) -->
+<button class="w-full group text-left bg-white border border-outline-variant/50 rounded-xl p-5 flex items-center gap-gutter transition-all duration-200 hover:border-primary/40 hover:bg-surface-container-low">
+<div class="w-12 h-12 flex-shrink-0 bg-surface-container rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-on-background/60" data-icon="home_work">home_work</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-bold text-label-bold text-on-background">Remote Autonomy</h3>
+<p class="text-sm text-on-background/60">Flexibility to work from anywhere, anytime.</p>
+</div>
+</button>
+<!-- Option 4 (Unselected) -->
+<button class="w-full group text-left bg-white border border-outline-variant/50 rounded-xl p-5 flex items-center gap-gutter transition-all duration-200 hover:border-primary/40 hover:bg-surface-container-low">
+<div class="w-12 h-12 flex-shrink-0 bg-surface-container rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-on-background/60" data-icon="public">public</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-bold text-label-bold text-on-background">Mission-Driven NGO</h3>
+<p class="text-sm text-on-background/60">Focus on social impact and community service.</p>
+</div>
+</button>
+</div>
+</main>
+<!-- Bottom Action Area -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex flex-col items-center px-margin-mobile pb-8 pt-6 bg-gradient-to-t from-background via-background/95 to-transparent">
+<button class="w-full max-w-md h-[56px] bg-on-background text-white font-label-bold text-lg rounded-full flex items-center justify-center gap-2 continue-glow active:scale-[0.98] transition-all duration-200">
+            Continue
+            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<p class="mt-4 text-xs text-on-background/40 font-medium">Step 4 of 12 — 2 minutes remaining</p>
+</footer>
+<!-- Selection Logic -->
+<script>
+        document.querySelectorAll('button:not(.bg-on-background)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Reset all buttons
+                document.querySelectorAll('button:not(.bg-on-background)').forEach(b => {
+                    b.className = "w-full group text-left bg-white border border-outline-variant/50 rounded-xl p-5 flex items-center gap-gutter transition-all duration-200 hover:border-primary/40 hover:bg-surface-container-low";
+                    const iconCont = b.querySelector('div:first-child');
+                    iconCont.className = "w-12 h-12 flex-shrink-0 bg-surface-container rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform";
+                    const icon = iconCont.querySelector('span');
+                    icon.className = "material-symbols-outlined text-on-background/60";
+                    icon.style.fontVariationSettings = "'FILL' 0";
+                    const checkIcon = b.querySelector('div:last-child');
+                    if (checkIcon && checkIcon.querySelector('[data-icon="check_circle"]')) checkIcon.remove();
+                    const subtext = b.querySelector('p');
+                    if(subtext) subtext.className = "text-sm text-on-background/60";
+                });
+
+                // Apply selected style to clicked button
+                this.className = "w-full group text-left bg-primary-container/20 border-2 border-primary text-on-background rounded-xl p-5 flex items-center gap-gutter transition-all duration-300 transform -translate-y-0.5 selected-glow";
+                const iconCont = this.querySelector('div:first-child');
+                iconCont.className = "w-12 h-12 flex-shrink-0 bg-primary rounded-lg flex items-center justify-center";
+                const icon = iconCont.querySelector('span');
+                icon.className = "material-symbols-outlined text-white icon-fill";
+                icon.style.fontVariationSettings = "'FILL' 1";
+                
+                const subtext = this.querySelector('p');
+                if(subtext) subtext.className = "text-sm text-on-background/70 font-medium";
+                
+                // Add checkmark
+                if (!this.querySelector('[data-icon="check_circle"]')) {
+                    const checkDiv = document.createElement('div');
+                    checkDiv.className = "flex-shrink-0";
+                    checkDiv.innerHTML = '<span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>';
+                    this.appendChild(checkDiv);
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Guidanzia | Assessment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500&amp;family=Hanken+Grotesk:wght@400;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&amp;family=Hanken+Grotesk:wght@100..900&amp;family=Sora:wght@100..900&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#dbe1ff",
+                    "on-secondary": "#273500",
+                    "surface-container": "#171f36",
+                    "on-background": "#dbe1ff",
+                    "on-secondary-fixed": "#151f00",
+                    "on-secondary-fixed-variant": "#3a4d00",
+                    "surface-tint": "#f0c04d",
+                    "inverse-primary": "#785a00",
+                    "on-primary-container": "#6d5100",
+                    "on-tertiary-container": "#006060",
+                    "surface-container-high": "#222941",
+                    "secondary-container": "#89b100",
+                    "surface": "#0a1229",
+                    "primary": "#ffe4af",
+                    "primary-fixed": "#ffdf9d",
+                    "surface-container-highest": "#2c344c",
+                    "on-tertiary": "#003737",
+                    "error": "#ffb4ab",
+                    "outline": "#9b8f7c",
+                    "primary-fixed-dim": "#f0c04d",
+                    "surface-variant": "#2c344c",
+                    "on-tertiary-fixed-variant": "#004f50",
+                    "inverse-on-surface": "#282f48",
+                    "primary-container": "#f5c451",
+                    "on-secondary-container": "#2f3f00",
+                    "inverse-surface": "#dbe1ff",
+                    "secondary": "#abd533",
+                    "surface-bright": "#313851",
+                    "on-primary-fixed-variant": "#5b4300",
+                    "secondary-fixed-dim": "#abd533",
+                    "on-primary": "#3f2e00",
+                    "on-surface-variant": "#d2c5b0",
+                    "tertiary-fixed": "#69f7f7",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#45dada",
+                    "surface-dim": "#0a1229",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-fixed": "#251a00",
+                    "background": "#0a1229",
+                    "surface-container-lowest": "#050d24",
+                    "tertiary-container": "#4bdfdf",
+                    "outline-variant": "#4e4635",
+                    "surface-container-low": "#131b32",
+                    "secondary-fixed": "#c6f24e",
+                    "tertiary": "#6efcfc",
+                    "on-tertiary-fixed": "#002020",
+                    "error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "margin-mobile": "20px",
+                    "stack-sm": "8px",
+                    "stack-lg": "48px",
+                    "margin-desktop": "40px",
+                    "gutter": "16px",
+                    "stack-md": "24px"
+            },
+            "fontFamily": {
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md-mobile": ["Sora"],
+                    "label-bold": ["Hanken Grotesk"],
+                    "display-lg-mobile": ["Sora"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "headline-md": ["Sora"],
+                    "display-xl": ["Sora"],
+                    "display-lg": ["Sora"],
+                    "headline-sm": ["Sora"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-tick {
+            height: 4px;
+            flex-grow: 1;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .progress-tick.active {
+            height: 12px;
+        }
+        textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 1px rgba(255, 228, 175, 0.2);
+        }
+        .btn-glow-gold {
+            box-shadow: 0 0 20px -5px rgba(240, 192, 77, 0.6);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-x-hidden">
+<!-- Progress Rail Header -->
+<header class="fixed top-0 left-0 w-full pt-8 px-margin-mobile z-50 bg-background">
+<div class="flex items-end gap-1 w-full max-w-[600px] mx-auto h-4">
+<!-- Ticks 1-20 Loop -->
+<!-- Tick 1 (Completed) -->
+<div class="progress-tick bg-primary-fixed-dim rounded-full"></div>
+<!-- Tick 2 (Current) -->
+<div class="progress-tick active bg-secondary rounded-full"></div>
+<!-- Ticks 3-20 (Remaining) -->
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+<div class="progress-tick bg-surface-container-highest rounded-full"></div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 px-margin-mobile pb-32 max-w-[600px] mx-auto w-full">
+<!-- Sub-header -->
+<div class="mb-stack-sm">
+<span class="text-on-surface-variant font-label-bold text-label-bold tracking-wider uppercase">Module 1 · Question 2 of 20</span>
+</div>
+<!-- Question Headline -->
+<h1 class="font-headline-sm text-headline-sm text-primary leading-tight mb-stack-sm">
+            What is one project you've worked on that made you feel proud?
+        </h1>
+<!-- Optional Subline -->
+<p class="text-on-surface-variant font-body-md text-body-md mb-stack-lg">
+            Optional — skip if nothing comes to mind.
+        </p>
+<!-- Response Area (Bento-style Card) -->
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary/10 to-secondary/10 blur opacity-25 group-focus-within:opacity-50 transition duration-500"></div>
+<div class="relative bg-surface-container-low border-2 border-outline-variant rounded-xl p-unit focus-within:border-primary transition-colors">
+<textarea class="w-full min-h-[220px] bg-transparent text-on-surface font-body-lg text-body-lg p-stack-md resize-none placeholder:text-on-surface-variant/40 placeholder:italic focus:ring-0 border-none" id="response-input" maxlength="500" oninput="updateCharCount(this)" placeholder="Type your response here..."></textarea>
+<!-- Character Counter -->
+<div class="absolute bottom-4 right-4 text-on-surface-variant/60 font-label-bold text-sm">
+<span id="char-count" class="">0</span>/500
+                </div>
+</div>
+</div>
+<!-- Atmospheric Micro-interaction (Background Detail) -->
+<div class="mt-stack-lg opacity-20 pointer-events-none">
+<div class="w-1 h-32 bg-gradient-to-b from-secondary to-transparent ml-4 rounded-full"></div>
+</div>
+</main>
+<!-- Bottom Action Bar -->
+<footer class="fixed bottom-0 left-0 w-full z-50 backdrop-blur-xl bg-surface/80">
+<div class="max-w-[600px] mx-auto px-margin-mobile h-[100px] flex items-center justify-between">
+<!-- Left Action: Skip -->
+<button class="text-on-surface-variant font-label-bold text-label-bold hover:text-on-surface transition-colors px-4 py-2">
+                Skip this
+            </button>
+<!-- Right Action: Continue -->
+<button class="bg-primary text-on-primary font-label-bold text-label-bold px-10 h-14 rounded-full flex items-center justify-center btn-glow-gold active:scale-95 transition-all">
+                Continue
+                <span class="material-symbols-outlined ml-2 text-xl" style="font-variation-settings: 'wght' 700;">arrow_forward</span>
+</button>
+</div>
+<!-- Safe area padding for notched mobile devices -->
+<div class="h-4 bg-transparent"></div>
+</footer>
+<script>
+        function updateCharCount(textarea) {
+            const count = textarea.value.length;
+            document.getElementById('char-count').innerText = count;
+            
+            // Subtle visual feedback on counter
+            const counter = document.getElementById('char-count');
+            if (count > 450) {
+                counter.classList.add('text-primary');
+            } else {
+                counter.classList.remove('text-primary');
+            }
+        }
+
+        // Vanilla micro-interaction for textarea focus
+        const textarea = document.getElementById('response-input');
+        const footer = document.querySelector('footer');
+
+        textarea.addEventListener('focus', () => {
+            // Optional: hide background elements to focus on input
+            document.body.classList.add('focused-input');
+        });
+
+        textarea.addEventListener('blur', () => {
+            document.body.classList.remove('focused-input');
+        });
+    </script>
+
+
+</body></html>

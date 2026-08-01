@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guidanzia | Behavioral Assessment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@400;500&family=Hanken+Grotesk:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom tabular numbers for the timer */
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+        }
+        /* Tile transition animation */
+        .tile-transition {
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Action Glow effect as per Design System */
+        .action-glow-gold {
+            box-shadow: 0 0 20px -5px rgba(245, 196, 81, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#131b32",
+                        "surface": "#0a1229",
+                        "on-tertiary-fixed-variant": "#004f50",
+                        "inverse-surface": "#dbe1ff",
+                        "tertiary-fixed-dim": "#45dada",
+                        "surface-container-lowest": "#050d24",
+                        "on-primary-fixed": "#251a00",
+                        "on-secondary-fixed-variant": "#3a4d00",
+                        "surface-variant": "#2c344c",
+                        "surface-dim": "#0a1229",
+                        "background": "#0a1229",
+                        "outline": "#9b8f7c",
+                        "on-secondary-fixed": "#151f00",
+                        "inverse-on-surface": "#282f48",
+                        "surface-container-high": "#222941",
+                        "outline-variant": "#4e4635",
+                        "on-primary-fixed-variant": "#5b4300",
+                        "on-primary-container": "#6d5100",
+                        "on-background": "#dbe1ff",
+                        "on-tertiary-fixed": "#002020",
+                        "secondary": "#abd533",
+                        "primary": "#ffe4af",
+                        "secondary-fixed-dim": "#abd533",
+                        "tertiary-fixed": "#69f7f7",
+                        "tertiary-container": "#4bdfdf",
+                        "primary-fixed": "#ffdf9d",
+                        "tertiary": "#6efcfc",
+                        "primary-fixed-dim": "#f0c04d",
+                        "primary-container": "#f5c451",
+                        "surface-tint": "#f0c04d",
+                        "on-surface-variant": "#d2c5b0",
+                        "on-error": "#690005",
+                        "on-secondary": "#273500",
+                        "on-surface": "#dbe1ff",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#006060",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#2c344c",
+                        "secondary-fixed": "#c6f24e",
+                        "on-secondary-container": "#2f3f00",
+                        "on-primary": "#3f2e00",
+                        "surface-container": "#171f36",
+                        "on-tertiary": "#003737",
+                        "surface-bright": "#313851",
+                        "secondary-container": "#89b100",
+                        "error": "#ffb4ab",
+                        "inverse-primary": "#785a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "24px",
+                        "margin-desktop": "40px",
+                        "stack-lg": "48px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Sora"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "display-lg-mobile": ["Sora"],
+                        "headline-md-mobile": ["Sora"],
+                        "label-bold": ["Hanken Grotesk"],
+                        "display-lg": ["Sora"],
+                        "headline-sm": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "body-md": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col font-body-md overflow-hidden select-none">
+<!-- Top Navigation Header (Suppressed for Transactional/Assessment Task) -->
+<header class="flex justify-between items-center px-margin-mobile h-16 w-full z-50 bg-surface border-b-2 border-outline-variant fixed top-0">
+<h1 class="font-display-lg-mobile text-headline-md-mobile text-primary-fixed italic">Guidanzia</h1>
+<div class="w-10 h-10 rounded-full border-2 border-outline-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A modern, high-contrast professional headshot of a young South Asian professional with a confident smile, set against a dark navy studio background with golden rim lighting. The style is clean, sharp, and premium, consistent with a high-end career development application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhoRh2ZTXIHYc2RQFwvXtwn2_zm98cwAZQW2TYP04-6e3LfYHeFQZJ-KUEvFu8aocSTyljlsqanFg2SKuthcnEY-jpH07z1lt73tmEI6TH55EHAL8fnWaJdVcmw3h5dJOczCZBZir5tphTkQEjCtiUmyF8ASUhrVlFbGTHqMaYL9ANBHSvEIJ3_n5-kMZg3aOy1sHKfmG35NJ8TBS6V798t_fWNlYmkVAprmTX8hOi70YvDFAhW9pdFbrU2cCBgfq5HDta0yXok5o"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col pt-24 pb-32 px-margin-mobile">
+<!-- Briefing Section -->
+<div class="mb-stack-lg max-w-sm mx-auto w-full">
+<p class="font-headline-md-mobile text-[20px] text-on-surface-variant leading-tight max-w-[280px]">
+                Arrange the tiles in ascending order.
+            </p>
+</div>
+<!-- Puzzle Grid -->
+<div class="flex-grow flex items-center justify-center">
+<div class="grid grid-cols-3 gap-3 w-full max-w-[340px] aspect-square relative" id="puzzle-grid">
+<!-- Tiles generated by JavaScript -->
+<!-- Placeholder tiles for visual structure while JS loads -->
+<div class="bg-surface-container border-2 border-primary-container rounded-[24px] flex items-center justify-center aspect-square">
+<span class="font-display-lg text-primary text-[32px]">1</span>
+</div>
+<div class="bg-surface-container border-2 border-primary-container rounded-[24px] flex items-center justify-center aspect-square">
+<span class="font-display-lg text-primary text-[32px]">2</span>
+</div>
+<div class="bg-surface-container border-2 border-primary-container rounded-[24px] flex items-center justify-center aspect-square">
+<span class="font-display-lg text-primary text-[32px]">3</span>
+</div>
+<div class="bg-surface-container border-2 border-primary-container rounded-[24px] flex items-center justify-center aspect-square">
+<span class="font-display-lg text-primary text-[32px]">4</span>
+</div>
+<div class="bg-surface-container border-2 border-primary-container rounded-[24px] flex items-center justify-center aspect-square">
+<span class="font-display-lg text-primary text-[32px]">5</span>
+</div>
+<div class="bg-surface-container border-2 border-primary-container rounded-[24px] flex items-center justify-center aspect-square">
+<span class="font-display-lg text-primary text-[32px]">6</span>
+</div>
+<div class="bg-surface-container border-2 border-primary-container rounded-[24px] flex items-center justify-center aspect-square">
+<span class="font-display-lg text-primary text-[32px]">7</span>
+</div>
+<div class="bg-surface-container border-2 border-primary-container rounded-[24px] flex items-center justify-center aspect-square">
+<span class="font-display-lg text-primary text-[32px]">8</span>
+</div>
+<div class="bg-transparent aspect-square"></div>
+</div>
+</div>
+<!-- Stats Counter -->
+<div class="mt-stack-lg flex justify-between items-center max-w-[340px] mx-auto w-full px-2 opacity-60">
+<div class="flex flex-col">
+<span class="font-label-bold text-label-bold uppercase tracking-wider text-outline">Moves</span>
+<span class="font-display-lg-mobile text-[24px] tabular-nums" id="move-count">12</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-bold text-label-bold uppercase tracking-wider text-outline">Time</span>
+<span class="font-display-lg-mobile text-[24px] tabular-nums" id="timer">00:45</span>
+</div>
+</div>
+</main>
+<!-- Bottom Actions (Thumb-Zone Optimized) -->
+<footer class="fixed bottom-0 left-0 w-full p-margin-mobile flex flex-col items-center gap-4 bg-gradient-to-t from-surface to-transparent pt-12">
+<button class="w-full max-w-sm font-label-bold text-label-bold text-on-surface-variant py-4 hover:text-on-surface transition-colors">
+            I'd rather skip this
+        </button>
+</footer>
+<script>
+        // Simple Puzzle Logic
+        const grid = document.getElementById('puzzle-grid');
+        const moveDisplay = document.getElementById('move-count');
+        const timerDisplay = document.getElementById('timer');
+        
+        let moves = 0;
+        let seconds = 45;
+        let tiles = [1, 2, 3, 4, 5, 6, 7, 8, null];
+
+        // Shuffle logic (Simplified for demo, starts in almost-solved state for "calm" feel)
+        function shuffleTiles() {
+            // Keep it mostly ordered to respect the "untimed/calm" request
+            tiles = [1, 2, 3, 4, 5, 6, 7, null, 8];
+            renderGrid();
+        }
+
+        function renderGrid() {
+            grid.innerHTML = '';
+            tiles.forEach((tile, index) => {
+                const tileDiv = document.createElement('div');
+                if (tile === null) {
+                    tileDiv.className = 'bg-transparent aspect-square cursor-default';
+                } else {
+                    tileDiv.className = 'bg-surface-container border-2 border-primary-container rounded-[24px] flex items-center justify-center aspect-square cursor-pointer active:scale-95 transition-transform action-glow-gold';
+                    tileDiv.innerHTML = `<span class="font-display-lg text-primary text-[32px]">${tile}</span>`;
+                    tileDiv.onclick = () => tryMove(index);
+                }
+                grid.appendChild(tileDiv);
+            });
+        }
+
+        function tryMove(index) {
+            const emptyIndex = tiles.indexOf(null);
+            const row = Math.floor(index / 3);
+            const col = index % 3;
+            const emptyRow = Math.floor(emptyIndex / 3);
+            const emptyCol = emptyIndex % 3;
+
+            const isAdjacent = (Math.abs(row - emptyRow) + Math.abs(col - emptyCol)) === 1;
+
+            if (isAdjacent) {
+                // Swap
+                [tiles[index], tiles[emptyIndex]] = [tiles[emptyIndex], tiles[index]];
+                moves++;
+                moveDisplay.textContent = moves;
+                renderGrid();
+                checkWin();
+            }
+        }
+
+        function checkWin() {
+            const winCondition = [1, 2, 3, 4, 5, 6, 7, 8, null];
+            const isWin = tiles.every((val, index) => val === winCondition[index]);
+            if (isWin) {
+                // Subtle feedback instead of high-energy popups
+                moveDisplay.classList.add('text-secondary');
+                timerDisplay.classList.add('text-secondary');
+            }
+        }
+
+        // Timer increment
+        setInterval(() => {
+            seconds++;
+            const mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+            const secs = (seconds % 60).toString().padStart(2, '0');
+            timerDisplay.textContent = `${mins}:${secs}`;
+        }, 1000);
+
+        // Initial setup
+        shuffleTiles();
+    </script>
+</body></html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guidanzia Assessment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;700&family=Be+Vietnam+Pro:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        .selected-glow {
+            box-shadow: 0 0 20px rgba(240, 192, 77, 0.3);
+        }
+        .continue-glow {
+            box-shadow: 0 0 25px rgba(240, 192, 77, 0.4);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#004f50",
+                        "surface-dim": "#0a1229",
+                        "secondary-fixed": "#c6f24e",
+                        "on-secondary-fixed": "#151f00",
+                        "tertiary": "#6efcfc",
+                        "on-primary": "#3f2e00",
+                        "inverse-surface": "#dbe1ff",
+                        "tertiary-fixed": "#69f7f7",
+                        "surface-container-low": "#131b32",
+                        "primary-fixed-dim": "#f0c04d",
+                        "on-tertiary": "#003737",
+                        "on-primary-fixed-variant": "#5b4300",
+                        "on-error": "#690005",
+                        "surface-bright": "#313851",
+                        "on-tertiary-container": "#006060",
+                        "on-secondary": "#273500",
+                        "on-secondary-container": "#2f3f00",
+                        "outline-variant": "#4e4635",
+                        "inverse-primary": "#785a00",
+                        "surface-container-lowest": "#050d24",
+                        "secondary-container": "#89b100",
+                        "tertiary-container": "#4bdfdf",
+                        "surface-container": "#171f36",
+                        "surface-tint": "#f0c04d",
+                        "inverse-on-surface": "#282f48",
+                        "error-container": "#93000a",
+                        "primary": "#ffe4af",
+                        "surface": "#0a1229",
+                        "on-surface": "#dbe1ff",
+                        "tertiary-fixed-dim": "#45dada",
+                        "secondary": "#abd533",
+                        "on-surface-variant": "#d2c5b0",
+                        "on-background": "#dbe1ff",
+                        "on-primary-container": "#6d5100",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#abd533",
+                        "on-primary-fixed": "#251a00",
+                        "background": "#0a1229",
+                        "on-tertiary-fixed": "#002020",
+                        "on-secondary-fixed-variant": "#3a4d00",
+                        "surface-variant": "#2c344c",
+                        "outline": "#9b8f7c",
+                        "surface-container-highest": "#2c344c",
+                        "surface-container-high": "#222941",
+                        "primary-fixed": "#ffdf9d",
+                        "primary-container": "#f5c451"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "24px",
+                        "margin-mobile": "20px",
+                        "unit": "4px",
+                        "stack-lg": "48px",
+                        "gutter": "16px",
+                        "margin-desktop": "40px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md-mobile": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "display-xl": ["Sora"],
+                        "label-bold": ["Hanken Grotesk"],
+                        "headline-sm": ["Sora"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "display-lg-mobile": ["Sora"],
+                        "display-lg": ["Sora"]
+                    },
+                    "fontSize": {
+                        "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col items-center">
+<!-- Top AppBar (Injected from JSON) -->
+<header class="fixed top-0 w-full z-50 bg-surface flex justify-between items-center px-margin-mobile h-16 border-b-2 border-outline-variant">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+</div>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-primary italic">Guidanzia</h1>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional close-up portrait of a young Indian student with a friendly and ambitious expression. The lighting is crisp and high-contrast, reflecting a modern fintech-style aesthetic. The background is a soft-focus office or university setting with hints of navy and acid lime lighting, aligning with the brand's premium dark mode identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqtU3bIdIJ6c6AaLkvtd-pbWUJCJFVM5Fdp6AJgg-fdbXsPqO0Hcbv46rQ_AzzsOamHvqNv-l_twUkhQghEupK5VuqALtAV4eaXJsJS3KYhNtcsslrwvj_k4hM_tkHJFLqzMSZqqDnfGNsf8c_3i2ELfbIyoTCxisC7YWKXogrNYY6mgvGM8tNqhYY8i33kJ8bEqO_kotFCar2djfixAKDRRkWRSJGuLgTqwjUBT45pPyxjU86Y_8fs4FQKHb9co3-aOLFWRtZk24"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-md pt-24 pb-32 px-margin-mobile flex-1 flex flex-col">
+<!-- Progress Bar Section -->
+<div class="mb-stack-md">
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-bold text-label-bold text-secondary uppercase tracking-widest">Assessment Stage 02</span>
+<span class="font-label-bold text-label-bold text-on-surface-variant">4/12 Questions</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden border-2 border-outline-variant p-0.5">
+<div class="h-full bg-secondary rounded-full" style="width: 33%"></div>
+</div>
+</div>
+<!-- Question Header -->
+<div class="mb-stack-lg">
+<h2 class="font-headline-sm text-headline-sm text-primary-fixed mb-stack-sm">Which work environment fuels your energy most?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Pick the setting where you feel most productive and creative.</p>
+</div>
+<!-- Option Cards (Selected State Focus) -->
+<div class="space-y-stack-md">
+<!-- Option 1 (Unselected) -->
+<button class="w-full group text-left bg-surface-container-low border-2 border-outline-variant rounded-xl p-stack-md flex items-center gap-gutter transition-all duration-200 hover:bg-surface-container-high">
+<div class="w-12 h-12 flex-shrink-0 bg-surface-container-highest border-2 border-outline-variant rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="hub">hub</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-bold text-label-bold text-on-surface">Structured Teams</h3>
+<p class="text-sm text-on-surface-variant">Clear roles and collaborative hierarchy.</p>
+</div>
+</button>
+<!-- Option 2 (SELECTED STATE) -->
+<button class="w-full group text-left bg-primary-container border-2 border-primary text-on-primary-container rounded-xl p-stack-md flex items-center gap-gutter transition-all duration-300 transform -translate-y-1 selected-glow">
+<div class="w-12 h-12 flex-shrink-0 bg-on-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary icon-fill" data-icon="rocket_launch" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-bold text-label-bold text-on-primary-fixed">Fast-Paced Startups</h3>
+<p class="text-sm text-on-primary-container font-medium">Dynamic, high-impact, and rapidly evolving.</p>
+</div>
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="check_circle">check_circle</span>
+</div>
+</button>
+<!-- Option 3 (Unselected) -->
+<button class="w-full group text-left bg-surface-container-low border-2 border-outline-variant rounded-xl p-stack-md flex items-center gap-gutter transition-all duration-200 hover:bg-surface-container-high">
+<div class="w-12 h-12 flex-shrink-0 bg-surface-container-highest border-2 border-outline-variant rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="home_work">home_work</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-bold text-label-bold text-on-surface">Remote Autonomy</h3>
+<p class="text-sm text-on-surface-variant">Flexibility to work from anywhere, anytime.</p>
+</div>
+</button>
+<!-- Option 4 (Unselected) -->
+<button class="w-full group text-left bg-surface-container-low border-2 border-outline-variant rounded-xl p-stack-md flex items-center gap-gutter transition-all duration-200 hover:bg-surface-container-high">
+<div class="w-12 h-12 flex-shrink-0 bg-surface-container-highest border-2 border-outline-variant rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="public">public</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-bold text-label-bold text-on-surface">Mission-Driven NGO</h3>
+<p class="text-sm text-on-surface-variant">Focus on social impact and community service.</p>
+</div>
+</button>
+</div>
+</main>
+<!-- Bottom Navigation / Action Area -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex flex-col items-center px-margin-mobile pb-8 pt-4 bg-gradient-to-t from-background via-background to-transparent">
+<button class="w-full max-w-md h-[56px] bg-primary text-on-primary font-label-bold text-lg rounded-full flex items-center justify-center gap-2 continue-glow active:scale-95 transition-all duration-200">
+            Continue
+            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<p class="mt-4 text-xs text-on-surface-variant opacity-60">Step 4 of 12 — 2 minutes remaining</p>
+</footer>
+<!-- Interactive micro-interaction script -->
+<script>
+        document.querySelectorAll('button:not(.bg-primary)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove selected states from others
+                document.querySelectorAll('button').forEach(b => {
+                    if (b.classList.contains('bg-primary-container')) {
+                        b.className = "w-full group text-left bg-surface-container-low border-2 border-outline-variant rounded-xl p-stack-md flex items-center gap-gutter transition-all duration-200 hover:bg-surface-container-high";
+                        const iconCont = b.querySelector('div:first-child');
+                        iconCont.className = "w-12 h-12 flex-shrink-0 bg-surface-container-highest border-2 border-outline-variant rounded-lg flex items-center justify-center";
+                        const icon = iconCont.querySelector('span');
+                        icon.className = "material-symbols-outlined text-tertiary";
+                        icon.style.fontVariationSettings = "'FILL' 0";
+                        const checkIcon = b.querySelector('div:last-child');
+                        if (checkIcon && checkIcon.querySelector('[data-icon="check_circle"]')) checkIcon.remove();
+                    }
+                });
+
+                // Set this as selected
+                this.className = "w-full group text-left bg-primary-container border-2 border-primary text-on-primary-container rounded-xl p-stack-md flex items-center gap-gutter transition-all duration-300 transform -translate-y-1 selected-glow";
+                const iconCont = this.querySelector('div:first-child');
+                iconCont.className = "w-12 h-12 flex-shrink-0 bg-on-primary-container rounded-lg flex items-center justify-center";
+                const icon = iconCont.querySelector('span');
+                icon.className = "material-symbols-outlined text-primary icon-fill";
+                icon.style.fontVariationSettings = "'FILL' 1";
+                
+                // Add checkmark if not exists
+                if (!this.querySelector('[data-icon="check_circle"]')) {
+                    const checkDiv = document.createElement('div');
+                    checkDiv.className = "flex-shrink-0";
+                    checkDiv.innerHTML = '<span class="material-symbols-outlined text-on-primary-container" data-icon="check_circle">check_circle</span>';
+                    this.appendChild(checkDiv);
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@400;500&family=Hanken+Grotesk:wght@700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#45dada",
+                        "surface-container": "#171f36",
+                        "on-secondary": "#273500",
+                        "outline": "#9b8f7c",
+                        "surface-bright": "#313851",
+                        "on-tertiary": "#003737",
+                        "surface-tint": "#f0c04d",
+                        "on-primary-fixed": "#251a00",
+                        "tertiary-container": "#4bdfdf",
+                        "surface-container-low": "#131b32",
+                        "inverse-on-surface": "#282f48",
+                        "on-primary": "#3f2e00",
+                        "surface-container-high": "#222941",
+                        "tertiary": "#6efcfc",
+                        "primary-container": "#f5c451",
+                        "surface-container-lowest": "#050d24",
+                        "on-tertiary-container": "#006060",
+                        "on-surface": "#dbe1ff",
+                        "secondary": "#abd533",
+                        "outline-variant": "#4e4635",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#d2c5b0",
+                        "on-tertiary-fixed": "#002020",
+                        "error-container": "#93000a",
+                        "surface-variant": "#2c344c",
+                        "secondary-container": "#89b100",
+                        "on-background": "#dbe1ff",
+                        "surface-dim": "#0a1229",
+                        "secondary-fixed-dim": "#abd533",
+                        "surface-container-highest": "#2c344c",
+                        "surface": "#0a1229",
+                        "on-primary-container": "#6d5100",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#151f00",
+                        "primary-fixed": "#ffdf9d",
+                        "primary": "#ffe4af",
+                        "on-tertiary-fixed-variant": "#004f50",
+                        "background": "#0a1229",
+                        "primary-fixed-dim": "#f0c04d",
+                        "on-secondary-fixed-variant": "#3a4d00",
+                        "on-secondary-container": "#2f3f00",
+                        "tertiary-fixed": "#69f7f7",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#dbe1ff",
+                        "on-primary-fixed-variant": "#5b4300",
+                        "secondary-fixed": "#c6f24e",
+                        "inverse-primary": "#785a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "24px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "20px",
+                        "stack-sm": "8px",
+                        "stack-lg": "48px",
+                        "unit": "4px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Sora"],
+                        "headline-sm": ["Sora"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "display-xl": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "label-bold": ["Hanken Grotesk"],
+                        "headline-md-mobile": ["Sora"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "display-lg": ["Sora"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .rank-badge-1 { background-color: #f0c04d; color: #0a1229; }
+        .rank-badge-2 { background-color: #abd533; color: #0a1229; }
+        .active-glow { box-shadow: 0 0 20px rgba(240, 192, 77, 0.3); }
+        .glass-nav { backdrop-filter: blur(20px); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- Top Navigation / Progress Shell -->
+<header class="w-full top-0 sticky z-30 bg-background pt-6 px-margin-mobile pb-4">
+<div class="flex flex-col gap-4">
+<!-- Progress Rail: 20 Ticks -->
+<div class="flex items-end justify-between gap-1 h-6">
+<!-- Completed Ticks (1-3) -->
+<div class="flex-1 h-1 bg-primary-fixed-dim rounded-full"></div>
+<div class="flex-1 h-1 bg-primary-fixed-dim rounded-full"></div>
+<div class="flex-1 h-1 bg-primary-fixed-dim rounded-full"></div>
+<!-- Current Tick (4) -->
+<div class="flex-1 h-3 bg-secondary rounded-full transition-all duration-300"></div>
+<!-- Remaining Ticks (5-20) -->
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+<div class="flex-1 h-1 bg-surface-variant rounded-full"></div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-bold text-label-bold text-on-surface-variant tracking-wider uppercase">Module 6 · Question 4 of 20</span>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-on-surface">Rank your top 2 least favorite subjects.</h1>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-margin-mobile pb-32">
+<!-- Persistent Hint Line -->
+<div class="mt-stack-md py-3 px-4 bg-surface-container-low border-2 border-outline-variant rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-size: 18px;">info</span>
+<p class="font-body-md text-on-surface-variant">
+                1st: <span class="text-primary font-bold" id="rank-1-label">___</span>  ·  
+                2nd: <span class="text-secondary font-bold" id="rank-2-label">___</span>
+</p>
+</div>
+<!-- Options Zone -->
+<div class="mt-stack-md flex flex-col gap-4">
+<!-- Subject Card: Mathematics -->
+<button class="subject-card group w-full p-5 flex justify-between items-center bg-surface-container-low border-2 border-outline-variant rounded-xl transition-all duration-200 active:scale-[0.98] hover:border-outline" onclick="toggleRank('Mathematics', this)">
+<span class="font-headline-sm text-headline-sm text-on-surface">Mathematics</span>
+<div class="rank-indicator w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 border-outline-variant transition-colors"></div>
+</button>
+<!-- Subject Card: Physics -->
+<button class="subject-card group w-full p-5 flex justify-between items-center bg-surface-container-low border-2 border-outline-variant rounded-xl transition-all duration-200 active:scale-[0.98] hover:border-outline" onclick="toggleRank('Physics', this)">
+<span class="font-headline-sm text-headline-sm text-on-surface">Physics</span>
+<div class="rank-indicator w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 border-outline-variant transition-colors"></div>
+</button>
+<!-- Subject Card: Chemistry -->
+<button class="subject-card group w-full p-5 flex justify-between items-center bg-surface-container-low border-2 border-outline-variant rounded-xl transition-all duration-200 active:scale-[0.98] hover:border-outline" onclick="toggleRank('Chemistry', this)">
+<span class="font-headline-sm text-headline-sm text-on-surface">Chemistry</span>
+<div class="rank-indicator w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 border-outline-variant transition-colors"></div>
+</button>
+<!-- Subject Card: Biology -->
+<button class="subject-card group w-full p-5 flex justify-between items-center bg-surface-container-low border-2 border-outline-variant rounded-xl transition-all duration-200 active:scale-[0.98] hover:border-outline" onclick="toggleRank('Biology', this)">
+<span class="font-headline-sm text-headline-sm text-on-surface">Biology</span>
+<div class="rank-indicator w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 border-outline-variant transition-colors"></div>
+</button>
+<!-- Subject Card: Economics -->
+<button class="subject-card group w-full p-5 flex justify-between items-center bg-surface-container-low border-2 border-outline-variant rounded-xl transition-all duration-200 active:scale-[0.98] hover:border-outline" onclick="toggleRank('Economics', this)">
+<span class="font-headline-sm text-headline-sm text-on-surface">Economics</span>
+<div class="rank-indicator w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 border-outline-variant transition-colors"></div>
+</button>
+</div>
+</main>
+<!-- Error Message Anchor -->
+<div class="fixed bottom-[88px] left-0 w-full px-margin-mobile py-3 bg-surface z-40">
+<div class="flex items-center gap-2 border-l-4 border-primary px-3 py-2 bg-primary/10 rounded-r-md">
+<span class="material-symbols-outlined text-primary text-[20px]">warning</span>
+<span class="font-label-bold text-label-bold text-primary">Please select your top 2 to continue</span>
+</div>
+</div>
+<!-- Bottom Action Bar Shell -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile pb-6 pt-4 bg-surface-container/80 backdrop-blur-xl border-t-2 border-outline-variant">
+<!-- Back Button (Ghost) -->
+<button class="flex items-center gap-2 text-on-surface-variant font-label-bold hover:opacity-80 transition-opacity active:scale-95">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+<span class="font-label-bold text-label-bold">Back</span>
+</button>
+<!-- Continue Button (Primary Pill, Disabled State) -->
+<button class="opacity-40 grayscale pointer-events-none bg-primary-container text-on-primary-container rounded-full px-8 py-3 flex items-center gap-2 font-label-bold text-label-bold active:scale-95 transition-all duration-200 shadow-[0_0_20px_rgba(240,192,77,0)]" disabled="" id="continue-btn">
+<span class="font-label-bold text-label-bold">Continue</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</footer>
+<script>
+        let selection = [];
+
+        function toggleRank(subject, el) {
+            const index = selection.indexOf(subject);
+            const indicator = el.querySelector('.rank-indicator');
+            const errorBar = document.querySelector('.fixed.bottom-\\[88px\\]');
+            const continueBtn = document.getElementById('continue-btn');
+
+            if (index > -1) {
+                // Remove selection
+                selection.splice(index, 1);
+            } else {
+                // Add selection if limit not reached
+                if (selection.length < 2) {
+                    selection.push(subject);
+                } else {
+                    // Limit reached: optional feedback or replace last? 
+                    // Let's replace last for better UX or ignore
+                    return;
+                }
+            }
+
+            // Update UI for all cards based on selection array
+            document.querySelectorAll('.subject-card').forEach(card => {
+                const cardSubject = card.querySelector('span').innerText;
+                const cardIndicator = card.querySelector('.rank-indicator');
+                const cardIndex = selection.indexOf(cardSubject);
+
+                card.classList.remove('border-primary-container', 'border-secondary-container', 'active-glow');
+                cardIndicator.innerHTML = '';
+                cardIndicator.className = 'rank-indicator w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 border-outline-variant transition-all';
+
+                if (cardIndex === 0) {
+                    card.classList.add('border-primary-container', 'active-glow');
+                    cardIndicator.innerText = '1';
+                    cardIndicator.classList.add('rank-badge-1', 'border-primary-container');
+                } else if (cardIndex === 1) {
+                    card.classList.add('border-secondary-container');
+                    cardIndicator.innerText = '2';
+                    cardIndicator.classList.add('rank-badge-2', 'border-secondary-container');
+                }
+            });
+
+            // Update Hint Labels
+            document.getElementById('rank-1-label').innerText = selection[0] || '___';
+            document.getElementById('rank-2-label').innerText = selection[1] || '___';
+
+            // Handle Error & Continue Button State
+            if (selection.length === 2) {
+                errorBar.classList.add('hidden');
+                continueBtn.disabled = false;
+                continueBtn.classList.remove('opacity-40', 'grayscale', 'pointer-events-none');
+                continueBtn.style.boxShadow = '0 0 20px rgba(240, 192, 77, 0.4)';
+            } else {
+                errorBar.classList.remove('hidden');
+                continueBtn.disabled = true;
+                continueBtn.classList.add('opacity-40', 'grayscale', 'pointer-events-none');
+                continueBtn.style.boxShadow = 'none';
+            }
+        }
+    </script>
+</body></html>

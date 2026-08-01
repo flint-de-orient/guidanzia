@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Career Discovery Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;700&family=Be+Vietnam+Pro:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#5b4300",
+                    "inverse-surface": "#dbe1ff",
+                    "outline": "#9b8f7c",
+                    "background": "#0a1229",
+                    "primary-fixed-dim": "#f0c04d",
+                    "on-primary-fixed": "#251a00",
+                    "on-tertiary": "#003737",
+                    "error": "#ffb4ab",
+                    "outline-variant": "#4e4635",
+                    "on-tertiary-fixed": "#002020",
+                    "secondary-fixed-dim": "#abd533",
+                    "on-secondary-fixed": "#151f00",
+                    "on-surface-variant": "#d2c5b0",
+                    "primary": "#ffe4af",
+                    "inverse-on-surface": "#282f48",
+                    "on-tertiary-fixed-variant": "#004f50",
+                    "on-secondary": "#273500",
+                    "surface-tint": "#f0c04d",
+                    "secondary-container": "#89b100",
+                    "tertiary": "#6efcfc",
+                    "surface": "#0a1229",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#3a4d00",
+                    "on-tertiary-container": "#006060",
+                    "on-background": "#dbe1ff",
+                    "surface-container-high": "#222941",
+                    "secondary": "#abd533",
+                    "on-surface": "#dbe1ff",
+                    "tertiary-container": "#4bdfdf",
+                    "secondary-fixed": "#c6f24e",
+                    "surface-container-low": "#131b32",
+                    "surface-container": "#171f36",
+                    "surface-container-lowest": "#050d24",
+                    "on-secondary-container": "#2f3f00",
+                    "primary-container": "#f5c451",
+                    "surface-dim": "#0a1229",
+                    "primary-fixed": "#ffdf9d",
+                    "surface-bright": "#313851",
+                    "inverse-primary": "#785a00",
+                    "surface-variant": "#2c344c",
+                    "on-primary-container": "#6d5100",
+                    "on-primary": "#3f2e00",
+                    "on-error": "#690005",
+                    "tertiary-fixed": "#69f7f7",
+                    "error-container": "#93000a",
+                    "tertiary-fixed-dim": "#45dada",
+                    "surface-container-highest": "#2c344c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "gutter": "16px",
+                    "margin-desktop": "40px",
+                    "stack-lg": "48px",
+                    "unit": "4px",
+                    "margin-mobile": "20px",
+                    "stack-md": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Sora"],
+                    "label-bold": ["Hanken Grotesk"],
+                    "headline-md": ["Sora"],
+                    "headline-sm": ["Sora"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "headline-md-mobile": ["Sora"],
+                    "display-xl": ["Sora"],
+                    "display-lg-mobile": ["Sora"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                    "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-tick {
+            height: 4px;
+            flex-grow: 1;
+            margin: 0 2px;
+            border-radius: 2px;
+        }
+        .progress-tick.active {
+            height: 12px;
+            margin-top: -4px;
+        }
+        .selection-tile {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .selection-tile:active {
+            transform: scale(0.96);
+        }
+        .glass-bottom {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-x-hidden">
+<!-- Progress Rail Section -->
+<header class="pt-8 px-margin-mobile flex flex-col gap-unit">
+<div class="flex items-end w-full h-3">
+<!-- 20 Ticks -->
+<!-- 1-15: Gold Filled -->
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<div class="progress-tick bg-primary-container"></div>
+<!-- 16: Active Lime Taller -->
+<div class="progress-tick active bg-secondary"></div>
+<!-- 17-20: Muted -->
+<div class="progress-tick bg-surface-variant"></div>
+<div class="progress-tick bg-surface-variant"></div>
+<div class="progress-tick bg-surface-variant"></div>
+<div class="progress-tick bg-surface-variant"></div>
+</div>
+<p class="text-on-surface-variant text-[14px] mt-2 font-body-md opacity-80">
+            Module 4 · Question 16 of 20
+        </p>
+</header>
+<!-- Question Section -->
+<main class="px-margin-mobile pt-stack-lg pb-40 flex-grow">
+<h1 class="font-display-lg-mobile text-[34px] leading-[1.1] font-extrabold tracking-tight mb-stack-md text-on-surface max-w-[12ch]">
+            Which of these industries interest you most?
+        </h1>
+<div class="inline-flex items-center bg-secondary text-on-secondary px-3 py-1 rounded-full text-label-bold font-label-bold mb-stack-lg">
+            2 of 3 selected
+        </div>
+<!-- Option Zone: 2-column Grid -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Selected Tile 1 -->
+<div class="selection-tile bg-primary-container text-on-primary border-2 border-primary-container rounded-[16px] aspect-square flex flex-col items-center justify-center relative p-gutter cursor-pointer">
+<span class="material-symbols-outlined absolute top-3 right-3 text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="material-symbols-outlined text-[40px] mb-2">rocket_launch</span>
+<span class="text-[17px] font-bold text-center leading-tight">SpaceTech</span>
+</div>
+<!-- Unselected Tile (Dimmed 40%) -->
+<div class="selection-tile bg-background opacity-40 border-2 border-outline-variant rounded-[16px] aspect-square flex flex-col items-center justify-center p-gutter cursor-pointer">
+<span class="material-symbols-outlined text-[40px] mb-2 text-on-surface-variant">payments</span>
+<span class="text-[17px] font-bold text-center leading-tight text-on-surface">Fintech</span>
+</div>
+<!-- Selected Tile 2 -->
+<div class="selection-tile bg-primary-container text-on-primary border-2 border-primary-container rounded-[16px] aspect-square flex flex-col items-center justify-center relative p-gutter cursor-pointer">
+<span class="material-symbols-outlined absolute top-3 right-3 text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="material-symbols-outlined text-[40px] mb-2">biotech</span>
+<span class="text-[17px] font-bold text-center leading-tight">Biohacking</span>
+</div>
+<!-- Unselected Tile (Dimmed 40%) -->
+<div class="selection-tile bg-background opacity-40 border-2 border-outline-variant rounded-[16px] aspect-square flex flex-col items-center justify-center p-gutter cursor-pointer">
+<span class="material-symbols-outlined text-[40px] mb-2 text-on-surface-variant">sports_esports</span>
+<span class="text-[17px] font-bold text-center leading-tight text-on-surface">E-Sports</span>
+</div>
+<!-- Unselected Tile (Dimmed 40%) -->
+<div class="selection-tile bg-background opacity-40 border-2 border-outline-variant rounded-[16px] aspect-square flex flex-col items-center justify-center p-gutter cursor-pointer">
+<span class="material-symbols-outlined text-[40px] mb-2 text-on-surface-variant">energy_savings_leaf</span>
+<span class="text-[17px] font-bold text-center leading-tight text-on-surface">Clean Energy</span>
+</div>
+<!-- Unselected Tile (Dimmed 40%) -->
+<div class="selection-tile bg-background opacity-40 border-2 border-outline-variant rounded-[16px] aspect-square flex flex-col items-center justify-center p-gutter cursor-pointer">
+<span class="material-symbols-outlined text-[40px] mb-2 text-on-surface-variant">architecture</span>
+<span class="text-[17px] font-bold text-center leading-tight text-on-surface">Smart Cities</span>
+</div>
+<!-- Unselected Tile (Dimmed 40%) -->
+<div class="selection-tile bg-background opacity-40 border-2 border-outline-variant rounded-[16px] aspect-square flex flex-col items-center justify-center p-gutter cursor-pointer">
+<span class="material-symbols-outlined text-[40px] mb-2 text-on-surface-variant">memory</span>
+<span class="text-[17px] font-bold text-center leading-tight text-on-surface">Web3 & AI</span>
+</div>
+<!-- Unselected Tile (Dimmed 40%) -->
+<div class="selection-tile bg-background opacity-40 border-2 border-outline-variant rounded-[16px] aspect-square flex flex-col items-center justify-center p-gutter cursor-pointer">
+<span class="material-symbols-outlined text-[40px] mb-2 text-on-surface-variant">movie</span>
+<span class="text-[17px] font-bold text-center leading-tight text-on-surface">Creative Media</span>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar -->
+<footer class="fixed bottom-0 left-0 right-0 glass-bottom bg-background/60 px-margin-mobile py-6 flex items-center justify-between z-50">
+<!-- Back Action -->
+<button class="w-14 h-14 rounded-full border-2 border-outline-variant flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-on-surface-variant text-[28px]">chevron_left</span>
+</button>
+<!-- Continue Action -->
+<button class="flex-grow ml-4 h-14 bg-primary-container text-on-primary font-bold text-[18px] rounded-full shadow-[0_0_20px_rgba(245,196,81,0.3)] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+            Continue
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</footer>
+<!-- Decorative background elements -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden">
+<!-- Acid lime structural streak -->
+<div class="absolute -top-[10%] -right-[10%] w-[60%] h-[30%] bg-secondary/10 rotate-[25deg] blur-[120px]"></div>
+<!-- Subtle tonal layering -->
+<div class="absolute bottom-0 left-0 w-full h-[50%] bg-surface-container-low/30 blur-[80px]"></div>
+</div>
+<script>
+        // Micro-interactions for selection tiles
+        document.querySelectorAll('.selection-tile').forEach(tile => {
+            tile.addEventListener('click', () => {
+                // This is a static UI mockup, so we just toggle a simple visual state for demo
+                const isSelected = tile.classList.contains('bg-primary-container');
+                
+                // Note: Logic here would usually handle the "Max 3" rule.
+                // For this prompt's requirement, we maintain the "2 of 3" visually requested state.
+            });
+        });
+    </script>
+</body></html>

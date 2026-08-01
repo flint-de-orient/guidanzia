@@ -1,0 +1,59 @@
+name: edubot_mobile
+description: "EduBot — AI career counselling for Indian students (Flutter mobile app)."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State management
+  flutter_riverpod: ^2.6.1
+
+  # Networking
+  http: ^1.2.2
+
+  # Local storage
+  flutter_secure_storage: ^9.2.2
+  shared_preferences: ^2.3.2
+
+  # UI / design
+  google_fonts: ^6.2.1
+  fl_chart: ^0.69.2
+  flutter_animate: ^4.5.2
+  cupertino_icons: ^1.0.8
+
+  # PDF + external links
+  printing: ^5.13.4
+  pdf: ^3.11.1
+  file_saver: ^0.2.14
+  url_launcher: ^6.3.1
+  intl: any
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/mascot/
+    - assets/games/
+
+  fonts:
+    - family: Sora
+      fonts:
+        - asset: assets/fonts/Sora.ttf
+    - family: NotoDevanagari
+      fonts:
+        - asset: assets/fonts/NotoSansDevanagari-Regular.ttf
+    - family: NotoBengali
+      fonts:
+        - asset: assets/fonts/NotoSansBengali-Regular.ttf

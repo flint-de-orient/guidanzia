@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router';
 import { Button } from '../components/ui/button';
 import { JobRole } from '../../types/career';
@@ -9,11 +9,12 @@ import {
 import {
   Brain, Home, GraduationCap, Target, Calendar, Building2, IndianRupee, Award, BarChart3, FileText, TrendingUp,
   Users, FileDown, ArrowLeft, X, Menu, CheckCircle2, MapPin, Star, ExternalLink, Youtube, MessageSquare,
-  Lightbulb,
+  Lightbulb, Download, Loader2,
 } from 'lucide-react';
 
 import { Navbar } from '../components/navbar';
 import { TranslatedText } from '../components/TranslatedText';
+import { translationService } from '../../services/translationService';
 
 // Session management functions
 const saveLastViewedRole = (roleId: string, roleTitle: string) => {
@@ -38,9 +39,10 @@ const saveJobRoleToServer = async (roleId: string, roleTitle: string, detailData
 
 // All sections the backend can generate
 const DETAIL_SECTIONS = [
-  'overview', 'pathway', 'skills', 'roadmap',
+  'overview', 'pathway', 'roadmap',
   'institute', 'fees', 'scholarships', 'jobmarket',
   'certifications', 'salary', 'experts',
+  'skills'
 ];
 
 // Derive the broad domain of a job title so the backend AI stays domain-specific.
@@ -114,37 +116,34 @@ function loadDetailCache(roleId: string): JobDetail | null {
   } catch { return null; }
 }
 
-// Look up a role from sessionStorage-stored API careers only (fully AI-driven, no static fallback)
-// Falls back to localStorage last role when sessionStorage is empty (e.g. after fresh login)
+// Resolve a role from sessionStorage careerRecommendations using flat job-N index
+// Falls back to localStorage last role on refresh
 function resolveRole(roleId: string): JobRole | undefined {
-  const stored = sessionStorage.getItem('careerRecommendations');
-  if (stored) {
-    try {
-      const parsed = JSON.parse(stored);
-      if (parsed?.success && Array.isArray(parsed.careers)) {
-        for (let di = 0; di < parsed.careers.length; di++) {
-          const jobs = parsed.careers[di].jobs ?? [];
-          for (let ji = 0; ji < jobs.length; ji++) {
-            if (`domain-${di}-job-${ji}` === roleId) {
-              return {
-                id: roleId,
-                title: jobs[ji].title,
-                domainId: `domain-${di}`,
-                icon: '🎯',
-                matchPercentage: parsed.careers[di].match ?? 0,
-                salaryRange: jobs[ji].salary,
-                growthRate: jobs[ji].growth,
-                description: jobs[ji].description,
-              };
-            }
-          }
+  // roleId format: job-0, job-1, job-2
+  const index = parseInt(roleId.replace('job-', ''), 10);
+  if (!isNaN(index)) {
+    const stored = sessionStorage.getItem('careerRecommendations');
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        const career = parsed?.careers?.[index];
+        if (career) {
+          return {
+            id: roleId,
+            title: career.title,
+            domainId: '',
+            icon: '🎯',
+            matchPercentage: career.matchScore ?? 0,
+            salaryRange: '',
+            growthRate: '',
+            description: career.description ?? '',
+          };
         }
-      }
-    } catch { /* ignore */ }
+      } catch { /* ignore */ }
+    }
   }
 
-  // Fallback: reconstruct minimal role from localStorage last role
-  // The useEffect will fetch full detail from server
+  // Fallback: localStorage last role (after page refresh)
   const lastRole = (() => {
     try {
       const raw = localStorage.getItem('edubot_last_role');
@@ -171,6 +170,9 @@ export function JobRoleDetail() {
   const { roleId } = useParams();
   const [activeSection, setActiveSection] = useState('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [pdfProgress, setPdfProgress] = useState(0);
+  const [pdfStatus, setPdfStatus] = useState('');
 
   // Progress-aware loading state
   const [loadedCount, setLoadedCount] = useState(0);
@@ -181,6 +183,7 @@ export function JobRoleDetail() {
 
   // Merged details built section by section
   const [details, setDetails] = useState<JobDetail | null>(null);
+  const completedRef = useRef(0);
 
   const role = resolveRole(roleId || '');
 
@@ -244,7 +247,9 @@ export function JobRoleDetail() {
       })
         .then(r => r.json())
         .then(data => {
-          const SECTION_KEYS = ['overview','careerPathway','skillsLearning','roadmap90Days','topInstitutes','feesInvestment','scholarships','jobMarket','certifications','salaryGrowth','industryExperts'];
+          const SECTION_KEYS = ['overview','careerPathway',
+            // 'skillsLearning','roadmap90Days',
+            'topInstitutes','feesInvestment','scholarships','jobMarket','certifications','salaryGrowth','industryExperts'];
           // Check if at least 8 out of 11 sections exist (70%+ complete)
           const sectionsPresent = SECTION_KEYS.filter((k: string) => data.detail?.[k] !== undefined).length;
           const hasCompleteData = data.success && data.detail && sectionsPresent >= 8;
@@ -305,8 +310,7 @@ export function JobRoleDetail() {
       industryExperts: [],
     };
     setDetails(aiSkeleton);
-
-    let completed = 0;
+    completedRef.current = 0;
 
     // Map backend section keys → JobDetail fields
     const sectionMap: Record<string, (d: JobDetail, content: any) => JobDetail> = {
@@ -346,43 +350,43 @@ export function JobRoleDetail() {
           },
         };
       },
-            skills: (d, c) => ({
-        ...d,
-        skillsLearning: {
-          mustHave: (c.skills?.high ?? []).map((s: any) => ({
-            skill: s.name,
-            youtubeLink: s.video_url ?? `https://www.youtube.com/results?search_query=${encodeURIComponent(s.name)}+tutorial`,
-          })),
-          core: (c.skills?.medium ?? []).map((s: any) => ({
-            skill: s.name,
-            youtubeLink: s.video_url ?? `https://www.youtube.com/results?search_query=${encodeURIComponent(s.name)}+tutorial`,
-          })),
-          bonus: (c.skills?.low ?? []).map((s: any) => ({
-            skill: s.name,
-            youtubeLink: s.video_url ?? `https://www.youtube.com/results?search_query=${encodeURIComponent(s.name)}+tutorial`,
-          })),
-        },
-      }),
-      roadmap: (d, c) => ({
-        ...d,
-        roadmap90Days: {
-          phase1: {
-            learningGoals: c.roadmap?.phase1?.goals ?? d.roadmap90Days.phase1.learningGoals,
-            actionTasks: c.roadmap?.phase1?.tasks ?? d.roadmap90Days.phase1.actionTasks,
-            progressIndicators: c.roadmap?.phase1?.progress_indicators ?? d.roadmap90Days.phase1.progressIndicators,
-          },
-          phase2: {
-            learningGoals: c.roadmap?.phase2?.goals ?? d.roadmap90Days.phase2.learningGoals,
-            actionTasks: c.roadmap?.phase2?.tasks ?? d.roadmap90Days.phase2.actionTasks,
-            progressIndicators: c.roadmap?.phase2?.progress_indicators ?? d.roadmap90Days.phase2.progressIndicators,
-          },
-          phase3: {
-            learningGoals: c.roadmap?.phase3?.goals ?? d.roadmap90Days.phase3.learningGoals,
-            actionTasks: c.roadmap?.phase3?.tasks ?? d.roadmap90Days.phase3.actionTasks,
-            progressIndicators: c.roadmap?.phase3?.progress_indicators ?? d.roadmap90Days.phase3.progressIndicators,
-          },
-        },
-      }),
+      //       skills: (d, c) => ({
+      //   ...d,
+      //   skillsLearning: {
+      //     mustHave: (c.skills?.high ?? []).map((s: any) => ({
+      //       skill: s.name,
+      //       youtubeLink: s.video_url ?? `https://www.youtube.com/results?search_query=${encodeURIComponent(s.name)}+tutorial`,
+      //     })),
+      //     core: (c.skills?.medium ?? []).map((s: any) => ({
+      //       skill: s.name,
+      //       youtubeLink: s.video_url ?? `https://www.youtube.com/results?search_query=${encodeURIComponent(s.name)}+tutorial`,
+      //     })),
+      //     bonus: (c.skills?.low ?? []).map((s: any) => ({
+      //       skill: s.name,
+      //       youtubeLink: s.video_url ?? `https://www.youtube.com/results?search_query=${encodeURIComponent(s.name)}+tutorial`,
+      //     })),
+      //   },
+      // }),
+      // roadmap: (d, c) => ({
+      //   ...d,
+      //   roadmap90Days: {
+      //     phase1: {
+      //       learningGoals: c.roadmap?.phase1?.goals ?? d.roadmap90Days.phase1.learningGoals,
+      //       actionTasks: c.roadmap?.phase1?.tasks ?? d.roadmap90Days.phase1.actionTasks,
+      //       progressIndicators: c.roadmap?.phase1?.progress_indicators ?? d.roadmap90Days.phase1.progressIndicators,
+      //     },
+      //     phase2: {
+      //       learningGoals: c.roadmap?.phase2?.goals ?? d.roadmap90Days.phase2.learningGoals,
+      //       actionTasks: c.roadmap?.phase2?.tasks ?? d.roadmap90Days.phase2.actionTasks,
+      //       progressIndicators: c.roadmap?.phase2?.progress_indicators ?? d.roadmap90Days.phase2.progressIndicators,
+      //     },
+      //     phase3: {
+      //       learningGoals: c.roadmap?.phase3?.goals ?? d.roadmap90Days.phase3.learningGoals,
+      //       actionTasks: c.roadmap?.phase3?.tasks ?? d.roadmap90Days.phase3.actionTasks,
+      //       progressIndicators: c.roadmap?.phase3?.progress_indicators ?? d.roadmap90Days.phase3.progressIndicators,
+      //     },
+      //   },
+      // }),
       institute: (d, c) => ({
         ...d,
         topInstitutes: {
@@ -392,6 +396,7 @@ export function JobRoleDetail() {
             department: i.department ?? i.specialization ?? '',
             rating: parseFloat(i.rating) || 4.0,
             website: i.website,
+            eligibility: i.eligibility ?? 'Not specified',
           })),
           private: (c.institutes?.private ?? []).map((i: any) => ({
             name: i.name,
@@ -399,6 +404,7 @@ export function JobRoleDetail() {
             department: i.department ?? i.specialization ?? '',
             rating: parseFloat(i.rating) || 4.0,
             website: i.website,
+            eligibility: i.eligibility ?? 'Not specified',
           })),
           distanceLearning: (c.institutes?.distance ?? []).map((i: any) => ({
             name: i.name,
@@ -406,6 +412,7 @@ export function JobRoleDetail() {
             department: i.department ?? i.specialization ?? '',
             rating: parseFloat(i.rating) || 4.0,
             website: i.website,
+            eligibility: i.eligibility ?? 'Not specified',
           })),
           online: (c.institutes?.online ?? []).map((i: any) => ({
             name: i.name,
@@ -413,6 +420,7 @@ export function JobRoleDetail() {
             department: i.department ?? i.specialization ?? '',
             rating: parseFloat(i.rating) || 4.0,
             website: i.website,
+            eligibility: i.eligibility ?? 'Open enrollment',
           })),
         },
       }),
@@ -573,8 +581,8 @@ export function JobRoleDetail() {
     const sectionToDetailKey: Record<string, string> = {
       overview: 'overview',
       pathway: 'careerPathway',
-      skills: 'skillsLearning',
-      roadmap: 'roadmap90Days',
+      // skills: 'skillsLearning',
+      // roadmap: 'roadmap90Days',
       institute: 'topInstitutes',
       fees: 'feesInvestment',
       scholarships: 'scholarships',
@@ -609,9 +617,9 @@ export function JobRoleDetail() {
 
     DETAIL_SECTIONS.forEach((section) => {
       fetchWithRetry(section).finally(() => {
-        completed += 1;
-        setLoadedCount(completed);
-        if (completed === DETAIL_SECTIONS.length) {
+        completedRef.current += 1;
+        setLoadedCount(completedRef.current);
+        if (completedRef.current === DETAIL_SECTIONS.length) {
           setLoadingDone(true);
           setDetails((final) => {
             if (final && role) {
@@ -664,13 +672,151 @@ export function JobRoleDetail() {
               style={{ width: `${progressPct}%` }}
             />
           </div>
-          {!loadingFromCache && (
-            <p className="text-sm font-semibold text-indigo-600">{progressPct}% complete — {loadedCount} of {totalSections} sections</p>
-          )}
+          <p className="text-sm font-semibold text-indigo-600">{progressPct}% complete — {loadedCount} of {totalSections} sections</p>
         </div>
       </div>
     );
   }
+
+  const handleGenerateReport = async () => {
+    setIsGenerating(true);
+    setPdfProgress(0);
+    setPdfStatus('Initializing...');
+    try {
+      const targetLanguage = (localStorage.getItem('edubot_language') || 'en') as 'en' | 'hi' | 'bn';
+      setPdfProgress(10);
+      setPdfStatus('Preparing data...');
+      let translatedDetails = details!;
+      setPdfProgress(20);
+      setPdfStatus('Translating content...');
+      if (targetLanguage !== 'en') {
+        const textsToTranslate: string[] = [
+          details!.overview.description,
+          ...details!.overview.keyResponsibilities,
+          ...details!.overview.whySuitable,
+          ...details!.careerPathway.steps.flatMap(s => [s.phase, s.description]),
+          // ...details!.skillsLearning.mustHave.map(s => s.skill),
+          // ...details!.skillsLearning.core.map(s => s.skill),
+          // ...details!.skillsLearning.bonus.map(s => s.skill),
+          // ...details!.roadmap90Days.phase1.learningGoals,
+          // ...details!.roadmap90Days.phase1.actionTasks,
+          // ...details!.roadmap90Days.phase1.progressIndicators,
+          // ...details!.roadmap90Days.phase2.learningGoals,
+          // ...details!.roadmap90Days.phase2.actionTasks,
+          // ...details!.roadmap90Days.phase2.progressIndicators,
+          // ...details!.roadmap90Days.phase3.learningGoals,
+          // ...details!.roadmap90Days.phase3.actionTasks,
+          // ...details!.roadmap90Days.phase3.progressIndicators,
+          // ...details!.salaryGrowth.salaryTips,
+          ...details!.jobMarket.keyInsights,
+          // ...details!.certifications.map(c => c.name),
+          ...details!.industryExperts.map(e => e.advice),
+          ...details!.topInstitutes.government.flatMap(i => [i.name, i.location, i.department, i.eligibility]),
+          ...details!.topInstitutes.private.flatMap(i => [i.name, i.location, i.department, i.eligibility]),
+          ...details!.topInstitutes.distanceLearning.flatMap(i => [i.name, i.location, i.department, i.eligibility]),
+          ...details!.topInstitutes.online.flatMap(i => [i.name, i.location, i.department, i.eligibility]),
+          ...(details!.scholarships?.governmentPrivate || []).flatMap(s => [s.name, s.eligibility]),
+          ...(details!.scholarships?.bankLoans || []).flatMap(l => [l.name, l.interestRate]),
+          ...(details!.scholarships?.governmentSchemes || []).flatMap(s => [s.name, s.benefits, s.eligibility]),
+          details!.feesInvestment.description,
+          ...details!.feesInvestment.breakdown.map(b => b.phase),
+        ];
+        setPdfProgress(40);
+        setPdfStatus('Translating sections...');
+        const translations = await translationService.translateBatch(textsToTranslate, targetLanguage);
+        setPdfProgress(60);
+        setPdfStatus('Building report...');
+        let idx = 0;
+        translatedDetails = {
+          ...details!,
+          overview: {
+            description: translations[idx++],
+            keyResponsibilities: details!.overview.keyResponsibilities.map(() => translations[idx++]),
+            whySuitable: details!.overview.whySuitable.map(() => translations[idx++]),
+          },
+          careerPathway: {
+            ...details!.careerPathway,
+            steps: details!.careerPathway.steps.map(s => ({ ...s, phase: translations[idx++], description: translations[idx++] })),
+          },
+          // skillsLearning: {
+          //   mustHave: details!.skillsLearning.mustHave.map(s => ({ ...s, skill: translations[idx++] })),
+          //   core: details!.skillsLearning.core.map(s => ({ ...s, skill: translations[idx++] })),
+          //   bonus: details!.skillsLearning.bonus.map(s => ({ ...s, skill: translations[idx++] })),
+          // },
+          // roadmap90Days: {
+          //   phase1: {
+          //     learningGoals: details!.roadmap90Days.phase1.learningGoals.map(() => translations[idx++]),
+          //     actionTasks: details!.roadmap90Days.phase1.actionTasks.map(() => translations[idx++]),
+          //     progressIndicators: details!.roadmap90Days.phase1.progressIndicators.map(() => translations[idx++]),
+          //   },
+          //   phase2: {
+          //     learningGoals: details!.roadmap90Days.phase2.learningGoals.map(() => translations[idx++]),
+          //     actionTasks: details!.roadmap90Days.phase2.actionTasks.map(() => translations[idx++]),
+          //     progressIndicators: details!.roadmap90Days.phase2.progressIndicators.map(() => translations[idx++]),
+          //   },
+          //   phase3: {
+          //     learningGoals: details!.roadmap90Days.phase3.learningGoals.map(() => translations[idx++]),
+          //     actionTasks: details!.roadmap90Days.phase3.actionTasks.map(() => translations[idx++]),
+          //     progressIndicators: details!.roadmap90Days.phase3.progressIndicators.map(() => translations[idx++]),
+          //   },
+          // },
+          // salaryGrowth: { ...details!.salaryGrowth, salaryTips: details!.salaryGrowth.salaryTips.map(() => translations[idx++]) },
+          jobMarket: { ...details!.jobMarket, keyInsights: details!.jobMarket.keyInsights.map(() => translations[idx++]) },
+          // certifications: details!.certifications.map(c => ({ ...c, name: translations[idx++] })),
+          industryExperts: details!.industryExperts.map(e => ({ ...e, advice: translations[idx++] })),
+          topInstitutes: {
+            government: details!.topInstitutes.government.map(i => ({ ...i, name: translations[idx++], location: translations[idx++], department: translations[idx++], eligibility: translations[idx++] })),
+            private: details!.topInstitutes.private.map(i => ({ ...i, name: translations[idx++], location: translations[idx++], department: translations[idx++], eligibility: translations[idx++] })),
+            distanceLearning: details!.topInstitutes.distanceLearning.map(i => ({ ...i, name: translations[idx++], location: translations[idx++], department: translations[idx++], eligibility: translations[idx++] })),
+            online: details!.topInstitutes.online.map(i => ({ ...i, name: translations[idx++], location: translations[idx++], department: translations[idx++], eligibility: translations[idx++] })),
+          },
+          scholarships: {
+            governmentPrivate: (details!.scholarships?.governmentPrivate || []).map(s => ({ ...s, name: translations[idx++], eligibility: translations[idx++] })),
+            bankLoans: (details!.scholarships?.bankLoans || []).map(l => ({ ...l, name: translations[idx++], interestRate: translations[idx++] })),
+            governmentSchemes: (details!.scholarships?.governmentSchemes || []).map(s => ({ ...s, name: translations[idx++], benefits: translations[idx++], eligibility: translations[idx++] })),
+          },
+          feesInvestment: {
+            ...details!.feesInvestment,
+            description: translations[idx++],
+            breakdown: details!.feesInvestment.breakdown.map(b => ({ ...b, phase: translations[idx++] })),
+          },
+        };
+      }
+      setPdfProgress(70);
+      setPdfStatus('Generating PDF...');
+      const progressInterval = setInterval(() => {
+        setPdfProgress(prev => prev < 85 ? prev + 1 : prev);
+      }, 200);
+      const response = await fetch(`${API_BASE}/api/generate-pdf`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ roleId, roleTitle: role!.title, targetLanguage, translatedData: translatedDetails }),
+      });
+      clearInterval(progressInterval);
+      if (!response.ok) throw new Error('PDF generation failed');
+      setPdfProgress(90);
+      setPdfStatus('Finalizing...');
+      const blob = await response.blob();
+      setPdfProgress(100);
+      setPdfStatus('Complete!');
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `EduBot-Career-Report-${role!.title.replace(/\s+/g, '-')}-${Date.now()}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      setIsGenerating(false);
+      setPdfProgress(0);
+      setPdfStatus('');
+    } catch (error) {
+      setIsGenerating(false);
+      setPdfProgress(0);
+      setPdfStatus('');
+      alert(`Failed to generate PDF: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  };
 
   // Transform salary progression data for the chart
   const salaryProgressionData = details.salaryGrowth.progression.map(item => ({
@@ -686,14 +832,14 @@ export function JobRoleDetail() {
   const menuItems = [
     { id: 'overview', label: 'Overview', icon: Home },
     { id: 'pathway', label: 'Career Pathway', icon: GraduationCap },
-    { id: 'skills', label: 'Skills & Learning', icon: Target },
-    { id: 'roadmap', label: '90-Day Roadmap', icon: Calendar },
+    // { id: 'skills', label: 'Skills & Learning', icon: Target },
+    // { id: 'roadmap', label: '90-Day Roadmap', icon: Calendar },
     { id: 'institutes', label: 'Top Institutes', icon: Building2 },
     { id: 'fees', label: 'Fees & Investment', icon: IndianRupee },
     { id: 'scholarships', label: 'Scholarships', icon: Award },
     { id: 'market', label: 'Job Market', icon: BarChart3 },
-    { id: 'certifications', label: 'Certifications', icon: FileText },
-    { id: 'salary', label: 'Salary Growth', icon: TrendingUp },
+    // { id: 'certifications', label: 'Certifications', icon: FileText },
+    // { id: 'salary', label: 'Salary Growth', icon: TrendingUp },
     { id: 'experts', label: 'Industry Experts', icon: Users },
     { id: 'report', label: 'Career Report', icon: FileDown },
   ];
@@ -719,7 +865,7 @@ export function JobRoleDetail() {
           {menuItems.map((item) => {
             if (item.id === 'report') {
               return (
-                <Link key={item.id} to={`/career-report/${roleId}`}>
+                <Link key={item.id} to="/career-report">
                   <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-left text-gray-700 hover:bg-gray-50">
                     <item.icon className="text-xl" />
                     <span className="text-sm"><TranslatedText>{item.label}</TranslatedText></span>
@@ -727,7 +873,6 @@ export function JobRoleDetail() {
                 </Link>
               );
             }
-            
             return (
               <button
                 key={item.id}
@@ -778,7 +923,7 @@ export function JobRoleDetail() {
               {menuItems.map((item) => {
                 if (item.id === 'report') {
                   return (
-                    <Link key={item.id} to={`/career-report/${roleId}`}>
+                    <Link key={item.id} to="/career-report">
                       <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-left text-gray-700 hover:bg-gray-50">
                         <item.icon className="text-xl" />
                         <span className="text-sm"><TranslatedText>{item.label}</TranslatedText></span>
@@ -786,7 +931,6 @@ export function JobRoleDetail() {
                     </Link>
                   );
                 }
-                
                 return (
                   <button
                     key={item.id}
@@ -818,13 +962,11 @@ export function JobRoleDetail() {
           </aside>
         </div>
       )}
-
-      {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
         <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
           <div className="px-4 sm:px-6 lg:px-8 py-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between w-full">
               <button
                 onClick={() => setSidebarOpen(true)}
                 className="lg:hidden p-2 -ml-2 rounded-lg hover:bg-gray-100"
@@ -850,6 +992,24 @@ export function JobRoleDetail() {
                   )}
                 </div>
               </div>
+              <Button
+                onClick={handleGenerateReport}
+                disabled={isGenerating || !details}
+                size="sm"
+                className="ml-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 flex-shrink-0"
+              >
+                {isGenerating ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <span className="hidden sm:inline">{pdfProgress}%</span>
+                  </>
+                ) : (
+                  <>
+                    <Download className="w-4 h-4 sm:mr-2" />
+                    <span className="hidden sm:inline"><TranslatedText>Download PDF</TranslatedText></span>
+                  </>
+                )}
+              </Button>
             </div>
           </div>
         </header>
@@ -932,7 +1092,7 @@ export function JobRoleDetail() {
           )}
 
           {/* Skills & Learning Section */}
-          {activeSection === 'skills' && (
+          {/* {activeSection === 'skills' && (
             <div className="max-w-5xl mx-auto space-y-6">
               <div className="bg-white rounded-2xl border-2 border-red-200 p-6 sm:p-8">
                 <div className="flex items-center gap-3 mb-6">
@@ -1027,10 +1187,10 @@ export function JobRoleDetail() {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           {/* 90-Day Roadmap Section */}
-          {activeSection === 'roadmap' && (
+          {/* {activeSection === 'roadmap' && (
             <div className="max-w-5xl mx-auto">
               <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-8">
@@ -1087,7 +1247,7 @@ export function JobRoleDetail() {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Other sections remain but with boxicons */}
           {activeSection === 'institutes' && (
@@ -1111,6 +1271,9 @@ export function JobRoleDetail() {
                               <TranslatedText>{inst.location}</TranslatedText>
                             </p>
                             <p className="font-medium text-sm text-indigo-600"><TranslatedText>{inst.department}</TranslatedText></p>
+                            <div className="mt-2 px-3 py-1 bg-emerald-50 border border-emerald-200 rounded-lg inline-block">
+                              <p className="text-xs text-emerald-700 font-semibold"><TranslatedText>Eligibility: </TranslatedText><span> {inst.eligibility}</span></p>
+                            </div>
                           </div>
                           <div className="flex items-center gap-1">
                             <Star className="text-xl text-yellow-500" />
@@ -1281,7 +1444,7 @@ export function JobRoleDetail() {
             </div>
           )}
 
-          {activeSection === 'certifications' && (
+          {/* {activeSection === 'certifications' && (
             <div className="max-w-5xl mx-auto">
               <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6"><TranslatedText>Industry-Recognized Certifications</TranslatedText></h2>
@@ -1329,9 +1492,9 @@ export function JobRoleDetail() {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
-          {activeSection === 'salary' && (
+          {/* {activeSection === 'salary' && (
             <div className="max-w-6xl mx-auto space-y-6">
               <div className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6"><TranslatedText>Salary Progression Timeline</TranslatedText></h2>
@@ -1381,7 +1544,7 @@ export function JobRoleDetail() {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           {activeSection === 'experts' && (
             <div className="max-w-5xl mx-auto">

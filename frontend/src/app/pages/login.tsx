@@ -26,7 +26,7 @@ export function Login() {
       if (recommendations || lastRole) {
         navigate('/');
       } else {
-        navigate('/onboarding');
+        navigate('/onboarding-new');
       }
     }
   };
@@ -149,7 +149,7 @@ export function Login() {
                 type="button"
                 variant="outline"
                 className="w-full h-12"
-                onClick={() => navigate('/onboarding')}
+                onClick={() => navigate('/onboarding-new')}
               >
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path

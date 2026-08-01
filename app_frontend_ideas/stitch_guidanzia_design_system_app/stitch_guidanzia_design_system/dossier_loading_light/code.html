@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Career Discovery | Analysis Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;700&amp;family=Be+Vietnam+Pro:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 3s linear infinite;
+        }
+        .glow-gold {
+            filter: drop-shadow(0 0 8px rgba(240, 192, 77, 0.4));
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .pulse-opacity {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .6; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#4f6700",
+                        "on-tertiary-fixed": "#002020",
+                        "tertiary-fixed": "#69f7f7",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#006060",
+                        "on-primary-fixed": "#251a00",
+                        "on-secondary-fixed-variant": "#3a4d00",
+                        "surface-dim": "#d2d9f9",
+                        "surface": "#faf8ff",
+                        "surface-container-low": "#f2f3ff",
+                        "primary": "#785a00",
+                        "on-secondary-fixed": "#151f00",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#785a00",
+                        "primary-fixed-dim": "#f0c04d",
+                        "background": "#f8f9fb", /* Cloud White canvas */
+                        "secondary-container": "#c6f24e",
+                        "outline-variant": "#d2c5b0",
+                        "on-primary-container": "#6d5100",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e3e7ff",
+                        "secondary-fixed-dim": "#abd533",
+                        "on-surface-variant": "#4e4635",
+                        "tertiary": "#006a6a",
+                        "on-tertiary-fixed-variant": "#004f50",
+                        "surface-container": "#ebedff",
+                        "on-background": "#131b32",
+                        "on-error": "#ffffff",
+                        "outline": "#807663",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#dbe1ff",
+                        "inverse-on-surface": "#eff0ff",
+                        "surface-bright": "#faf8ff",
+                        "tertiary-container": "#4bdfdf",
+                        "primary-container": "#f5c451",
+                        "primary-fixed": "#ffdf9d",
+                        "on-primary-fixed-variant": "#5b4300",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#282f48",
+                        "on-secondary-container": "#546d00",
+                        "inverse-primary": "#f0c04d",
+                        "secondary-fixed": "#c6f24e",
+                        "tertiary-fixed-dim": "#45dada",
+                        "on-surface": "#131b32",
+                        "surface-container-highest": "#dbe1ff",
+                        "deep-navy": "#0b0a3d",
+                        "graduation-gold": "#f0c04d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "48px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "20px",
+                        "stack-md": "24px",
+                        "unit": "4px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "display": ["Plus Jakarta Sans", "Sora"],
+                        "body": ["Plus Jakarta Sans", "Be Vietnam Pro"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen text-on-surface flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-40 bg-white border-b border-surface-variant/30">
+<div class="flex items-center justify-between px-margin-mobile py-4 w-full max-w-[1200px] mx-auto">
+<div class="flex items-center gap-4">
+<button aria-label="Back" class="active:scale-95 transition-transform text-deep-navy">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold text-deep-navy tracking-tight">Career Discovery</h1>
+</div>
+<button aria-label="Filter" class="active:scale-95 transition-transform text-deep-navy">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area: Analysis State -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile relative overflow-hidden pb-32">
+<div class="z-10 w-full max-w-sm flex flex-col items-center space-y-stack-lg">
+<!-- Centered Progress Ring -->
+<div class="relative w-56 h-56 flex items-center justify-center">
+<!-- Outer Ring Background -->
+<div class="absolute inset-0 border-8 border-surface-container-low rounded-full"></div>
+<!-- Outer Spinning Ring (Graduation Gold Accent) -->
+<div class="absolute inset-0 border-t-8 border-graduation-gold rounded-full animate-spin-slow glow-gold"></div>
+<!-- Inner Glassmorphic Core -->
+<div class="w-40 h-40 glass-card rounded-full flex items-center justify-center shadow-xl relative">
+<div class="text-center">
+<span class="block text-2xl font-extrabold text-deep-navy leading-none">100%</span>
+<span class="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mt-1">Analyzed</span>
+</div>
+<!-- Rotating Streaks -->
+<div class="absolute inset-2 rounded-full border border-dashed border-graduation-gold/30 animate-spin-slow" style="animation-direction: reverse;"></div>
+</div>
+</div>
+<!-- Loading Text -->
+<div class="text-center space-y-3">
+<h2 class="text-2xl font-extrabold text-deep-navy tracking-tight">Building your Data Scientist dossier</h2>
+<p class="text-body-md text-on-surface-variant pulse-opacity font-medium">Mapping skill matrices &amp; market trends...</p>
+</div>
+<!-- Segmented Progress Bar -->
+<div class="w-full space-y-stack-sm">
+<div class="flex gap-1.5 w-full">
+<!-- 4 Filled Ticks -->
+<div class="h-2 flex-1 bg-graduation-gold rounded-full shadow-sm"></div>
+<div class="h-2 flex-1 bg-graduation-gold rounded-full shadow-sm"></div>
+<div class="h-2 flex-1 bg-graduation-gold rounded-full shadow-sm"></div>
+<div class="h-2 flex-1 bg-graduation-gold rounded-full shadow-sm"></div>
+<!-- 3 Remaining Ticks (Transitioning) -->
+<div class="h-2 flex-1 rounded-full bg-surface-container-highest transition-colors duration-500" id="tick-5"></div>
+<div class="h-2 flex-1 rounded-full bg-surface-container-highest transition-colors duration-500" id="tick-6"></div>
+<div class="h-2 flex-1 rounded-full bg-surface-container-highest transition-colors duration-500" id="tick-7"></div>
+</div>
+<div class="flex justify-between items-center px-1">
+<span class="text-sm font-bold text-graduation-gold tracking-tight" id="percent-label">57% ANALYZED</span>
+<span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-[0.2em]" id="step-label">Step 4/7</span>
+</div>
+</div>
+<!-- Career Insight Snippet -->
+<div class="w-full">
+<div class="glass-card p-gutter rounded-2xl shadow-sm border-l-4 border-graduation-gold">
+<p class="text-body-md text-deep-navy font-medium leading-relaxed italic">
+                    "Data Scientists in Mumbai are seeing a 15% increase in base compensation for Python + AWS skills..."
+                </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Deep Navy with Gold Active states) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-4 bg-deep-navy shadow-[0_-8px_30px_rgb(0,0,0,0.12)]">
+<a class="flex flex-col items-center justify-center text-white/60 hover:text-white transition-colors gap-1" href="#">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Explore</span>
+</a>
+<!-- ACTIVE TAB: Paths -->
+<a class="flex flex-col items-center justify-center text-graduation-gold gap-1" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">route</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Paths</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/60 hover:text-white transition-colors gap-1" href="#">
+<span class="material-symbols-outlined text-[24px]">psychology</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Mentor</span>
+</a>
+<a class="flex flex-col items-center justify-center text-white/60 hover:text-white transition-colors gap-1" href="#">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Profile</span>
+</a>
+</nav>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const percentSpan = document.getElementById('percent-label');
+        const stepSpan = document.getElementById('step-label');
+        const ticks = [
+            document.getElementById('tick-5'),
+            document.getElementById('tick-6'),
+            document.getElementById('tick-7')
+        ];
+        
+        let currentStep = 4;
+        const totalSteps = 7;
+        
+        const interval = setInterval(() => {
+            if (currentStep < totalSteps) {
+                const tick = ticks[currentStep - 4];
+                if (tick) {
+                    tick.classList.remove('bg-surface-container-highest');
+                    tick.classList.add('bg-graduation-gold', 'shadow-sm');
+                }
+                
+                currentStep++;
+                let newPercent = Math.min(100, Math.floor((currentStep / totalSteps) * 100));
+                
+                percentSpan.innerText = `${newPercent}% ANALYZED`;
+                stepSpan.innerText = `Step ${currentStep}/${totalSteps}`;
+
+                if(currentStep === totalSteps) {
+                    clearInterval(interval);
+                }
+            }
+        }, 3000);
+    });
+</script>
+</body></html>

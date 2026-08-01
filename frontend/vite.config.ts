@@ -16,6 +16,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  // Load .env from project root
+  envDir: path.resolve(__dirname, '..'),
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],

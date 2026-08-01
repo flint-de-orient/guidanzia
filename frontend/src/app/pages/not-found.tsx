@@ -58,7 +58,7 @@ export function NotFound() {
         <div className="mt-12 pt-8 border-t border-gray-200">
           <p className="text-sm text-gray-600 mb-4"><TranslatedText>Looking for something specific?</TranslatedText></p>
           <div className="flex flex-wrap gap-3 justify-center">
-            <Link to="/onboarding">
+            <Link to="/onboarding-new">
               <Button variant="ghost" size="sm" className="text-indigo-600 hover:text-indigo-700">
                 <TranslatedText>Take Assessment</TranslatedText>
               </Button>

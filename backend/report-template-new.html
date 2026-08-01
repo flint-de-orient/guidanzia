@@ -401,7 +401,7 @@
                 <div class="header-title" id="header-main-title">PERSONALIZED CAREER GUIDANCE REPORT</div>
                 <div class="header-badges">
                     <span class="badge-item" id="badge-ai">AI-POWERED CAREER REPORT</span>
-                    <span class="badge-item" id="badge-edition">2026 EDITION</span>
+                    <span class="badge-item" id="badge-edition">{new Date().getFullYear()} EDITION</span>
                 </div>
             </div>
             <div class="header-brand">
@@ -707,71 +707,71 @@
                 html += '</ul></div></div>';
             }
             
-            if (data.skillsLearning) {
-                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.skills.toUpperCase()}</h2><div class="section-content">`;
-                const skillCategories = [
-                    { key: 'mustHave', title: t.musthave },
-                    { key: 'core', title: t.core },
-                    { key: 'bonus', title: t.bonus }
-                ];
-                skillCategories.forEach(category => {
-                    if (data.skillsLearning[category.key] && data.skillsLearning[category.key].length > 0) {
-                        html += `<h3 class="subsection-title">${category.title}</h3>`;
-                        html += `<table class="data-table"><thead><tr>`;
-                        html += `<th>${t.skill}</th><th>${t.resources}</th></tr></thead><tbody>`;
-                        data.skillsLearning[category.key].forEach(skill => {
-                            html += `<tr><td><strong>${skill.skill}</strong></td>`;
-                            html += `<td>`;
-                            if (skill.youtubeLink) {
-                                html += `<a href="${skill.youtubeLink}" style="color: #7c3aed; text-decoration: none; font-size: 11px; margin-right: 10px; font-weight: 600;">Youtube Video</a>`;
-                            }
-                            if (skill.courseUrl) {
-                                html += `<a href="${skill.courseUrl}" style="color: #7c3aed; text-decoration: none; font-size: 11px; font-weight: 600;">Course link</a>`;
-                            }
-                            html += `</td></tr>`;
-                        });
-                        html += '</tbody></table>';
-                    }
-                });
-                html += '</div></div>';
-            }
+            // if (data.skillsLearning) {
+            //     html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.skills.toUpperCase()}</h2><div class="section-content">`;
+            //     const skillCategories = [
+            //         { key: 'mustHave', title: t.musthave },
+            //         { key: 'core', title: t.core },
+            //         { key: 'bonus', title: t.bonus }
+            //     ];
+            //     skillCategories.forEach(category => {
+            //         if (data.skillsLearning[category.key] && data.skillsLearning[category.key].length > 0) {
+            //             html += `<h3 class="subsection-title">${category.title}</h3>`;
+            //             html += `<table class="data-table"><thead><tr>`;
+            //             html += `<th>${t.skill}</th><th>${t.resources}</th></tr></thead><tbody>`;
+            //             data.skillsLearning[category.key].forEach(skill => {
+            //                 html += `<tr><td><strong>${skill.skill}</strong></td>`;
+            //                 html += `<td>`;
+            //                 if (skill.youtubeLink) {
+            //                     html += `<a href="${skill.youtubeLink}" style="color: #7c3aed; text-decoration: none; font-size: 11px; margin-right: 10px; font-weight: 600;">Youtube Video</a>`;
+            //                 }
+            //                 if (skill.courseUrl) {
+            //                     html += `<a href="${skill.courseUrl}" style="color: #7c3aed; text-decoration: none; font-size: 11px; font-weight: 600;">Course link</a>`;
+            //                 }
+            //                 html += `</td></tr>`;
+            //             });
+            //             html += '</tbody></table>';
+            //         }
+            //     });
+            //     html += '</div></div>';
+            // }
             
-            if (data.roadmap90Days) {
-                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.roadmap.toUpperCase()}</h2><div class="section-content">`;
-                const phaseLabels = { en: ['Phase 1 (Days 1-30)', 'Phase 2 (Days 31-60)', 'Phase 3 (Days 61-90)'], hi: ['चरण 1 (दिन 1-30)', 'चरण 2 (दिन 31-60)', 'चरण 3 (दिन 61-90)'], bn: ['পর্যায় 1 (দিন 1-30)', 'পর্যায় 2 (দিন 31-60)', 'পর্যায় 3 (দিন 61-90)'] };
-                const subLabels = { en: { learning: 'Learning Goals:', action: 'Action Tasks:', progress: 'Progress Indicators:' }, hi: { learning: 'सीखने के लक्ष्य:', action: 'कार्य कार्य:', progress: 'प्रगति संकेतक:' }, bn: { learning: 'শেখার লক্ষ্য:', action: 'কর্ম কাজ:', progress: 'অগ্রগতি সূচক:' } };
-                const pl = phaseLabels[lang] || phaseLabels.en;
-                const sl = subLabels[lang] || subLabels.en;
-                const phases = [
-                    { key: 'phase1', title: pl[0] },
-                    { key: 'phase2', title: pl[1] },
-                    { key: 'phase3', title: pl[2] }
-                ];
-                phases.forEach(phase => {
-                    if (data.roadmap90Days[phase.key]) {
-                        const phaseData = data.roadmap90Days[phase.key];
-                        html += `<div style="margin-bottom: 18px; padding: 16px; border: 1px solid #4f46e5; border-radius: 10px; background: white;">`;
-                        html += `<h3 style="color: #6366f1; margin-bottom: 10px; font-size: 15px; font-weight: 700;">${phase.title}</h3>`;
-                        if (phaseData.learningGoals && phaseData.learningGoals.length > 0) {
-                            html += `<p style="font-weight: 600; margin-top: 10px; color: #374151; font-size: 13px;">${sl.learning}</p><ul class="bullet-list">`;
-                            phaseData.learningGoals.forEach(goal => html += `<li>${goal}</li>`);
-                            html += '</ul>';
-                        }
-                        if (phaseData.actionTasks && phaseData.actionTasks.length > 0) {
-                            html += `<p style="font-weight: 600; margin-top: 10px; color: #374151; font-size: 13px;">${sl.action}</p><ul class="bullet-list">`;
-                            phaseData.actionTasks.forEach(task => html += `<li>${task}</li>`);
-                            html += '</ul>';
-                        }
-                        if (phaseData.progressIndicators && phaseData.progressIndicators.length > 0) {
-                            html += `<p style="font-weight: 600; margin-top: 10px; color: #374151; font-size: 13px;">${sl.progress}</p><ul class="bullet-list">`;
-                            phaseData.progressIndicators.forEach(indicator => html += `<li>${indicator}</li>`);
-                            html += '</ul>';
-                        }
-                        html += '</div>';
-                    }
-                });
-                html += '</div></div>';
-            }
+            // if (data.roadmap90Days) {
+            //     html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.roadmap.toUpperCase()}</h2><div class="section-content">`;
+            //     const phaseLabels = { en: ['Phase 1 (Days 1-30)', 'Phase 2 (Days 31-60)', 'Phase 3 (Days 61-90)'], hi: ['चरण 1 (दिन 1-30)', 'चरण 2 (दिन 31-60)', 'चरण 3 (दिन 61-90)'], bn: ['পর্যায় 1 (দিন 1-30)', 'পর্যায় 2 (দিন 31-60)', 'পর্যায় 3 (দিন 61-90)'] };
+            //     const subLabels = { en: { learning: 'Learning Goals:', action: 'Action Tasks:', progress: 'Progress Indicators:' }, hi: { learning: 'सीखने के लक्ष्य:', action: 'कार्य कार्य:', progress: 'प्रगति संकेतक:' }, bn: { learning: 'শেখার লক্ষ্য:', action: 'কর্ম কাজ:', progress: 'অগ্রগতি সূচক:' } };
+            //     const pl = phaseLabels[lang] || phaseLabels.en;
+            //     const sl = subLabels[lang] || subLabels.en;
+            //     const phases = [
+            //         { key: 'phase1', title: pl[0] },
+            //         { key: 'phase2', title: pl[1] },
+            //         { key: 'phase3', title: pl[2] }
+            //     ];
+            //     phases.forEach(phase => {
+            //         if (data.roadmap90Days[phase.key]) {
+            //             const phaseData = data.roadmap90Days[phase.key];
+            //             html += `<div style="margin-bottom: 18px; padding: 16px; border: 1px solid #4f46e5; border-radius: 10px; background: white;">`;
+            //             html += `<h3 style="color: #6366f1; margin-bottom: 10px; font-size: 15px; font-weight: 700;">${phase.title}</h3>`;
+            //             if (phaseData.learningGoals && phaseData.learningGoals.length > 0) {
+            //                 html += `<p style="font-weight: 600; margin-top: 10px; color: #374151; font-size: 13px;">${sl.learning}</p><ul class="bullet-list">`;
+            //                 phaseData.learningGoals.forEach(goal => html += `<li>${goal}</li>`);
+            //                 html += '</ul>';
+            //             }
+            //             if (phaseData.actionTasks && phaseData.actionTasks.length > 0) {
+            //                 html += `<p style="font-weight: 600; margin-top: 10px; color: #374151; font-size: 13px;">${sl.action}</p><ul class="bullet-list">`;
+            //                 phaseData.actionTasks.forEach(task => html += `<li>${task}</li>`);
+            //                 html += '</ul>';
+            //             }
+            //             if (phaseData.progressIndicators && phaseData.progressIndicators.length > 0) {
+            //                 html += `<p style="font-weight: 600; margin-top: 10px; color: #374151; font-size: 13px;">${sl.progress}</p><ul class="bullet-list">`;
+            //                 phaseData.progressIndicators.forEach(indicator => html += `<li>${indicator}</li>`);
+            //                 html += '</ul>';
+            //             }
+            //             html += '</div>';
+            //         }
+            //     });
+            //     html += '</div></div>';
+            // }
             
             if (data.topInstitutes) {
                 html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.institutes.toUpperCase()}</h2><div class="section-content">`;
@@ -782,17 +782,20 @@
                     { key: 'online', title: t.online }
                 ];
                 const visitLabels = { en: 'Visit', hi: 'देखें', bn: 'দেখুন' };
+                const cutoffLabels = { en: 'Eligibility', hi: 'पात्रता', bn: 'যোগ্যতা' };
                 const vl = visitLabels[lang] || visitLabels.en;
+                const cl = cutoffLabels[lang] || cutoffLabels.en;
                 instituteTypes.forEach(type => {
                     if (data.topInstitutes[type.key] && data.topInstitutes[type.key].length > 0) {
                         html += `<h3 class="subsection-title">${type.title}</h3>`;
                         html += `<table class="data-table"><thead><tr>`;
-                        html += `<th>${t.name}</th><th>${t.location}</th><th>${t.department}</th><th>${t.rating}</th><th>${t.website}</th></tr></thead><tbody>`;
+                        html += `<th>${t.name}</th><th>${t.location}</th><th>${t.department}</th><th>${t.rating}</th><th>${cl}</th><th>${t.website}</th></tr></thead><tbody>`;
                         data.topInstitutes[type.key].forEach(institute => {
                             html += `<tr><td><strong>${institute.name}</strong></td>`;
                             html += `<td>${institute.location}</td>`;
                             html += `<td>${institute.department}</td>`;
                             html += `<td><strong>${institute.rating}/5</strong></td>`;
+                            html += `<td style="color: #059669; font-weight: 600;">${institute.eligibility || 'N/A'}</td>`;
                             if (institute.website) {
                                 html += `<td><a href="${institute.website}" style="color: #7c3aed; text-decoration: none; font-size: 11px; font-weight: 600;">${vl}</a></td>`;
                             } else {
@@ -807,26 +810,26 @@
             }
 
             // Salary Progression
-            if (data.salaryGrowth) {
-                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.salary.toUpperCase()}</h2><div class="section-content">`;
-                if (data.salaryGrowth.cityComparison && data.salaryGrowth.cityComparison.length > 0) {
-                    html += `<h3 class="subsection-title">${t.salary_range ? t.salary_range : t.salary.toUpperCase()}</h3>`;
-                    html += `<table class="data-table"><thead><tr>`;
-                    html += `<th>${t.locations || t.city}</th><th>${t.salary_range || t.salary}</th></tr></thead><tbody>`;
-                    data.salaryGrowth.cityComparison.forEach(city => {
-                        html += `<tr><td><strong>${city.city}</strong></td>`;
-                        html += `<td style="color: #059669; font-weight: 600;">${city.salary}</td></tr>`;
-                    });
-                    html += '</tbody></table>';
-                }
-                if (data.salaryGrowth.salaryTips && data.salaryGrowth.salaryTips.length > 0) {
-                    html += '<div class="info-box">';
-                    html += `<strong>${t.tips}</strong><ul class="bullet-list" style="margin-top: 8px;">`;
-                    data.salaryGrowth.salaryTips.forEach(tip => html += `<li>${tip}</li>`);
-                    html += '</ul></div>';
-                }
-                html += '</div></div>';
-            }
+            // if (data.salaryGrowth) {
+            //     html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.salary.toUpperCase()}</h2><div class="section-content">`;
+            //     if (data.salaryGrowth.cityComparison && data.salaryGrowth.cityComparison.length > 0) {
+            //         html += `<h3 class="subsection-title">${t.salary_range ? t.salary_range : t.salary.toUpperCase()}</h3>`;
+            //         html += `<table class="data-table"><thead><tr>`;
+            //         html += `<th>${t.locations || t.city}</th><th>${t.salary_range || t.salary}</th></tr></thead><tbody>`;
+            //         data.salaryGrowth.cityComparison.forEach(city => {
+            //             html += `<tr><td><strong>${city.city}</strong></td>`;
+            //             html += `<td style="color: #059669; font-weight: 600;">${city.salary}</td></tr>`;
+            //         });
+            //         html += '</tbody></table>';
+            //     }
+            //     if (data.salaryGrowth.salaryTips && data.salaryGrowth.salaryTips.length > 0) {
+            //         html += '<div class="info-box">';
+            //         html += `<strong>${t.tips}</strong><ul class="bullet-list" style="margin-top: 8px;">`;
+            //         data.salaryGrowth.salaryTips.forEach(tip => html += `<li>${tip}</li>`);
+            //         html += '</ul></div>';
+            //     }
+            //     html += '</div></div>';
+            // }
             
             if (data.jobMarket) {
                 html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.jobmarket.toUpperCase()}</h2><div class="section-content">`;
@@ -854,26 +857,26 @@
                 html += '</div></div>';
             }
             
-            if (data.certifications && data.certifications.length > 0) {
-                const enrollLabels = { en: 'Enroll', hi: 'नामांकन', bn: 'নথিভুক্ত' };
-                const el = enrollLabels[lang] || enrollLabels.en;
-                html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.certifications.toUpperCase()}</h2><div class="section-content">`;
-                html += `<table class="data-table"><thead><tr>`;
-                html += `<th>${t.name}</th><th>${t.provider}</th><th>${t.duration}</th><th>${t.cost}</th><th>${t.link || 'Link'}</th></tr></thead><tbody>`;
-                data.certifications.forEach(cert => {
-                    html += `<tr><td><strong>${cert.name}</strong></td>`;
-                    html += `<td>${cert.provider || cert.platform}</td>`;
-                    html += `<td>${cert.duration}</td>`;
-                    html += `<td style="color: #059669; font-weight: 600;">${cert.cost}</td>`;
-                    if (cert.link) {
-                        html += `<td><a href="${cert.link}" style="color: #6366f1; text-decoration: none; font-size: 11px; font-weight: 600;">${el}</a></td>`;
-                    } else {
-                        html += `<td>-</td>`;
-                    }
-                    html += `</tr>`;
-                });
-                html += '</tbody></table></div></div>';
-            }
+            // if (data.certifications && data.certifications.length > 0) {
+            //     const enrollLabels = { en: 'Enroll', hi: 'नामांकन', bn: 'নথিভুক্ত' };
+            //     const el = enrollLabels[lang] || enrollLabels.en;
+            //     html += `<div class="section"><h2 class="section-title"><span class="section-number">${sectionNumber++}</span>${t.certifications.toUpperCase()}</h2><div class="section-content">`;
+            //     html += `<table class="data-table"><thead><tr>`;
+            //     html += `<th>${t.name}</th><th>${t.provider}</th><th>${t.duration}</th><th>${t.cost}</th><th>${t.link || 'Link'}</th></tr></thead><tbody>`;
+            //     data.certifications.forEach(cert => {
+            //         html += `<tr><td><strong>${cert.name}</strong></td>`;
+            //         html += `<td>${cert.provider || cert.platform}</td>`;
+            //         html += `<td>${cert.duration}</td>`;
+            //         html += `<td style="color: #059669; font-weight: 600;">${cert.cost}</td>`;
+            //         if (cert.link) {
+            //             html += `<td><a href="${cert.link}" style="color: #6366f1; text-decoration: none; font-size: 11px; font-weight: 600;">${el}</a></td>`;
+            //         } else {
+            //             html += `<td>-</td>`;
+            //         }
+            //         html += `</tr>`;
+            //     });
+            //     html += '</tbody></table></div></div>';
+            // }
             
             if (data.scholarships && ((data.scholarships.governmentPrivate && data.scholarships.governmentPrivate.length > 0) || (data.scholarships.bankLoans && data.scholarships.bankLoans.length > 0) || (data.scholarships.governmentSchemes && data.scholarships.governmentSchemes.length > 0))) {
                 // Use translated headings/columns from the `translations` map (t.*) to avoid English fallback
@@ -893,11 +896,18 @@
                 
                 if (data.scholarships.governmentPrivate && data.scholarships.governmentPrivate.length > 0) {
                     html += `<table class="data-table"><thead><tr>`;
-                    html += `<th>${t.name}</th><th>${eligibilityByLang[lang]}</th><th>${amountByLang[lang]}</th></tr></thead><tbody>`;
+                    html += `<th>${t.name}</th><th>${eligibilityByLang[lang]}</th><th>${amountByLang[lang]}</th><th>${t.link || 'Link'}</th></tr></thead><tbody>`;
                     data.scholarships.governmentPrivate.forEach(sch => {
                         html += `<tr><td><strong>${sch.name}</strong></td>`;
                         html += `<td>${sch.eligibility}</td>`;
-                        html += `<td style="color: #059669; font-weight: 600;">${sch.amount}</td></tr>`;
+                        html += `<td style="color: #059669; font-weight: 600;">${sch.amount}</td>`;
+                        html += `<td>`;
+                        if (sch.website) {
+                            html += `<a href="${sch.website}" style="color: #6366f1; text-decoration: none; font-size: 11px; font-weight: 600;">${t.link}</a>`;
+                        } else {
+                            html += `-`;
+                        }
+                        html += `</td></tr>`;
                     });
                     html += '</tbody></table>';
                 }
@@ -905,11 +915,18 @@
                 if (data.scholarships.bankLoans && data.scholarships.bankLoans.length > 0) {
                     html += `<h3 class="subsection-title">${(lang === 'hi' ? 'शिक्षा ऋण' : lang === 'bn' ? 'শিক্ষা ঋণ' : 'Education Loans')}</h3>`;
                     html += `<table class="data-table"><thead><tr>`;
-                    html += `<th>${providerTitleByLang[lang]}</th><th>${maxAmountByLang[lang]}</th><th>${interestByLang[lang]}</th></tr></thead><tbody>`;
+                    html += `<th>${providerTitleByLang[lang]}</th><th>${maxAmountByLang[lang]}</th><th>${interestByLang[lang]}</th><th>${t.link || 'Link'}</th></tr></thead><tbody>`;
                     data.scholarships.bankLoans.forEach(loan => {
                         html += `<tr><td><strong>${loan.name}</strong></td>`;
                         html += `<td style="color: #059669; font-weight: 600;">${loan.amount}</td>`;
-                        html += `<td>${loan.interestRate}</td></tr>`;
+                        html += `<td>${loan.interestRate}</td>`;
+                        html += `<td>`;
+                        if (loan.website) {
+                            html += `<a href="${loan.website}" style="color: #6366f1; text-decoration: none; font-size: 11px; font-weight: 600;">${t.link}</a>`;
+                        } else {
+                            html += `-`;
+                        }
+                        html += `</td></tr>`;
                     });
                     html += '</tbody></table>';
                 }

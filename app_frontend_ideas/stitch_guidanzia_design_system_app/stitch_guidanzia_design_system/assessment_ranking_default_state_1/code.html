@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Career Assessment | Rank Interests</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@400;500&family=Hanken+Grotesk:wght@700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-tick {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-interaction:active {
+            transform: scale(0.98);
+            border-color: #f0c04d;
+        }
+        body {
+            background-color: #0a1229;
+            color: #dbe1ff;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-error": "#690005",
+                "tertiary-fixed-dim": "#45dada",
+                "tertiary-fixed": "#69f7f7",
+                "on-surface-variant": "#d2c5b0",
+                "secondary-fixed-dim": "#abd533",
+                "on-primary": "#3f2e00",
+                "surface-bright": "#313851",
+                "on-primary-fixed-variant": "#5b4300",
+                "inverse-surface": "#dbe1ff",
+                "secondary": "#abd533",
+                "surface-container-low": "#131b32",
+                "secondary-fixed": "#c6f24e",
+                "tertiary": "#6efcfc",
+                "on-tertiary-fixed": "#002020",
+                "error-container": "#93000a",
+                "tertiary-container": "#4bdfdf",
+                "outline-variant": "#4e4635",
+                "surface-container-lowest": "#050d24",
+                "background": "#0a1229",
+                "on-primary-fixed": "#251a00",
+                "surface-dim": "#0a1229",
+                "on-error-container": "#ffdad6",
+                "secondary-container": "#89b100",
+                "surface": "#0a1229",
+                "surface-container-high": "#222941",
+                "on-primary-container": "#6d5100",
+                "on-tertiary-container": "#006060",
+                "surface-tint": "#f0c04d",
+                "inverse-primary": "#785a00",
+                "on-secondary-fixed-variant": "#3a4d00",
+                "on-secondary-fixed": "#151f00",
+                "surface-container": "#171f36",
+                "on-background": "#dbe1ff",
+                "on-surface": "#dbe1ff",
+                "on-secondary": "#273500",
+                "primary-container": "#f5c451",
+                "on-secondary-container": "#2f3f00",
+                "inverse-on-surface": "#282f48",
+                "surface-variant": "#2c344c",
+                "on-tertiary-fixed-variant": "#004f50",
+                "primary-fixed-dim": "#f0c04d",
+                "outline": "#9b8f7c",
+                "surface-container-highest": "#2c344c",
+                "on-tertiary": "#003737",
+                "error": "#ffb4ab",
+                "primary": "#ffe4af",
+                "primary-fixed": "#ffdf9d"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "gutter": "16px",
+                "stack-md": "24px",
+                "unit": "4px",
+                "margin-mobile": "20px",
+                "stack-sm": "8px",
+                "stack-lg": "48px",
+                "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                "display-lg-mobile": ["Sora"],
+                "body-lg": ["Be Vietnam Pro"],
+                "headline-md": ["Sora"],
+                "display-xl": ["Sora"],
+                "display-lg": ["Sora"],
+                "headline-sm": ["Sora"],
+                "body-md": ["Be Vietnam Pro"],
+                "label-bold": ["Hanken Grotesk"],
+                "headline-md-mobile": ["Sora"]
+            },
+            "fontSize": {
+                "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen">
+<!-- Progress Header Section -->
+<header class="pt-8 px-margin-mobile space-y-4">
+<!-- Segmented Rail: 20 Ticks -->
+<div class="flex items-end justify-between gap-1 w-full h-8">
+<!-- Completed (1) -->
+<div class="h-4 flex-1 bg-surface-tint rounded-full progress-tick"></div>
+<!-- Current (2) -->
+<div class="h-8 flex-1 bg-secondary rounded-full progress-tick"></div>
+<!-- Remaining (3-20) -->
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+<div class="h-4 flex-1 bg-surface-variant rounded-full progress-tick"></div>
+</div>
+<p class="font-label-bold text-label-bold text-on-surface-variant tracking-wider uppercase">
+            Module 4 · Question 2 of 20
+        </p>
+</header>
+<!-- Question Canvas -->
+<main class="flex-grow px-margin-mobile pt-10 pb-32">
+<h1 class="font-display-lg-mobile text-[34px] leading-tight text-on-surface mb-2">
+            Rank your top interests
+        </h1>
+<p class="font-body-md text-on-surface-variant mb-stack-md opacity-60">
+            Select your top 2 in order
+        </p>
+<!-- Ranking List -->
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="card-interaction h-[78px] bg-surface-container-low border-2 border-surface-variant rounded-xl px-4 flex items-center gap-4 group transition-colors hover:border-secondary">
+<div class="w-12 h-12 flex items-center justify-center rounded-lg bg-tertiary/10 border border-tertiary/20">
+<span class="material-symbols-outlined text-tertiary" data-icon="terminal">terminal</span>
+</div>
+<span class="font-label-bold text-[17px] text-on-surface">Software Architecture</span>
+<div class="ml-auto w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</div>
+<!-- Card 2 -->
+<div class="card-interaction h-[78px] bg-surface-container-low border-2 border-surface-variant rounded-xl px-4 flex items-center gap-4 group transition-colors hover:border-secondary">
+<div class="w-12 h-12 flex items-center justify-center rounded-lg bg-secondary/10 border border-secondary/20">
+<span class="material-symbols-outlined text-secondary" data-icon="database">database</span>
+</div>
+<span class="font-label-bold text-[17px] text-on-surface">Data Engineering</span>
+<div class="ml-auto w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</div>
+<!-- Card 3 -->
+<div class="card-interaction h-[78px] bg-surface-container-low border-2 border-surface-variant rounded-xl px-4 flex items-center gap-4 group transition-colors hover:border-secondary">
+<div class="w-12 h-12 flex items-center justify-center rounded-lg bg-surface-tint/10 border border-surface-tint/20">
+<span class="material-symbols-outlined text-surface-tint" data-icon="brush">brush</span>
+</div>
+<span class="font-label-bold text-[17px] text-on-surface">Product Design (UX/UI)</span>
+<div class="ml-auto w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</div>
+<!-- Card 4 -->
+<div class="card-interaction h-[78px] bg-surface-container-low border-2 border-surface-variant rounded-xl px-4 flex items-center gap-4 group transition-colors hover:border-secondary">
+<div class="w-12 h-12 flex items-center justify-center rounded-lg bg-error/10 border border-error/20">
+<span class="material-symbols-outlined text-error" data-icon="monitoring">monitoring</span>
+</div>
+<span class="font-label-bold text-[17px] text-on-surface">Business Strategy</span>
+<div class="ml-auto w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</div>
+<!-- Card 5 -->
+<div class="card-interaction h-[78px] bg-surface-container-low border-2 border-surface-variant rounded-xl px-4 flex items-center gap-4 group transition-colors hover:border-secondary">
+<div class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary-fixed/10 border border-primary-fixed/20">
+<span class="material-symbols-outlined text-primary-fixed" data-icon="psychology">psychology</span>
+</div>
+<span class="font-label-bold text-[17px] text-on-surface">Behavioral Science</span>
+<div class="ml-auto w-6 h-6 rounded-full border-2 border-outline-variant"></div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Shell from JSON) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile pb-8 pt-6 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-t-2 border-outline-variant">
+<!-- Back Button (Inactive Style) -->
+<button class="flex items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-6 py-4 hover:opacity-90 active:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined mr-2" data-icon="chevron_left">chevron_left</span>
+<span class="font-label-bold text-label-bold">Back</span>
+</button>
+<!-- Continue Button (Active Style Logic: Dimmed Gold State) -->
+<button class="flex items-center justify-center bg-surface-variant/40 text-on-surface-variant/40 rounded-full px-8 py-4 opacity-50 cursor-not-allowed transition-all duration-200">
+<span class="font-label-bold text-label-bold mr-2">Continue</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('.card-interaction').forEach(card => {
+            card.addEventListener('click', function() {
+                const radio = this.querySelector('.ml-auto');
+                const isSelected = radio.classList.contains('bg-secondary');
+                
+                if(!isSelected) {
+                    // Selection logic
+                    radio.classList.remove('border-outline-variant');
+                    radio.classList.add('bg-secondary', 'border-secondary', 'flex', 'items-center', 'justify-center');
+                    radio.innerHTML = '<span class="material-symbols-outlined text-[14px] text-on-secondary font-bold" data-icon="check" style="font-variation-settings: \'opsz\' 16">check</span>';
+                    this.classList.add('border-secondary', 'bg-surface-container-high');
+                } else {
+                    // Deselection logic
+                    radio.classList.add('border-outline-variant');
+                    radio.classList.remove('bg-secondary', 'border-secondary', 'flex', 'items-center', 'justify-center');
+                    radio.innerHTML = '';
+                    this.classList.remove('border-secondary', 'bg-surface-container-high');
+                }
+
+                // Check if any selections are made to enable Continue button
+                const selectedCount = document.querySelectorAll('.bg-secondary').length;
+                const continueBtn = document.querySelector('nav button:last-child');
+                if(selectedCount > 0) {
+                    continueBtn.classList.remove('bg-surface-variant/40', 'text-on-surface-variant/40', 'opacity-50', 'cursor-not-allowed');
+                    continueBtn.classList.add('bg-primary', 'dark:bg-primary-container', 'text-on-primary', 'dark:text-on-primary-container', 'shadow-[0_0_20px_rgba(240,192,77,0.4)]');
+                } else {
+                    continueBtn.classList.add('bg-surface-variant/40', 'text-on-surface-variant/40', 'opacity-50', 'cursor-not-allowed');
+                    continueBtn.classList.remove('bg-primary', 'dark:bg-primary-container', 'text-on-primary', 'dark:text-on-primary-container', 'shadow-[0_0_20px_rgba(240,192,77,0.4)]');
+                }
+            });
+        });
+    </script>
+</body></html>

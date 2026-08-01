@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up | Guidanzia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;700&amp;family=Be+Vietnam+Pro:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "surface-variant": "#dbe1ff",
+                    "tertiary-container": "#4bdfdf",
+                    "outline": "#807663",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#546d00",
+                    "surface-container-low": "#f2f3ff",
+                    "primary": "#785a00",
+                    "surface-container-high": "#e3e7ff",
+                    "tertiary-fixed": "#69f7f7",
+                    "on-primary-fixed": "#251a00",
+                    "on-background": "#0b0a3d",
+                    "surface-container-highest": "#dbe1ff",
+                    "secondary-fixed-dim": "#abd533",
+                    "on-tertiary-container": "#006060",
+                    "on-primary-fixed-variant": "#5b4300",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#c6f24e",
+                    "surface-tint": "#785a00",
+                    "surface": "#fcf8fd",
+                    "inverse-on-surface": "#eff0ff",
+                    "tertiary": "#006a6a",
+                    "on-secondary-fixed": "#151f00",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#f0c04d",
+                    "on-surface-variant": "#4e4635",
+                    "primary-container": "#f5c451",
+                    "secondary": "#4f6700",
+                    "inverse-surface": "#282f48",
+                    "surface-dim": "#d2d9f9",
+                    "on-primary-container": "#6d5100",
+                    "primary-fixed": "#ffdf9d",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#3a4d00",
+                    "tertiary-fixed-dim": "#45dada",
+                    "on-tertiary-fixed": "#002020",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#004f50",
+                    "surface-bright": "#faf8ff",
+                    "inverse-primary": "#f0c04d",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#ebedff",
+                    "background": "#fcf8fd",
+                    "on-surface": "#0b0a3d",
+                    "secondary-container": "#c6f24e",
+                    "outline-variant": "#d2c5b0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "stack-md": "24px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "40px",
+                    "stack-lg": "48px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Sora"],
+                    "headline-sm": ["Sora"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "label-bold": ["Hanken Grotesk"],
+                    "display-lg": ["Sora"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "headline-md-mobile": ["Sora"],
+                    "display-xl": ["Sora"],
+                    "headline-md": ["Sora"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fcf8fd;
+            color: #0b0a3d;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .input-group:focus-within label {
+            transform: translateY(-34px) scale(0.85);
+            color: #785a00;
+            background-color: #fcf8fd;
+            padding: 0 4px;
+        }
+
+        .input-filled label {
+            transform: translateY(-34px) scale(0.85);
+            background-color: #fcf8fd;
+            padding: 0 4px;
+        }
+
+        .strength-segment {
+            height: 4px;
+            flex: 1;
+            border-radius: 2px;
+            background-color: #e3e7ff;
+            transition: background-color 0.3s ease;
+        }
+
+        .strength-segment.active {
+            background-color: #4f6700;
+        }
+
+        .custom-glow:active {
+            box-shadow: 0 0 20px rgba(120, 90, 0, 0.2);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start overflow-x-hidden">
+<!-- Top App Bar -->
+<header class="w-full h-16 flex items-center justify-between px-margin-mobile z-50">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-background">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-background">language</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-md px-margin-mobile flex flex-col pt-stack-md pb-stack-lg">
+<!-- Headline Section -->
+<section class="mb-stack-lg">
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-on-background tracking-tight leading-none">
+                Let's find your thing.
+            </h1>
+</section>
+<!-- Form Section -->
+<form class="flex flex-col gap-gutter" id="signup-form">
+<!-- Full Name Input -->
+<div class="relative group flex flex-col">
+<label class="absolute left-4 top-1/2 -translate-y-1/2 font-label-bold text-label-bold text-on-surface-variant transition-all duration-200 pointer-events-none z-10" for="name">Full Name</label>
+<input class="h-14 bg-surface-container-lowest border-2 border-outline-variant rounded-xl px-4 pt-2 text-on-surface font-body-md focus:outline-none focus:border-primary transition-all duration-200" id="name" name="name" oninput="this.value !== '' ? this.parentElement.classList.add('input-filled') : this.parentElement.classList.remove('input-filled')" required="" type="text"/>
+</div>
+<!-- Email Input -->
+<div class="relative group flex flex-col">
+<label class="absolute left-4 top-1/2 -translate-y-1/2 font-label-bold text-label-bold text-on-surface-variant transition-all duration-200 pointer-events-none z-10" for="email">Email Address</label>
+<input class="h-14 bg-surface-container-lowest border-2 border-outline-variant rounded-xl px-4 pt-2 text-on-surface font-body-md focus:outline-none focus:border-primary transition-all duration-200" id="email" name="email" oninput="this.value !== '' ? this.parentElement.classList.add('input-filled') : this.parentElement.classList.remove('input-filled')" required="" type="email"/>
+</div>
+<!-- Password Input Container -->
+<div class="flex flex-col gap-2">
+<div class="relative group flex flex-col">
+<label class="absolute left-4 top-1/2 -translate-y-1/2 font-label-bold text-label-bold text-on-surface-variant transition-all duration-200 pointer-events-none z-10" for="password">Password</label>
+<input class="h-14 bg-surface-container-lowest border-2 border-outline-variant rounded-xl px-4 pt-2 pr-12 text-on-surface font-body-md focus:outline-none focus:border-primary transition-all duration-200" id="password" name="password" oninput="updatePasswordStrength(this)" required="" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined" id="visibility-icon">visibility</span>
+</button>
+</div>
+<!-- Password Strength Meter -->
+<div class="flex gap-1 px-1">
+<div class="strength-segment" id="segment-1"></div>
+<div class="strength-segment" id="segment-2"></div>
+<div class="strength-segment" id="segment-3"></div>
+</div>
+</div>
+<!-- Primary Action -->
+<button class="mt-stack-md h-14 bg-primary-container text-on-primary-container font-label-bold text-label-bold rounded-full custom-glow transition-all active:scale-95 flex items-center justify-center shadow-sm" type="submit">
+                Create account
+            </button>
+</form>
+<!-- Social Divider -->
+<div class="flex items-center my-stack-lg gap-gutter">
+<div class="h-[1px] flex-1 bg-outline-variant"></div>
+<span class="font-label-bold text-label-bold text-on-surface-variant px-2">or</span>
+<div class="h-[1px] flex-1 bg-outline-variant"></div>
+</div>
+<!-- Social Button -->
+<button class="h-14 w-full border-2 border-outline-variant rounded-full flex items-center justify-center gap-3 font-label-bold text-label-bold text-on-surface transition-all active:scale-95 hover:bg-surface-container-low">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M12.48 10.92v3.28h7.84c-.24 1.84-.9 3.14-1.92 4.14-1.2 1.2-3.08 2.4-6.44 2.4-5.18 0-9.42-4.18-9.42-9.4s4.24-9.4 9.42-9.4c2.8 0 4.88 1.1 6.36 2.52l2.32-2.32c-2-1.88-4.64-3.32-8.68-3.32-7.1 0-12.86 5.76-12.86 12.86s5.76 12.86 12.86 12.86c3.84 0 6.74-1.26 9.02-3.6 2.34-2.34 3.08-5.62 3.08-8.24 0-.6-.06-1.16-.16-1.72h-11.9z" fill="currentColor"></path>
+</svg>
+            Continue with Google
+        </button>
+<!-- Login Link -->
+<div class="mt-stack-lg text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Already have an account? 
+                <a class="text-secondary font-bold hover:underline" href="#">Log in</a>
+</p>
+</div>
+<!-- Legal Disclaimer -->
+<footer class="mt-auto pt-stack-lg">
+<p class="text-[12px] leading-tight text-on-surface-variant text-center opacity-70 px-4">
+                By clicking "Create account", you agree to our 
+                <a class="underline" href="#">Terms of Service</a> and 
+                <a class="underline" href="#">Privacy Policy</a>.
+            </p>
+</footer>
+</main>
+<div class="h-8 w-full"></div>
+<script>
+        function togglePasswordVisibility() {
+            const pwdInput = document.getElementById('password');
+            const icon = document.getElementById('visibility-icon');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                icon.innerText = 'visibility_off';
+            } else {
+                pwdInput.type = 'password';
+                icon.innerText = 'visibility';
+            }
+        }
+
+        function updatePasswordStrength(input) {
+            const val = input.value;
+            const segments = [
+                document.getElementById('segment-1'),
+                document.getElementById('segment-2'),
+                document.getElementById('segment-3')
+            ];
+
+            if (val !== '') {
+                input.parentElement.classList.add('input-filled');
+            } else {
+                input.parentElement.classList.remove('input-filled');
+            }
+
+            let score = 0;
+            if (val.length > 0) score = 1;
+            if (val.length > 6) score = 2;
+            if (val.length > 10 && /[!@#$%^&*(),.?":{}|<>]/.test(val)) score = 3;
+
+            segments.forEach((seg, index) => {
+                if (index < score) {
+                    seg.classList.add('active');
+                } else {
+                    seg.classList.remove('active');
+                }
+            });
+        }
+
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span>';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                alert('Account creation simulated!');
+            }, 1500);
+        });
+    </script>
+</body></html>

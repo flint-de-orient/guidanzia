@@ -77,72 +77,78 @@
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-/* Typography - Poppins for headings, Inter for body */
+/* Typography now driven by token layer (theme.css: --font-display / --font-body).
+   Kept here only for smoothing. */
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-/* Background - Light neutral gray */
+/* Background - token-driven */
 .app-background {
-  background-color: var(--color-neutral-50);
+  background-color: var(--surface);
 }
 
-/* Gradient Utilities - Clean */
+/* ----------------------------------------------------------------------------
+   Legacy brand utilities, repointed to Guidanzia tokens.
+   `gradient-primary` stays a DARK (navy) gradient so the many hero panels that
+   place white text on it remain readable. Gold is the accent CTA — use
+   `gradient-gold` (navy ink) for that.
+   ---------------------------------------------------------------------------- */
 .gradient-primary {
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  background: linear-gradient(135deg, #1b2650 0%, #0b0a3d 100%);
+}
+
+.gradient-gold {
+  background: linear-gradient(135deg, #f5c451 0%, #e0a92e 100%);
+  color: var(--gold-ink);
 }
 
 .gradient-secondary {
-  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  background: linear-gradient(135deg, #24315f 0%, #141f42 100%);
 }
 
 .gradient-accent {
-  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  background: linear-gradient(135deg, var(--cyan-deep) 0%, #004f50 100%);
 }
 
 .gradient-primary-soft {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 14%, transparent) 0%, color-mix(in srgb, var(--on-surface) 8%, transparent) 100%);
 }
 
 .gradient-secondary-soft {
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--lime) 16%, transparent) 0%, color-mix(in srgb, var(--cyan) 12%, transparent) 100%);
 }
 
-/* Abstract Background Pattern - Clean */
+/* Abstract Background Pattern - token-driven, theme-aware */
 .abstract-bg {
-  background-color: var(--color-neutral-50);
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(20, 184, 166, 0.03) 0%, transparent 60%);
+  background-color: var(--surface);
+  background-image:
+    radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--gold) 8%, transparent) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--lime) 7%, transparent) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--cyan) 5%, transparent) 0%, transparent 60%);
 }
 
-/* Glassmorphism Effect */
+/* Glassmorphism Effect - token-driven */
 .glass-card {
-  background: rgba(255, 255, 255, 0.7);
+  background: color-mix(in srgb, var(--surface-container-lowest) 72%, transparent);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--outline);
   box-shadow: var(--shadow-lg);
 }
 
 .glass-card-strong {
-  background: rgba(255, 255, 255, 0.9);
+  background: color-mix(in srgb, var(--surface-container-lowest) 90%, transparent);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--outline);
   box-shadow: var(--shadow-xl);
 }
 
-/* Card Styles - White with soft shadow */
+/* Card Styles - elevated surface with soft shadow */
 .card-white {
-  background: white;
+  background: var(--surface-container-lowest);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
@@ -153,10 +159,10 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-2px);
 }
 
-/* Custom Scrollbar - Minimal */
+/* Custom Scrollbar - token-driven */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-primary-300) var(--color-neutral-100);
+  scrollbar-color: var(--outline) transparent;
 }
 
 *::-webkit-scrollbar {
@@ -165,41 +171,50 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--color-neutral-100);
+  background: transparent;
   border-radius: 4px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--color-primary-400);
+  background: var(--outline);
   border-radius: 4px;
   transition: background 0.3s ease;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-500);
+  background: var(--gold-deep);
 }
 
 *::-webkit-scrollbar-thumb:active {
-  background: var(--color-primary-600);
+  background: var(--gold);
 }
 
-/* Text Gradient Utilities */
+/* Text Gradient Utilities — the "Guidanzia" wordmark reads gold on light,
+   and stays legible because gold-deep anchors the dark end. */
 .text-gradient-primary {
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  background: linear-gradient(135deg, var(--gold-deep) 0%, #b8860b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-secondary {
-  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  background: linear-gradient(135deg, var(--lime-deep) 0%, var(--cyan-deep) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-accent {
-  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  background: linear-gradient(135deg, var(--cyan-deep) 0%, #004f50 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* On dark surfaces the wordmark needs the lighter gold end to stay visible. */
+.dark .text-gradient-primary {
+  background: linear-gradient(135deg, #ffdf9d 0%, var(--gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -207,12 +222,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Button Styles */
 .btn-primary {
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-  color: white;
-  border-radius: var(--radius-sm);
+  background: var(--gold);
+  color: var(--gold-ink);
+  border-radius: var(--radius-pill);
   padding: var(--spacing-2) var(--spacing-3);
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   box-shadow: var(--shadow-sm);
 }
 
@@ -222,18 +237,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-secondary {
-  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
-  color: white;
-  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--lime-deep);
+  border: 2px solid var(--lime);
+  border-radius: var(--radius-pill);
   padding: var(--spacing-2) var(--spacing-3);
   font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
 }
 
 .btn-secondary:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--lime) 12%, transparent);
 }
 
 /* Container Utilities */

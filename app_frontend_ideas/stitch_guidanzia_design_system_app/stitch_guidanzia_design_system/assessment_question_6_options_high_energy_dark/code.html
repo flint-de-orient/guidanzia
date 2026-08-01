@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Assessment - Team Environments</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: 'Sora', sans-serif;
+      background-color: #0A1229;
+      color: #ebe1d4;
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .hairline-border {
+      border: 1px solid #243056;
+    }
+    .progress-segment {
+      height: 4px;
+      flex: 1;
+      border-radius: 2px;
+    }
+    /* Selection Glow Effect */
+    .option-card:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease-in-out;
+    }
+    .option-card.selected {
+      border-color: #f5c451;
+      background-color: rgba(245, 196, 81, 0.05);
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed-dim": "#f0c04d",
+            "error": "#ffb4ab",
+            "on-error": "#690005",
+            "primary-fixed": "#ffdf9d",
+            "secondary-fixed-dim": "#abd533",
+            "on-secondary-container": "#2f3f00",
+            "surface-dim": "#17130c",
+            "surface-variant": "#39342b",
+            "primary-container": "#f5c451",
+            "on-background": "#ebe1d4",
+            "surface-container-lowest": "#110e07",
+            "error-container": "#93000a",
+            "inverse-on-surface": "#353027",
+            "surface-bright": "#3e3930",
+            "on-tertiary-fixed": "#002020",
+            "secondary": "#abd533",
+            "tertiary": "#6efcfc",
+            "surface-container": "#231f17",
+            "tertiary-container": "#4bdfdf",
+            "on-error-container": "#ffdad6",
+            "on-surface": "#ebe1d4",
+            "on-tertiary": "#003737",
+            "on-secondary-fixed-variant": "#3a4d00",
+            "outline": "#9b8f7c",
+            "surface-tint": "#f0c04d",
+            "outline-variant": "#4e4635",
+            "primary": "#ffe4af",
+            "on-secondary": "#273500",
+            "on-tertiary-fixed-variant": "#004f50",
+            "on-tertiary-container": "#006060",
+            "on-surface-variant": "#d2c5b0",
+            "background": "#17130c",
+            "surface-container-highest": "#39342b",
+            "secondary-fixed": "#c6f24e",
+            "secondary-container": "#89b100",
+            "on-primary-fixed-variant": "#5b4300",
+            "on-primary-container": "#6d5100",
+            "on-secondary-fixed": "#151f00",
+            "tertiary-fixed-dim": "#45dada",
+            "inverse-surface": "#ebe1d4",
+            "tertiary-fixed": "#69f7f7",
+            "surface": "#17130c",
+            "surface-container-low": "#1f1b13",
+            "on-primary": "#3f2e00",
+            "on-primary-fixed": "#251a00",
+            "surface-container-high": "#2e2921",
+            "inverse-primary": "#785a00"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "section-gap": "48px",
+            "stack-xs": "4px",
+            "gutter": "16px",
+            "stack-lg": "24px",
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "container-margin": "24px",
+            "unit": "4px"
+          },
+          "fontFamily": {
+            "body-md": ["Sora"],
+            "headline-lg": ["Sora"],
+            "label-md": ["Sora"],
+            "headline-md": ["Sora"],
+            "mono-data": ["Sora"],
+            "headline-xl": ["Sora"],
+            "body-lg": ["Sora"],
+            "headline-lg-mobile": ["Sora"],
+            "label-sm": ["Sora"]
+          },
+          "fontSize": {
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+            "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+            "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen bg-[#0A1229]">
+<!-- TopAppBar -->
+<header class="w-full sticky top-0 z-50 border-b border-outline-variant bg-surface dark:bg-surface flex items-center justify-between px-gutter h-16">
+<button class="flex items-center justify-center p-2 text-primary active:scale-95 duration-150 rounded-full hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary-container">Assessment</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Progress Rail -->
+<div class="px-container-margin py-stack-md flex gap-1">
+<!-- 6 Filled (Acid Lime) -->
+<div class="progress-segment bg-[#C6F24E]"></div>
+<div class="progress-segment bg-[#C6F24E]"></div>
+<div class="progress-segment bg-[#C6F24E]"></div>
+<div class="progress-segment bg-[#C6F24E]"></div>
+<div class="progress-segment bg-[#C6F24E]"></div>
+<div class="progress-segment bg-[#C6F24E]"></div>
+<!-- 14 Unfilled -->
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+<div class="progress-segment bg-[#243056]"></div>
+</div>
+<main class="flex-grow flex flex-col px-container-margin pb-32">
+<!-- Headline -->
+<h2 class="mt-stack-lg font-headline-md text-headline-md text-[#F4F6FF] max-w-lg">
+      Which of these team environments feels most productive to you?
+    </h2>
+<!-- Options Stack -->
+<div class="mt-section-gap flex flex-col gap-stack-md">
+<!-- Collaborative Studio -->
+<button class="option-card hairline-border bg-[#141F42] rounded-lg p-stack-md flex items-center gap-stack-md text-left transition-all hover:bg-surface-container-highest group" onclick="selectOption(this)">
+<div class="bg-surface-container-low p-2 rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+</div>
+<span class="font-body-lg text-body-lg text-[#F4F6FF] flex-grow">Collaborative Studio</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+<!-- Quiet Focus -->
+<button class="option-card hairline-border bg-[#141F42] rounded-lg p-stack-md flex items-center gap-stack-md text-left transition-all hover:bg-surface-container-highest group" onclick="selectOption(this)">
+<div class="bg-surface-container-low p-2 rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="self_care">self_care</span>
+</div>
+<span class="font-body-lg text-body-lg text-[#F4F6FF] flex-grow">Quiet Focus</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+<!-- Fast-Paced Startup -->
+<button class="option-card hairline-border bg-[#141F42] rounded-lg p-stack-md flex items-center gap-stack-md text-left transition-all hover:bg-surface-container-highest group" onclick="selectOption(this)">
+<div class="bg-surface-container-low p-2 rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<span class="font-body-lg text-body-lg text-[#F4F6FF] flex-grow">Fast-Paced Startup</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+<!-- Remote Autonomy -->
+<button class="option-card hairline-border bg-[#141F42] rounded-lg p-stack-md flex items-center gap-stack-md text-left transition-all hover:bg-surface-container-highest group" onclick="selectOption(this)">
+<div class="bg-surface-container-low p-2 rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="home_work">home_work</span>
+</div>
+<span class="font-body-lg text-body-lg text-[#F4F6FF] flex-grow">Remote Autonomy</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+<!-- Structured Agency -->
+<button class="option-card hairline-border bg-[#141F42] rounded-lg p-stack-md flex items-center gap-stack-md text-left transition-all hover:bg-surface-container-highest group" onclick="selectOption(this)">
+<div class="bg-surface-container-low p-2 rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+</div>
+<span class="font-body-lg text-body-lg text-[#F4F6FF] flex-grow">Structured Agency</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+<!-- Social Impact -->
+<button class="option-card hairline-border bg-[#141F42] rounded-lg p-stack-md flex items-center gap-stack-md text-left transition-all hover:bg-surface-container-highest group" onclick="selectOption(this)">
+<div class="bg-surface-container-low p-2 rounded-lg flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="volunteer_activism">volunteer_activism</span>
+</div>
+<span class="font-body-lg text-body-lg text-[#F4F6FF] flex-grow">Social Impact</span>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<footer class="fixed bottom-0 w-full z-50 border-t border-outline-variant flex justify-between items-center px-container-margin py-stack-md w-full bg-surface-container-low">
+<!-- Back Button -->
+<button class="flex flex-row items-center justify-center text-on-surface-variant hover:opacity-90 active:scale-95 transition-transform">
+<span class="material-symbols-outlined mr-1" data-icon="chevron_left">chevron_left</span>
+<span class="font-label-md text-label-md">Back</span>
+</button>
+<!-- Continue Button (Disabled/Dimmed State) -->
+<button class="flex flex-row items-center justify-center bg-primary-container/20 text-on-surface-variant/40 rounded-full px-stack-lg py-stack-sm cursor-not-allowed transition-all" disabled="" id="continue-btn">
+<span class="font-label-md text-label-md mr-1">Continue</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</footer>
+<script>
+    function selectOption(element) {
+      // Remove selection from all cards
+      document.querySelectorAll('.option-card').forEach(card => {
+        card.classList.remove('selected', 'border-primary-container');
+        card.classList.add('hairline-border');
+        const icon = card.querySelector('[data-icon="radio_button_checked"], [data-icon="radio_button_unchecked"]');
+        if (icon) {
+          icon.textContent = 'radio_button_unchecked';
+          icon.setAttribute('data-icon', 'radio_button_unchecked');
+          icon.classList.remove('text-primary');
+          icon.classList.add('text-outline-variant');
+        }
+      });
+
+      // Apply selection to clicked card
+      element.classList.add('selected', 'border-primary-container');
+      element.classList.remove('hairline-border');
+      const icon = element.querySelector('[data-icon="radio_button_unchecked"]');
+      if (icon) {
+        icon.textContent = 'radio_button_checked';
+        icon.setAttribute('data-icon', 'radio_button_checked');
+        icon.classList.remove('text-outline-variant');
+        icon.classList.add('text-primary');
+      }
+
+      // Enable Continue button
+      const continueBtn = document.getElementById('continue-btn');
+      continueBtn.disabled = false;
+      continueBtn.classList.remove('bg-primary-container/20', 'text-on-surface-variant/40', 'cursor-not-allowed');
+      continueBtn.classList.add('bg-primary-container', 'text-on-primary', 'active:scale-95');
+    }
+  </script>
+</body></html>

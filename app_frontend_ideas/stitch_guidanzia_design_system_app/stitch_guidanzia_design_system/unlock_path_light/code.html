@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Career Unlock | Career.AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;700&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#4f6700",
+                    "on-tertiary-fixed": "#002020",
+                    "tertiary-fixed": "#69f7f7",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#006060",
+                    "on-primary-fixed": "#251a00",
+                    "on-secondary-fixed-variant": "#3a4d00",
+                    "surface-dim": "#d2d9f9",
+                    "surface": "#faf8ff",
+                    "surface-container-low": "#f2f3ff",
+                    "primary": "#785a00",
+                    "on-secondary-fixed": "#151f00",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#785a00",
+                    "primary-fixed-dim": "#f0c04d",
+                    "background": "#faf8ff",
+                    "secondary-container": "#c6f24e",
+                    "outline-variant": "#d2c5b0",
+                    "on-primary-container": "#6d5100",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#e3e7ff",
+                    "secondary-fixed-dim": "#abd533",
+                    "on-surface-variant": "#4e4635",
+                    "tertiary": "#006a6a",
+                    "on-tertiary-fixed-variant": "#004f50",
+                    "surface-container": "#ebedff",
+                    "on-background": "#131b32",
+                    "on-error": "#ffffff",
+                    "outline": "#807663",
+                    "on-tertiary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#dbe1ff",
+                    "inverse-on-surface": "#eff0ff",
+                    "surface-bright": "#faf8ff",
+                    "tertiary-container": "#4bdfdf",
+                    "primary-container": "#f5c451",
+                    "primary-fixed": "#ffdf9d",
+                    "on-primary-fixed-variant": "#5b4300",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#282f48",
+                    "on-secondary-container": "#546d00",
+                    "inverse-primary": "#f0c04d",
+                    "secondary-fixed": "#c6f24e",
+                    "tertiary-fixed-dim": "#45dada",
+                    "on-surface": "#131b32",
+                    "surface-container-highest": "#dbe1ff",
+                    "charcoal": "#1a1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-lg": "48px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "20px",
+                    "stack-md": "24px",
+                    "unit": "4px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Plus Jakarta Sans", "Sora"],
+                    "headline-md-mobile": ["Plus Jakarta Sans", "Sora"],
+                    "headline-md": ["Plus Jakarta Sans", "Sora"],
+                    "display-xl": ["Plus Jakarta Sans", "Sora"],
+                    "headline-sm": ["Plus Jakarta Sans", "Sora"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "label-bold": ["Hanken Grotesk"],
+                    "display-lg-mobile": ["Plus Jakarta Sans", "Sora"],
+                    "body-md": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                    "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .gold-glow {
+        background: radial-gradient(circle at top, rgba(245, 196, 81, 0.1) 0%, transparent 70%);
+      }
+      .action-glow {
+        box-shadow: 0 10px 25px -5px rgba(120, 90, 0, 0.2);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .text-tabular { font-variant-numeric: tabular-nums; }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Glow Effect -->
+<div class="fixed top-0 left-0 w-full h-96 gold-glow pointer-events-none z-0"></div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex-grow px-margin-mobile pt-12 pb-32 flex flex-col items-center">
+<!-- Header Section -->
+<header class="w-full text-center mb-stack-lg">
+<!-- Icon -->
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full border-2 border-primary mb-stack-md bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<!-- Headline -->
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-on-background mb-4 tracking-tighter">
+                Unlock your<br/>full path
+            </h1>
+<!-- Career Tag -->
+<div class="inline-block px-4 py-1.5 rounded-full bg-surface-container-high border border-outline-variant shadow-sm">
+<span class="font-label-bold text-label-bold text-primary uppercase tracking-widest">UX Designer Path</span>
+</div>
+</header>
+<!-- Price Block -->
+<section class="w-full bg-surface-container-lowest border border-surface-container-high p-6 rounded-2xl mb-stack-lg flex flex-col items-center justify-center relative overflow-hidden shadow-sm">
+<div class="flex items-baseline gap-2 relative z-10">
+<span class="font-headline-md text-headline-md text-charcoal text-tabular">₹199</span>
+<span class="font-label-bold text-label-bold text-on-surface-variant">one-time</span>
+</div>
+<!-- Decorative streak -->
+<div class="absolute top-0 left-0 w-1.5 h-full bg-primary"></div>
+</section>
+<!-- Features/Inclusions Grid -->
+<section class="w-full mb-stack-lg">
+<div class="grid grid-cols-2 gap-x-4 gap-y-6">
+<!-- Row 1 -->
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-bold text-label-bold text-charcoal">Salary Insights</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-bold text-label-bold text-charcoal">Top Colleges</span>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-bold text-label-bold text-charcoal">Skill Roadmap</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-bold text-label-bold text-charcoal">Expert Mentors</span>
+</div>
+<!-- Row 3 -->
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-bold text-label-bold text-charcoal">Resume Guide</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-bold text-label-bold text-charcoal">Interview Prep</span>
+</div>
+<!-- Row 4 -->
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-bold text-label-bold text-charcoal">Job Market Data</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-bold text-label-bold text-charcoal">Portfolio Tips</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Actions - Sticky Bottom -->
+<footer class="fixed bottom-0 left-0 w-full bg-surface-container-low/80 backdrop-blur-md px-margin-mobile pt-6 pb-8 border-t border-surface-container-high z-50">
+<div class="max-w-md mx-auto flex flex-col items-center gap-4">
+<!-- Trust Row -->
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">shield_lock</span>
+<span class="font-label-bold text-[12px] text-on-surface-variant uppercase tracking-wider">Secure encrypted payment</span>
+</div>
+<!-- Main CTA -->
+<button class="w-full h-[56px] rounded-full bg-primary text-on-primary font-headline-sm flex items-center justify-center transition-all active:scale-95 action-glow">
+                Unlock now
+            </button>
+<!-- Secondary Action -->
+<button class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors py-2">
+                Maybe later
+            </button>
+</div>
+</footer>
+<!-- Simple Micro-interaction Script -->
+<script>
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.96)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

@@ -1,15 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#fcf8fd" media="(prefers-color-scheme: light)" />
+    <title>Guidanzia — AI Career Guidance</title>
+    <script>
+      // No-FOUC: apply the persisted (or system) theme + language BEFORE first paint.
+      (function () {
+        try {
+          var t = localStorage.getItem('edubot_theme');
+          if (!t) {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          if (t === 'dark') document.documentElement.classList.add('dark');
+          var lang = localStorage.getItem('edubot_language');
+          if (lang) document.documentElement.setAttribute('lang', lang);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>EduBot SaaS Web App UI</title>
-    </head>
-
-    <body>
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-    </body>
-  </html>
-  
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

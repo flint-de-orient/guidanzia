@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Assessment Question | Career Path Ranking</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500&amp;family=Hanken+Grotesk:wght@700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .drag-handle {
+            cursor: grab;
+        }
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+        /* Custom scrollbar for light theme */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fcf8fd;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ebedff;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#dbe1ff",
+                        "tertiary-container": "#4bdfdf",
+                        "outline": "#807663",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#546d00",
+                        "surface-container-low": "#f2f3ff",
+                        "primary": "#785a00", // Graduation Gold base
+                        "surface-container-high": "#e3e7ff",
+                        "tertiary-fixed": "#69f7f7",
+                        "on-primary-fixed": "#251a00",
+                        "on-background": "#0b0a3d", // Deep Navy
+                        "surface-container-highest": "#dbe1ff",
+                        "secondary-fixed-dim": "#abd533",
+                        "on-tertiary-container": "#006060",
+                        "on-primary-fixed-variant": "#5b4300",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#c6f24e",
+                        "surface-tint": "#785a00",
+                        "surface": "#fcf8fd", // Cloud White
+                        "inverse-on-surface": "#eff0ff",
+                        "tertiary": "#006a6a",
+                        "on-secondary-fixed": "#151f00",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#f0c04d",
+                        "on-surface-variant": "#4e4635",
+                        "primary-container": "#f5c451",
+                        "secondary": "#4f6700", // Lime accent darker for light text
+                        "inverse-surface": "#282f48",
+                        "surface-dim": "#d2d9f9",
+                        "on-primary-container": "#6d5100",
+                        "primary-fixed": "#ffdf9d",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#3a4d00",
+                        "tertiary-fixed-dim": "#45dada",
+                        "on-tertiary-fixed": "#002020",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#004f50",
+                        "surface-bright": "#fcf8fd",
+                        "inverse-primary": "#f0c04d",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#ebedff",
+                        "background": "#fcf8fd",
+                        "on-surface": "#0b0a3d",
+                        "secondary-container": "#c6f24e",
+                        "outline-variant": "#d2c5b0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "stack-md": "24px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "40px",
+                        "stack-lg": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Sora"],
+                        "headline-sm": ["Sora"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "label-bold": ["Hanken Grotesk"],
+                        "display-lg": ["Sora"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-md-mobile": ["Sora"],
+                        "display-xl": ["Sora"],
+                        "headline-md": ["Sora"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md flex flex-col selection:bg-primary/30">
+<!-- Header Navigation -->
+<header class="px-margin-mobile pt-12 pb-6 flex items-center justify-between z-10">
+<button class="w-12 h-12 flex items-center justify-start text-on-surface active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[32px]">close</span>
+</button>
+<div class="flex-1 px-4">
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-2/3 bg-primary rounded-full shadow-[0_0_8px_rgba(120,90,0,0.2)]"></div>
+</div>
+</div>
+<div class="pl-4 font-label-bold text-label-bold text-on-surface-variant">
+            08/12
+        </div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-margin-mobile flex flex-col gap-stack-md overflow-y-auto pb-40">
+<!-- Question Content -->
+<section class="flex flex-col gap-stack-sm pt-4">
+<span class="font-label-bold text-label-bold text-secondary uppercase tracking-widest">Preference Task</span>
+<h1 class="font-headline-md-mobile text-headline-md-mobile text-on-background">Rank your top three career interests.</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Drag and drop the items to set your priority from highest (top) to lowest (bottom).</p>
+</section>
+<!-- Ranking List -->
+<section class="flex flex-col gap-4">
+<!-- Rank Item 1 -->
+<div class="bg-white border-2 border-outline-variant p-5 rounded-xl flex items-center gap-4 shadow-sm transition-all duration-200">
+<div class="flex-none flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined drag-handle">drag_indicator</span>
+</div>
+<div class="flex-1">
+<div class="font-label-bold text-label-bold text-tertiary mb-1">UNRANKED</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Data Science &amp; AI</div>
+</div>
+<div class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant font-label-bold">
+                    -
+                </div>
+</div>
+<!-- Rank Item 2 -->
+<div class="bg-white border-2 border-outline-variant p-5 rounded-xl flex items-center gap-4 shadow-sm">
+<div class="flex-none flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined drag-handle">drag_indicator</span>
+</div>
+<div class="flex-1">
+<div class="font-label-bold text-label-bold text-tertiary mb-1">UNRANKED</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Product Management</div>
+</div>
+<div class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant font-label-bold">
+                    -
+                </div>
+</div>
+<!-- Rank Item 3 -->
+<div class="bg-white border-2 border-outline-variant p-5 rounded-xl flex items-center gap-4 shadow-sm">
+<div class="flex-none flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined drag-handle">drag_indicator</span>
+</div>
+<div class="flex-1">
+<div class="font-label-bold text-label-bold text-tertiary mb-1">UNRANKED</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Digital Marketing</div>
+</div>
+<div class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant font-label-bold">
+                    -
+                </div>
+</div>
+<!-- Rank Item 4 -->
+<div class="bg-white border-2 border-outline-variant p-5 rounded-xl flex items-center gap-4 shadow-sm opacity-60">
+<div class="flex-none flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined drag-handle">drag_indicator</span>
+</div>
+<div class="flex-1">
+<div class="font-label-bold text-label-bold text-tertiary mb-1">UNRANKED</div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Financial Analytics</div>
+</div>
+<div class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface-variant font-label-bold">
+                    -
+                </div>
+</div>
+</section>
+</main>
+<!-- Interactive Shell Layer -->
+<div class="fixed bottom-0 left-0 w-full z-50">
+<!-- Error State Message -->
+<div class="w-full bg-surface-container-lowest/95 backdrop-blur-md">
+<div class="w-full h-[1px] bg-primary"></div>
+<div class="px-margin-mobile py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">error</span>
+<p class="font-label-bold text-label-bold text-primary">Please rank your top preferences to continue</p>
+</div>
+</div>
+<!-- Shared Component: BottomNavBar -->
+<nav class="bg-white border-t-2 border-outline-variant h-24 w-full flex justify-between items-center px-margin-mobile pb-4">
+<!-- Back Button -->
+<button class="flex items-center justify-center text-on-surface-variant px-6 py-4 hover:opacity-90 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined mr-2" data-icon="chevron_left">chevron_left</span>
+<span class="font-label-bold text-label-bold">Back</span>
+</button>
+<!-- Disabled Continue Button -->
+<button class="flex items-center justify-center bg-on-background/5 text-on-background/20 rounded-full px-8 py-4 cursor-not-allowed" disabled="">
+<span class="font-label-bold text-label-bold mr-2">Continue</span>
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</nav>
+</div>
+<!-- Atmospheric background element -->
+<div class="fixed top-0 right-0 -z-10 w-full h-full pointer-events-none opacity-40 bg-[radial-gradient(circle_at_top_right,_#ffdf9d_0%,_transparent_40%)]"></div>
+<script>
+        // Simple scale micro-interaction for list items
+        document.querySelectorAll('.drag-handle').forEach(handle => {
+            handle.addEventListener('mousedown', () => {
+                const card = handle.closest('div.bg-white');
+                card.style.borderColor = '#785a00';
+                card.style.transform = 'scale(1.02)';
+                card.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+            });
+            const reset = () => {
+                const card = handle.closest('div.bg-white');
+                card.style.borderColor = '#d2c5b0';
+                card.style.transform = 'scale(1)';
+                card.style.boxShadow = '0 1px 2px 0 rgba(0, 0, 0, 0.05)';
+            };
+            handle.addEventListener('mouseup', reset);
+            handle.addEventListener('mouseleave', reset);
+        });
+    </script>
+</body></html>

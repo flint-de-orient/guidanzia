@@ -10,13 +10,19 @@ def truncate_database():
         
         # Delete all data from all tables
         cursor.execute('DELETE FROM users')
+        cursor.execute('DELETE FROM user_session')
         cursor.execute('DELETE FROM user_sessions')
         cursor.execute('DELETE FROM job_role_details')
+        cursor.execute('DELETE FROM onboarding_data')
+        cursor.execute('DELETE FROM career_recommendations')
         
         # Reset auto-increment counters
         cursor.execute('DELETE FROM sqlite_sequence WHERE name="users"')
         cursor.execute('DELETE FROM sqlite_sequence WHERE name="user_sessions"')
         cursor.execute('DELETE FROM sqlite_sequence WHERE name="job_role_details"')
+        cursor.execute('DELETE FROM sqlite_sequence WHERE name="user_session"')
+        cursor.execute('DELETE FROM sqlite_sequence WHERE name="onboarding_data"')
+        cursor.execute('DELETE FROM sqlite_sequence WHERE name="career_recommendations"')
         
         # Commit changes
         conn.commit()
@@ -30,6 +36,7 @@ def truncate_database():
         print("- All user data cleared")
         print("- All session data cleared") 
         print("- All job role details cleared")
+        
         print("- Auto-increment counters reset")
         print("- Database space reclaimed")
         

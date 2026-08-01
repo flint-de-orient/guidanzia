@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Assessment Question - Selected State</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Hanken+Grotesk:wght@400;700&family=Be+Vietnam+Pro:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#313851",
+                        "primary": "#ffe4af",
+                        "inverse-on-surface": "#282f48",
+                        "outline-variant": "#4e4635",
+                        "on-surface": "#dbe1ff",
+                        "surface-container-high": "#222941",
+                        "on-tertiary": "#003737",
+                        "primary-fixed-dim": "#f0c04d",
+                        "inverse-primary": "#785a00",
+                        "on-secondary-container": "#2f3f00",
+                        "on-primary-fixed": "#251a00",
+                        "outline": "#9b8f7c",
+                        "on-primary": "#3f2e00",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#ffdf9d",
+                        "surface-tint": "#f0c04d",
+                        "secondary-fixed-dim": "#abd533",
+                        "secondary-fixed": "#c6f24e",
+                        "tertiary-fixed-dim": "#45dada",
+                        "secondary": "#abd533",
+                        "on-tertiary-fixed": "#002020",
+                        "tertiary-container": "#4bdfdf",
+                        "surface-container-highest": "#2c344c",
+                        "on-surface-variant": "#d2c5b0",
+                        "on-error": "#690005",
+                        "surface": "#0a1229",
+                        "on-secondary-fixed": "#151f00",
+                        "on-background": "#dbe1ff",
+                        "tertiary": "#6efcfc",
+                        "surface-container-low": "#131b32",
+                        "inverse-surface": "#dbe1ff",
+                        "secondary-container": "#89b100",
+                        "on-tertiary-container": "#006060",
+                        "on-secondary-fixed-variant": "#3a4d00",
+                        "error": "#ffb4ab",
+                        "background": "#0a1229",
+                        "tertiary-fixed": "#69f7f7",
+                        "surface-container-lowest": "#050d24",
+                        "surface-container": "#171f36",
+                        "on-primary-fixed-variant": "#5b4300",
+                        "on-primary-container": "#6d5100",
+                        "surface-variant": "#2c344c",
+                        "on-secondary": "#273500",
+                        "on-tertiary-fixed-variant": "#004f50",
+                        "surface-dim": "#0a1229",
+                        "primary-container": "#f5c451"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "24px",
+                        "margin-mobile": "20px",
+                        "stack-lg": "48px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "40px",
+                        "unit": "4px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Sora"],
+                        "display-xl": ["Sora"],
+                        "display-lg-mobile": ["Sora"],
+                        "headline-md": ["Sora"],
+                        "label-bold": ["Hanken Grotesk"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "headline-md-mobile": ["Sora"],
+                        "display-lg": ["Sora"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .action-glow {
+            box-shadow: 0 0 20px -5px rgba(255, 228, 175, 0.5);
+        }
+        .card-selected-glow {
+            box-shadow: 0 10px 25px -5px rgba(255, 228, 175, 0.3);
+        }
+        body {
+            background-color: #0a1229;
+            color: #dbe1ff;
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- Top Navigation / App Bar -->
+<header class="bg-background fixed top-0 w-full z-40 flex items-center px-margin-mobile h-16 transition-opacity duration-200">
+<button class="text-primary hover:opacity-80 transition-opacity p-2 -ml-2">
+<span class="material-symbols-outlined text-headline-sm">close</span>
+</button>
+<div class="flex-grow"></div>
+<div class="flex items-center gap-1">
+<span class="font-label-bold text-label-bold text-on-surface-variant">06</span>
+<span class="font-label-bold text-label-bold text-outline">/ 10</span>
+</div>
+</header>
+<!-- Progress Rail -->
+<div class="fixed top-16 left-0 w-full px-margin-mobile py-4 bg-background z-30">
+<div class="flex justify-between gap-1 h-1.5 w-full">
+<div class="h-full flex-1 rounded-full bg-secondary"></div>
+<div class="h-full flex-1 rounded-full bg-secondary"></div>
+<div class="h-full flex-1 rounded-full bg-secondary"></div>
+<div class="h-full flex-1 rounded-full bg-secondary"></div>
+<div class="h-full flex-1 rounded-full bg-secondary"></div>
+<div class="h-full flex-1 rounded-full bg-secondary ring-2 ring-secondary ring-offset-2 ring-offset-background"></div>
+<div class="h-full flex-1 rounded-full bg-surface-container-highest"></div>
+<div class="h-full flex-1 rounded-full bg-surface-container-highest"></div>
+<div class="h-full flex-1 rounded-full bg-surface-container-highest"></div>
+<div class="h-full flex-1 rounded-full bg-surface-container-highest"></div>
+</div>
+</div>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-36 pb-32 px-margin-mobile">
+<div class="max-w-md mx-auto">
+<h1 class="font-headline-md-mobile text-headline-md-mobile mb-stack-lg leading-tight text-on-surface">
+                Which of these team environments feels most productive to you?
+            </h1>
+<div class="grid grid-cols-1 gap-4">
+<!-- Selected Card -->
+<button class="group relative flex items-center p-stack-md bg-primary text-on-primary rounded-xl border-2 border-primary card-selected-glow transition-all duration-200 scale-[1.02] text-left">
+<div class="flex items-center justify-center w-12 h-12 bg-on-primary text-primary rounded-lg mr-4 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-bold text-label-bold">Collaborative Studio</p>
+<p class="text-sm opacity-80 mt-1">High-energy, shared brainstorming</p>
+</div>
+<span class="material-symbols-outlined text-on-primary">check_circle</span>
+</button>
+<!-- Unselected Card 2 -->
+<button class="group flex items-center p-stack-md bg-surface-container border-2 border-surface-variant rounded-xl hover:border-secondary transition-all duration-200 text-left">
+<div class="flex items-center justify-center w-12 h-12 bg-surface-container-high text-secondary rounded-lg mr-4 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-bold text-label-bold text-on-surface">Focused Sanctuary</p>
+<p class="text-sm text-on-surface-variant mt-1">Quiet, individual flow-state work</p>
+</div>
+</button>
+<!-- Unselected Card 3 -->
+<button class="group flex items-center p-stack-md bg-surface-container border-2 border-surface-variant rounded-xl hover:border-secondary transition-all duration-200 text-left">
+<div class="flex items-center justify-center w-12 h-12 bg-surface-container-high text-secondary rounded-lg mr-4 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-bold text-label-bold text-on-surface">Fast-Paced Startup</p>
+<p class="text-sm text-on-surface-variant mt-1">Rapid iteration and quick decisions</p>
+</div>
+</button>
+<!-- Unselected Card 4 -->
+<button class="group flex items-center p-stack-md bg-surface-container border-2 border-surface-variant rounded-xl hover:border-secondary transition-all duration-200 text-left">
+<div class="flex items-center justify-center w-12 h-12 bg-surface-container-high text-secondary rounded-lg mr-4 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined">account_tree</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-bold text-label-bold text-on-surface">Structured Enterprise</p>
+<p class="text-sm text-on-surface-variant mt-1">Clear hierarchy and defined roles</p>
+</div>
+</button>
+<!-- Unselected Card 5 -->
+<button class="group flex items-center p-stack-md bg-surface-container border-2 border-surface-variant rounded-xl hover:border-secondary transition-all duration-200 text-left">
+<div class="flex items-center justify-center w-12 h-12 bg-surface-container-high text-secondary rounded-lg mr-4 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined">public</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-bold text-label-bold text-on-surface">Remote First</p>
+<p class="text-sm text-on-surface-variant mt-1">Asynchronous and digital primary</p>
+</div>
+</button>
+<!-- Unselected Card 6 -->
+<button class="group flex items-center p-stack-md bg-surface-container border-2 border-surface-variant rounded-xl hover:border-secondary transition-all duration-200 text-left">
+<div class="flex items-center justify-center w-12 h-12 bg-surface-container-high text-secondary rounded-lg mr-4 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined">science</span>
+</div>
+<div class="flex-grow">
+<p class="font-label-bold text-label-bold text-on-surface">Research Lab</p>
+<p class="text-sm text-on-surface-variant mt-1">Experimental and data-driven</p>
+</div>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Action Bar (Nav Shell) -->
+<footer class="fixed bottom-0 left-0 w-full z-50 bg-surface-container/80 backdrop-blur-md border-t-2 border-surface-variant flex justify-between items-center px-margin-mobile py-6">
+<!-- Back Button -->
+<button class="text-on-surface-variant flex items-center justify-center p-stack-sm hover:scale-105 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-headline-sm">chevron_left</span>
+</button>
+<!-- Primary Action CTA -->
+<button class="bg-primary text-on-primary rounded-full px-12 py-4 flex items-center justify-center action-glow hover:opacity-90 active:scale-95 transition-all duration-150">
+<span class="font-label-bold text-label-bold">Continue</span>
+<span class="material-symbols-outlined ml-2">arrow_forward</span>
+</button>
+</footer>
+<!-- Decorative Background Accent -->
+<div class="fixed top-0 right-0 -z-10 opacity-20 pointer-events-none">
+<svg fill="none" height="600" viewbox="0 0 400 600" width="400" xmlns="http://www.w3.org/2000/svg">
+<path d="M400 0L200 600H400V0Z" fill="url(#paint0_linear)"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="paint0_linear" x1="400" x2="300" y1="0" y2="300">
+<stop stop-color="#abd533"></stop>
+<stop offset="1" stop-color="#0a1229"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<script>
+        // Simple micro-interaction for card selection
+        document.querySelectorAll('button.group.flex').forEach(button => {
+            button.addEventListener('click', () => {
+                // Find currently selected
+                const currentSelected = document.querySelector('.bg-primary.text-on-primary');
+                if (currentSelected) {
+                    // Reset current
+                    currentSelected.classList.remove('bg-primary', 'text-on-primary', 'border-primary', 'card-selected-glow', 'scale-[1.02]');
+                    currentSelected.classList.add('bg-surface-container', 'border-surface-variant');
+                    
+                    const iconBox = currentSelected.querySelector('div');
+                    iconBox.classList.remove('bg-on-primary', 'text-primary');
+                    iconBox.classList.add('bg-surface-container-high', 'text-secondary');
+                    
+                    const checkIcon = currentSelected.querySelector('span:last-child');
+                    if (checkIcon && checkIcon.innerText === 'check_circle') checkIcon.remove();
+                }
+                
+                // Select new
+                button.classList.add('bg-primary', 'text-on-primary', 'border-primary', 'card-selected-glow', 'scale-[1.02]');
+                button.classList.remove('bg-surface-container', 'border-surface-variant');
+                
+                const iconBox = button.querySelector('div');
+                iconBox.classList.add('bg-on-primary', 'text-primary');
+                iconBox.classList.remove('bg-surface-container-high', 'text-secondary');
+                
+                // Add checkmark
+                const check = document.createElement('span');
+                check.className = 'material-symbols-outlined text-on-primary';
+                check.innerText = 'check_circle';
+                button.appendChild(check);
+            });
+        });
+    </script>
+</body></html>

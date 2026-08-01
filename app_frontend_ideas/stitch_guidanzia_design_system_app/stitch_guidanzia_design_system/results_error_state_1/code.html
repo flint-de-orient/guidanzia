@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guidanzia - Results Not Found</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;700&amp;family=Be+Vietnam+Pro:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary": "#ffffff",
+                "surface-variant": "#dbe1ff",
+                "tertiary-container": "#4bdfdf",
+                "outline": "#807663",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary-container": "#546d00",
+                "surface-container-low": "#f2f3ff",
+                "primary": "#785a00",
+                "surface-container-high": "#e3e7ff",
+                "tertiary-fixed": "#69f7f7",
+                "on-primary-fixed": "#251a00",
+                "on-background": "#0b0a3d",
+                "surface-container-highest": "#dbe1ff",
+                "secondary-fixed-dim": "#abd533",
+                "on-tertiary-container": "#006060",
+                "on-primary-fixed-variant": "#5b4300",
+                "on-primary": "#ffffff",
+                "secondary-fixed": "#c6f24e",
+                "surface-tint": "#785a00",
+                "surface": "#fcf8fd",
+                "inverse-on-surface": "#eff0ff",
+                "tertiary": "#006a6a",
+                "on-secondary-fixed": "#151f00",
+                "on-secondary": "#ffffff",
+                "primary-fixed-dim": "#f0c04d",
+                "on-surface-variant": "#4e4635",
+                "primary-container": "#f5c451",
+                "secondary": "#4f6700",
+                "inverse-surface": "#282f48",
+                "surface-dim": "#d2d9f9",
+                "on-primary-container": "#6d5100",
+                "primary-fixed": "#ffdf9d",
+                "on-error": "#ffffff",
+                "on-secondary-fixed-variant": "#3a4d00",
+                "tertiary-fixed-dim": "#45dada",
+                "on-tertiary-fixed": "#002020",
+                "error-container": "#ffdad6",
+                "error": "#ba1a1a",
+                "on-tertiary-fixed-variant": "#004f50",
+                "surface-bright": "#fcf8fd",
+                "inverse-primary": "#f0c04d",
+                "on-error-container": "#93000a",
+                "surface-container": "#ebedff",
+                "background": "#fcf8fd",
+                "on-surface": "#0b0a3d",
+                "secondary-container": "#c6f24e",
+                "outline-variant": "#d2c5b0"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "unit": "4px",
+                "gutter": "16px",
+                "margin-mobile": "20px",
+                "stack-md": "24px",
+                "stack-sm": "8px",
+                "margin-desktop": "40px",
+                "stack-lg": "48px"
+        },
+        "fontFamily": {
+                "display-lg-mobile": ["Sora"],
+                "headline-sm": ["Sora"],
+                "body-md": ["Be Vietnam Pro"],
+                "label-bold": ["Hanken Grotesk"],
+                "display-lg": ["Sora"],
+                "body-lg": ["Be Vietnam Pro"],
+                "headline-md-mobile": ["Sora"],
+                "display-xl": ["Sora"],
+                "headline-md": ["Sora"]
+        },
+        "fontSize": {
+                "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+        }
+      },
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 48;
+            user-select: none;
+        }
+        
+        .action-glow {
+            box-shadow: 0 4px 14px 0 rgba(245, 196, 81, 0.39);
+        }
+
+        .bg-noise {
+            background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+            opacity: 0.02;
+            pointer-events: none;
+        }
+
+        .streak-lime {
+            position: absolute;
+            width: 3px;
+            height: 48px;
+            background: #abd533;
+            left: 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-hidden">
+<!-- Background Texture -->
+<div class="fixed inset-0 bg-noise z-0"></div>
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full flex justify-between items-center px-margin-mobile h-16 z-50 bg-surface border-b border-outline-variant/30">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-background" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md text-[24px] text-primary italic tracking-tighter">Guidanzia</h1>
+</div>
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Profile Portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-jn9plq3ltU86UoSkAwTO9EwCBanCEi7DYukbXlaRlN2KNKrVvhs74oyomwKbfFazicKxehkKtiKT6inngIddnCiAx35EJ4aMfo_OI-tCEFlOuEZyFzZc421Gyx0omy2LJnsHIPyfDf9HPa7AEznLViWBDINHocrEUIfy3hFXgCjU6QicgpkoMlLNzhbhQ3oMICSdSFMu_qo9k5qcu90ujYPSeyS5JWdf3P7fP8l5--DO63zL3OntGpM7miS0P3QP7SWVsAYUoYc"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile z-10 relative mt-16 mb-24 text-center">
+<!-- Large Ghosted Icon -->
+<div class="relative mb-stack-lg">
+<div class="absolute inset-0 bg-primary/5 blur-3xl rounded-full"></div>
+<span class="material-symbols-outlined text-[120px] text-outline-variant/40 select-none" data-icon="search" style="font-variation-settings: 'wght' 100;">search</span>
+</div>
+<!-- Headline -->
+<h2 class="font-headline-md text-headline-md text-on-background mb-stack-sm max-w-xs mx-auto">
+            Hmm, something's missing
+        </h2>
+<!-- Body Text -->
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-sm mb-stack-lg">
+            We couldn't quite map your results yet. Let's try another module or check your connection.
+        </p>
+<!-- CTA Buttons -->
+<div class="w-full flex flex-col gap-4 max-w-sm">
+<button class="h-14 bg-primary-container text-on-primary-fixed font-label-bold text-label-bold rounded-full action-glow active:scale-95 transition-transform flex items-center justify-center">
+                Go to Explore
+            </button>
+<button class="h-14 border-2 border-secondary text-secondary font-label-bold text-label-bold rounded-full hover:bg-secondary/5 active:scale-95 transition-transform flex items-center justify-center">
+                Retry
+            </button>
+</div>
+<!-- Decorative Streak -->
+<div class="streak-lime bottom-24"></div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-surface border-t border-outline-variant/30">
+<!-- Explore -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label-bold text-[12px]">Explore</span>
+</a>
+<!-- Paths -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="route">route</span>
+<span class="font-label-bold text-[12px]">Paths</span>
+</a>
+<!-- Mentor -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-label-bold text-[12px]">Mentor</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-bold text-[12px]">Profile</span>
+</a>
+</nav>
+<script>
+    document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', function(e) {
+            let ripple = document.createElement('div');
+            ripple.style.position = 'absolute';
+            ripple.style.background = 'rgba(0,0,0,0.1)';
+            ripple.style.borderRadius = '50%';
+            ripple.style.pointerEvents = 'none';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'ripple 0.6s linear';
+            this.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+</script>
+</body></html>

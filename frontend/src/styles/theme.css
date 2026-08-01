@@ -1,84 +1,180 @@
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================================
+   GUIDANZIA SEMANTIC TOKEN LAYER
+   ----------------------------------------------------------------------------
+   One variable set, authored twice: :root = light, .dark = deltas.
+   Brand accents (gold / lime / cyan) mostly survive the theme flip;
+   surfaces and ink invert. Components must reference ONLY these tokens —
+   never raw hex. Intent names (gold / lime / cyan / surface / on-surface)
+   are the ones to type; the shadcn names below are kept so the existing
+   Radix UI primitives keep resolving.
+   ============================================================================ */
+
 :root {
+  /* --- Brand accents ------------------------------------------------------ */
+  --gold: #f5c451;            /* primary CTA surface */
+  --gold-ink: #0b0a3d;        /* text/icon on gold */
+  --gold-deep: #785a00;       /* gold used as text/border on light surfaces */
+
+  --lime: #c6f24e;            /* success / progress / streaks */
+  --lime-ink: #151f00;        /* text on lime */
+  --lime-deep: #4f6700;       /* lime used as text on light surfaces */
+
+  --cyan: #4bdfdf;            /* data-viz / AI insight ONLY */
+  --cyan-ink: #002020;
+  --cyan-deep: #006a6a;
+
+  /* --- Surfaces (light: lavender-tinted whites) --------------------------- */
+  --surface: #fcf8fd;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f2f3ff;
+  --surface-container: #ebedff;
+  --surface-container-high: #e3e7ff;
+  --surface-container-highest: #dbe1ff;
+
+  /* --- Ink & structure ---------------------------------------------------- */
+  --on-surface: #0b0a3d;          /* deep navy — primary ink */
+  --on-surface-variant: #565e7e;  /* cool muted (not the mockup's brown) */
+  --outline: #cdd3ee;             /* hairline border */
+  --outline-strong: #0b0a3d;      /* brutalist structural border */
+
+  --danger: #ba1a1a;
+  --danger-ink: #ffffff;
+  --danger-container: #ffdad6;
+  --on-danger-container: #93000a;
+
+  /* --- shadcn generic tokens (repointed to the ramp above) ---------------- */
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: oklch(0.145 0 0);
-  --card: #ffffff;
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.0058 264.53);
-  --secondary-foreground: #030213;
-  --muted: #ececf0;
-  --muted-foreground: #717182;
-  --accent: #e9ebef;
-  --accent-foreground: #030213;
-  --destructive: #d4183d;
-  --destructive-foreground: #ffffff;
-  --border: rgba(0, 0, 0, 0.1);
+  --background: var(--surface);
+  --foreground: var(--on-surface);
+  --card: var(--surface-container-lowest);
+  --card-foreground: var(--on-surface);
+  --popover: var(--surface-container-lowest);
+  --popover-foreground: var(--on-surface);
+  --primary: var(--gold);
+  --primary-foreground: var(--gold-ink);
+  --secondary: var(--surface-container);
+  --secondary-foreground: var(--on-surface);
+  --muted: var(--surface-container-low);
+  --muted-foreground: var(--on-surface-variant);
+  --accent: var(--surface-container-high);
+  --accent-foreground: var(--on-surface);
+  --destructive: var(--danger);
+  --destructive-foreground: var(--danger-ink);
+  --border: var(--outline);
   --input: transparent;
-  --input-background: #f3f3f5;
+  --input-background: var(--surface-container-low);
   --switch-background: #cbced4;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --ring: var(--gold-deep);
+
+  /* --- Data-viz series (recharts, etc.) ----------------------------------- */
+  --chart-1: var(--gold);
+  --chart-2: var(--lime-deep);
+  --chart-3: var(--cyan-deep);
+  --chart-4: #7c6bd6;
+  --chart-5: #e0803f;
+
+  /* --- Radius & shape ----------------------------------------------------- */
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #030213;
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius-card: 1.5rem;   /* 24px cards */
+  --radius-input: 0.75rem; /* 12px inputs */
+  --radius-pill: 9999px;
+
+  /* --- Sidebar (deep-dive) ------------------------------------------------ */
+  --sidebar: var(--surface-container-lowest);
+  --sidebar-foreground: var(--on-surface);
+  --sidebar-primary: var(--gold);
+  --sidebar-primary-foreground: var(--gold-ink);
+  --sidebar-accent: var(--surface-container-high);
+  --sidebar-accent-foreground: var(--on-surface);
+  --sidebar-border: var(--outline);
+  --sidebar-ring: var(--gold-deep);
+
+  /* --- Type families ------------------------------------------------------ */
+  --font-display: 'Sora', 'Noto Sans Devanagari', 'Noto Sans Bengali', sans-serif;
+  --font-body: 'Inter', 'Noto Sans Devanagari', 'Noto Sans Bengali', sans-serif;
+  --font-label: 'Inter', 'Noto Sans Devanagari', 'Noto Sans Bengali', sans-serif;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.269 0 0);
-  --sidebar-ring: oklch(0.439 0 0);
+  /* --- Accents: bright accents read well on navy, only ink/deep shift ----- */
+  --gold: #f5c451;
+  --gold-ink: #0b0a1f;
+  --gold-deep: #ffdf9d;   /* on dark, "deep" gold text must go lighter */
+
+  --lime: #c6f24e;
+  --lime-ink: #151f00;
+  --lime-deep: #abd533;
+
+  --cyan: #4bdfdf;
+  --cyan-ink: #002020;
+  --cyan-deep: #69f7f7;
+
+  /* --- Surfaces (dark: deep navy ramp) ----------------------------------- */
+  --surface: #0b1020;
+  --surface-container-lowest: #0e1426;
+  --surface-container-low: #141f42;
+  --surface-container: #1b2650;
+  --surface-container-high: #24315f;
+  --surface-container-highest: #2d3a6b;
+
+  --on-surface: #eef1ff;
+  --on-surface-variant: #9aa5ce;
+  --outline: #2a3560;
+  --outline-strong: #4a5794;
+
+  --danger: #ffb4ab;
+  --danger-ink: #690005;
+  --danger-container: #93000a;
+  --on-danger-container: #ffdad6;
+
+  --switch-background: #3a4680;
+
+  --chart-1: var(--gold);
+  --chart-2: var(--lime);
+  --chart-3: var(--cyan);
+  --chart-4: #b0a3f0;
+  --chart-5: #f0a875;
 }
 
+/* ============================================================================
+   TAILWIND v4 UTILITY EXPOSURE
+   Every semantic token surfaced here becomes a utility, e.g.
+   bg-surface, text-on-surface, border-outline, bg-gold, text-gold-ink,
+   rounded-card, rounded-pill, font-display, font-body.
+   ============================================================================ */
 @theme inline {
+  /* intent-named */
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+  --color-gold-deep: var(--gold-deep);
+  --color-lime: var(--lime);
+  --color-lime-ink: var(--lime-ink);
+  --color-lime-deep: var(--lime-deep);
+  --color-cyan: var(--cyan);
+  --color-cyan-ink: var(--cyan-ink);
+  --color-cyan-deep: var(--cyan-deep);
+
+  --color-surface: var(--surface);
+  --color-surface-lowest: var(--surface-container-lowest);
+  --color-surface-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-high: var(--surface-container-high);
+  --color-surface-highest: var(--surface-container-highest);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-outline-strong: var(--outline-strong);
+
+  --color-danger: var(--danger);
+  --color-danger-ink: var(--danger-ink);
+  --color-danger-container: var(--danger-container);
+  --color-on-danger-container: var(--on-danger-container);
+
+  /* shadcn generic (kept for Radix primitives) */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -105,10 +201,6 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -117,6 +209,20 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-card: var(--radius-card);
+  --radius-input: var(--radius-input);
+  --radius-pill: var(--radius-pill);
+
+  /* type */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-label: var(--font-label);
 }
 
 @layer base {
@@ -126,15 +232,15 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
   }
-
-  /**
-  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
-  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
-  */
 
   html {
     font-size: var(--font-size);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
   }
 
   h1 {
@@ -177,5 +283,15 @@
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+  }
+
+  /* Respect reduced-motion globally */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

@@ -4,8 +4,11 @@ import {Brain, Sparkles, Target, Award, Users, BookOpen, GraduationCap, Lightbul
 } from 'lucide-react';
 import { Navbar } from '../components/navbar';
 import { TranslatedText } from '../components/TranslatedText';
+import { useAuth } from '../contexts/AuthContext';
 
 export function Landing() {
+  const { isAuthenticated } = useAuth();
+  const ctaLink = isAuthenticated ? '/onboarding-new' : '/signup';
   return (
     <div className="min-h-screen abstract-bg">
       <Navbar />
@@ -29,7 +32,7 @@ export function Landing() {
               <TranslatedText>Get personalized career recommendations powered by advanced AI analysis of your interests, academic profile, and personality. Start your journey to a fulfilling career today.</TranslatedText>
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/signup">
+              <Link to={ctaLink}>
                 <Button
                   size="lg"
                   className="gradient-primary hover:opacity-90 transition-opacity text-lg px-8 py-6"
@@ -153,7 +156,7 @@ export function Landing() {
           
           {/* CTA below steps */}
           <div className="text-center mt-12">
-            <Link to="/onboarding">
+            <Link to={ctaLink}>
               <Button size="lg" className="gradient-primary hover:opacity-90 transition-opacity text-lg px-8">
                 <TranslatedText>Get Started Now</TranslatedText>
                 <span className="text-2xl ml-2">→</span>
@@ -287,7 +290,7 @@ export function Landing() {
             <p className="text-xl mb-8 text-purple-100">
               <TranslatedText>Join thousands of students who have found their perfect career with EduBot</TranslatedText>
             </p>
-            <Link to="/signup">
+            <Link to={ctaLink}>
               <Button
                 size="lg"
                 className="bg-white text-purple-600 hover:bg-gray-100 text-lg px-8 py-6"

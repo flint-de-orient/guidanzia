@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Career Path - Subject Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#006060",
+                    "primary": "#ffe4af",
+                    "surface": "#17130c",
+                    "inverse-surface": "#ebe1d4",
+                    "inverse-on-surface": "#353027",
+                    "on-surface-variant": "#d2c5b0",
+                    "on-background": "#ebe1d4",
+                    "surface-container-highest": "#39342b",
+                    "on-tertiary-fixed-variant": "#004f50",
+                    "surface-dim": "#17130c",
+                    "surface-variant": "#39342b",
+                    "surface-bright": "#3e3930",
+                    "on-secondary-container": "#2f3f00",
+                    "secondary-fixed-dim": "#abd533",
+                    "error-container": "#93000a",
+                    "surface-container-lowest": "#110e07",
+                    "secondary": "#abd533",
+                    "on-primary": "#3f2e00",
+                    "tertiary-fixed": "#69f7f7",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#3a4d00",
+                    "on-tertiary-fixed": "#002020",
+                    "on-surface": "#ebe1d4",
+                    "on-secondary": "#273500",
+                    "tertiary-container": "#4bdfdf",
+                    "surface-container": "#231f17",
+                    "on-secondary-fixed": "#151f00",
+                    "tertiary": "#6efcfc",
+                    "outline-variant": "#4e4635",
+                    "primary-fixed": "#ffdf9d",
+                    "surface-container-high": "#2e2921",
+                    "outline": "#9b8f7c",
+                    "primary-container": "#f5c451",
+                    "on-primary-container": "#6d5100",
+                    "error": "#ffb4ab",
+                    "on-error": "#690005",
+                    "inverse-primary": "#785a00",
+                    "background": "#17130c",
+                    "on-tertiary": "#003737",
+                    "surface-container-low": "#1f1b13",
+                    "on-primary-fixed": "#251a00",
+                    "primary-fixed-dim": "#f0c04d",
+                    "secondary-container": "#89b100",
+                    "secondary-fixed": "#c6f24e",
+                    "on-primary-fixed-variant": "#5b4300",
+                    "surface-tint": "#f0c04d",
+                    "tertiary-fixed-dim": "#45dada"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "32px",
+                    "unit": "4px",
+                    "gutter": "16px",
+                    "margin-mobile": "16px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "container-max": "1440px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "xl": "40px"
+            },
+            "fontFamily": {
+                    "body-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "label-caps": ["JetBrains Mono"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "headline-xl": ["Manrope"],
+                    "data-mono": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0A1229; /* Explicit Brand Override */
+            color: #F4F6FF;
+            -webkit-font-smoothing: antialiased;
+        }
+        .bg-surface-custom { background-color: #141F42; }
+        .border-outline-custom { border-color: #243056; }
+        .text-muted-custom { color: #8E9BC4; }
+        
+        .progress-tick {
+            width: 4px;
+            height: 12px;
+            border-radius: 1px;
+            background-color: #243056;
+            transition: all 0.3s ease;
+        }
+        .progress-tick.active {
+            background-color: #C6F24E; /* Acid Lime */
+            box-shadow: 0 0 10px rgba(198, 242, 78, 0.3);
+        }
+
+        .subject-card {
+            background-color: #141F42;
+            border: 1px solid #243056;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .subject-card:active {
+            transform: scale(0.97);
+        }
+        .subject-card.selected {
+            border-color: #F5C451;
+            background-color: rgba(245, 196, 81, 0.05);
+        }
+        .selection-badge {
+            display: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 9999px;
+            background-color: #F5C451;
+            color: #0A1229;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono';
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .subject-card.selected .selection-badge {
+            display: flex;
+        }
+
+        /* Hide Scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md selection:bg-secondary/30 selection:text-secondary">
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0A1229]/80 backdrop-blur-md border-b border-outline-custom flex justify-between items-center px-margin-mobile h-16">
+<button aria-label="Go back" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary" data-icon="arrow_back">arrow_back</span>
+</button>
+<span class="font-label-caps text-label-caps text-primary tracking-widest">STEP 2 OF 8</span>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<main class="pt-24 pb-32 px-margin-mobile max-w-xl mx-auto min-h-screen">
+<!-- Progress Rail -->
+<div class="flex justify-between items-center gap-1 mb-xl">
+<!-- 20 Ticks, 3 Active -->
+<div class="progress-tick active"></div>
+<div class="progress-tick active"></div>
+<div class="progress-tick active"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+<div class="progress-tick"></div>
+</div>
+<!-- Headline Section -->
+<section class="mb-lg">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-[#F4F6FF] mb-md md:font-headline-lg md:text-headline-lg">
+                Rank your top 3 favorite subjects.
+            </h1>
+<!-- Sub-headline / Selection Display -->
+<div class="bg-surface-custom border border-outline-custom rounded-xl p-md flex items-center gap-md">
+<span class="material-symbols-outlined text-secondary" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+<div class="font-data-mono text-data-mono text-muted-custom overflow-hidden whitespace-nowrap text-ellipsis">
+<span class="text-secondary">1st:</span> <span class="text-[#F4F6FF]" id="rank-1">___</span> · 
+                    <span class="text-secondary">2nd:</span> <span class="text-[#F4F6FF]" id="rank-2">___</span> · 
+                    <span class="text-secondary">3rd:</span> <span class="text-[#F4F6FF]" id="rank-3">___</span>
+</div>
+</div>
+</section>
+<!-- Subject Grid -->
+<div class="grid grid-cols-2 gap-gutter pb-xl">
+<!-- Subject Cards -->
+<button class="subject-card flex flex-col items-start p-md rounded-xl text-left hover:border-primary transition-colors" onclick="toggleSubject(this, 'Mathematics')">
+<div class="flex justify-between items-start w-full mb-xs">
+<span class="material-symbols-outlined text-primary/60" data-icon="functions">functions</span>
+<div class="selection-badge"></div>
+</div>
+<span class="font-headline-md text-headline-md text-[#F4F6FF]">Mathematics</span>
+</button>
+<button class="subject-card flex flex-col items-start p-md rounded-xl text-left hover:border-primary transition-colors" onclick="toggleSubject(this, 'Physics')">
+<div class="flex justify-between items-start w-full mb-xs">
+<span class="material-symbols-outlined text-primary/60" data-icon="architecture">architecture</span>
+<div class="selection-badge"></div>
+</div>
+<span class="font-headline-md text-headline-md text-[#F4F6FF]">Physics</span>
+</button>
+<button class="subject-card flex flex-col items-start p-md rounded-xl text-left hover:border-primary transition-colors" onclick="toggleSubject(this, 'Chemistry')">
+<div class="flex justify-between items-start w-full mb-xs">
+<span class="material-symbols-outlined text-primary/60" data-icon="science">science</span>
+<div class="selection-badge"></div>
+</div>
+<span class="font-headline-md text-headline-md text-[#F4F6FF]">Chemistry</span>
+</button>
+<button class="subject-card flex flex-col items-start p-md rounded-xl text-left hover:border-primary transition-colors" onclick="toggleSubject(this, 'Biology')">
+<div class="flex justify-between items-start w-full mb-xs">
+<span class="material-symbols-outlined text-primary/60" data-icon="biotech">biotech</span>
+<div class="selection-badge"></div>
+</div>
+<span class="font-headline-md text-headline-md text-[#F4F6FF]">Biology</span>
+</button>
+<button class="subject-card flex flex-col items-start p-md rounded-xl text-left hover:border-primary transition-colors" onclick="toggleSubject(this, 'Economics')">
+<div class="flex justify-between items-start w-full mb-xs">
+<span class="material-symbols-outlined text-primary/60" data-icon="monitoring">monitoring</span>
+<div class="selection-badge"></div>
+</div>
+<span class="font-headline-md text-headline-md text-[#F4F6FF]">Economics</span>
+</button>
+<button class="subject-card flex flex-col items-start p-md rounded-xl text-left hover:border-primary transition-colors" onclick="toggleSubject(this, 'Computer Science')">
+<div class="flex justify-between items-start w-full mb-xs">
+<span class="material-symbols-outlined text-primary/60" data-icon="terminal">terminal</span>
+<div class="selection-badge"></div>
+</div>
+<span class="font-headline-md text-headline-md text-[#F4F6FF]">Computer Science</span>
+</button>
+<button class="subject-card flex flex-col items-start p-md rounded-xl text-left hover:border-primary transition-colors" onclick="toggleSubject(this, 'Psychology')">
+<div class="flex justify-between items-start w-full mb-xs">
+<span class="material-symbols-outlined text-primary/60" data-icon="psychology">psychology</span>
+<div class="selection-badge"></div>
+</div>
+<span class="font-headline-md text-headline-md text-[#F4F6FF]">Psychology</span>
+</button>
+<button class="subject-card flex flex-col items-start p-md rounded-xl text-left hover:border-primary transition-colors" onclick="toggleSubject(this, 'Sociology')">
+<div class="flex justify-between items-start w-full mb-xs">
+<span class="material-symbols-outlined text-primary/60" data-icon="groups">groups</span>
+<div class="selection-badge"></div>
+</div>
+<span class="font-headline-md text-headline-md text-[#F4F6FF]">Sociology</span>
+</button>
+<button class="subject-card flex flex-col items-start p-md rounded-xl text-left hover:border-primary transition-colors" onclick="toggleSubject(this, 'Business Studies')">
+<div class="flex justify-between items-start w-full mb-xs">
+<span class="material-symbols-outlined text-primary/60" data-icon="business_center">business_center</span>
+<div class="selection-badge"></div>
+</div>
+<span class="font-headline-md text-headline-md text-[#F4F6FF]">Business Studies</span>
+</button>
+<button class="subject-card flex flex-col items-start p-md rounded-xl text-left hover:border-primary transition-colors" onclick="toggleSubject(this, 'Political Science')">
+<div class="flex justify-between items-start w-full mb-xs">
+<span class="material-symbols-outlined text-primary/60" data-icon="gavel">gavel</span>
+<div class="selection-badge"></div>
+</div>
+<span class="font-headline-md text-headline-md text-[#F4F6FF]">Political Science</span>
+</button>
+<button class="subject-card flex flex-col items-start p-md rounded-xl text-left hover:border-primary transition-colors" onclick="toggleSubject(this, 'History')">
+<div class="flex justify-between items-start w-full mb-xs">
+<span class="material-symbols-outlined text-primary/60" data-icon="history_edu">history_edu</span>
+<div class="selection-badge"></div>
+</div>
+<span class="font-headline-md text-headline-md text-[#F4F6FF]">History</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-between items-center bg-[#141F42] px-margin-mobile py-lg z-50 border-t border-outline-custom">
+<button class="flex items-center justify-center border border-outline text-[#F4F6FF] rounded-full px-lg py-sm font-label-caps text-label-caps hover:border-secondary transition-all active:translate-y-0.5">
+<span class="material-symbols-outlined mr-xs" data-icon="chevron_left">chevron_left</span>
+            Back
+        </button>
+<button class="flex items-center justify-center bg-primary-container/20 text-[#0A1229]/50 rounded-full px-lg py-sm font-bold font-label-caps text-label-caps opacity-50 cursor-not-allowed transition-all active:translate-y-0.5" disabled="" id="continue-btn">
+            Continue
+            <span class="material-symbols-outlined ml-xs" data-icon="chevron_right">chevron_right</span>
+</button>
+</nav>
+<script>
+        let selections = [];
+
+        function toggleSubject(element, subjectName) {
+            const index = selections.indexOf(subjectName);
+            
+            if (index > -1) {
+                // Remove selection
+                selections.splice(index, 1);
+                element.classList.remove('selected');
+            } else {
+                // Add selection if under limit
+                if (selections.length < 3) {
+                    selections.push(subjectName);
+                    element.classList.add('selected');
+                }
+            }
+
+            updateUI();
+        }
+
+        function updateUI() {
+            // Update labels
+            document.getElementById('rank-1').textContent = selections[0] || '___';
+            document.getElementById('rank-2').textContent = selections[1] || '___';
+            document.getElementById('rank-3').textContent = selections[2] || '___';
+
+            // Update badge numbers in cards
+            document.querySelectorAll('.subject-card').forEach(card => {
+                const subject = card.querySelector('.text-headline-md').textContent;
+                const selIndex = selections.indexOf(subject);
+                const badge = card.querySelector('.selection-badge');
+                if (selIndex > -1) {
+                    badge.textContent = selIndex + 1;
+                    card.classList.add('selected');
+                } else {
+                    card.classList.remove('selected');
+                }
+            });
+
+            // Update Continue Button State
+            const btn = document.getElementById('continue-btn');
+            if (selections.length === 3) {
+                btn.disabled = false;
+                btn.classList.remove('bg-primary-container/20', 'text-[#0A1229]/50', 'opacity-50', 'cursor-not-allowed');
+                btn.classList.add('bg-primary-container', 'text-[#0A1229]', 'opacity-100', 'cursor-pointer');
+            } else {
+                btn.disabled = true;
+                btn.classList.add('bg-primary-container/20', 'text-[#0A1229]/50', 'opacity-50', 'cursor-not-allowed');
+                btn.classList.remove('bg-primary-container', 'text-[#0A1229]', 'opacity-100', 'cursor-pointer');
+            }
+        }
+    </script>
+</body></html>

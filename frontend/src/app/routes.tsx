@@ -2,12 +2,14 @@ import { createBrowserRouter } from 'react-router';
 import { Landing } from './pages/landing';
 import { Login } from './pages/login';
 import { Signup } from './pages/signup';
-import { Onboarding } from './pages/onboarding';
+import { OnboardingNew } from './pages/onboarding-new';
 import { RecommendationsDashboard } from './pages/recommendations-dashboard';
 import { JobRoleDetail } from './pages/job-role-detail-new';
 import { CareerReport } from './pages/career-report';
 import { Profile } from './pages/profile';
 import { Settings } from './pages/settings';
+import { Payment } from './pages/payment';
+import { AssessmentPreview } from './pages/assessment-preview';
 import { NotFound } from './pages/not-found';
 import { PageTransition } from './components/page-transition';
 import { ScrollRestoration } from './components/scroll-restoration';
@@ -48,12 +50,12 @@ export const router = createBrowserRouter(
       ),
     },
     {
-      path: '/onboarding',
+      path: '/onboarding-new',
       element: (
         <>
           <ScrollRestoration />
           <PageTransition>
-            <Onboarding />
+            <OnboardingNew />
           </PageTransition>
         </>
       ),
@@ -81,7 +83,7 @@ export const router = createBrowserRouter(
       ),
     },
     {
-      path: '/career-report/:roleId',
+      path: '/career-report',
       element: (
         <>
           <ScrollRestoration />
@@ -103,12 +105,34 @@ export const router = createBrowserRouter(
       ),
     },
     {
+      path: '/payment',
+      element: (
+        <>
+          <ScrollRestoration />
+          <PageTransition>
+            <Payment />
+          </PageTransition>
+        </>
+      ),
+    },
+    {
       path: '/settings',
       element: (
         <>
           <ScrollRestoration />
           <PageTransition>
             <Settings />
+          </PageTransition>
+        </>
+      ),
+    },
+    {
+      path: '/assessment-preview',
+      element: (
+        <>
+          <ScrollRestoration />
+          <PageTransition>
+            <AssessmentPreview />
           </PageTransition>
         </>
       ),

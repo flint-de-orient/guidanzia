@@ -1,0 +1,1305 @@
+The journey
+
+Landing → Signup → Assessment (40 screens) → Top-3 Recommendations → Payment wall → Career Deep-Dive → PDF download, with the Mindset Report reachable from the deep-dive sidebar, and Profile/Settings hanging off the navbar avatar. 
+
+1. Landing Page (/)
+
+Design a modern SaaS landing page for an AI-powered career guidance platform targeting students and young professionals. Use a clean white background with blue and purple gradients, rounded cards, subtle shadows, and premium typography.
+
+Layout:
+
+
+
+
+
+Sticky navbar with logo, navigation links (Features, How it Works, Pricing, About), Login button, and a primary CTA that changes based on authentication status.
+
+
+
+Full-width hero section with large headline, supporting text, illustration of AI career analysis, and primary CTA ("Start Assessment").
+
+
+
+Three feature cards highlighting AI Assessment, Aptitude Analysis, and Personalized Career Reports.
+
+
+
+Three-step "How It Works" section with numbered cards: Register → Complete Assessment → Receive Career Recommendations.
+
+
+
+Six-card feature grid showing platform capabilities.
+
+
+
+Three customer testimonials with profile photos, ratings, and quotes.
+
+
+
+Large CTA banner encouraging users to begin assessment.
+
+
+
+Four-column footer containing Company, Resources, Legal, and Social links.
+
+The page is completely static with no backend functionality.
+
+
+
+2. Login (/login)
+
+Create a split-screen login page.
+
+Left side:
+
+
+
+
+
+Brand illustration
+
+
+
+Large marketing headline
+
+
+
+Short supporting description
+
+
+
+Gradient background
+
+Right side:
+
+
+
+
+
+Login card
+
+
+
+Email field
+
+
+
+Password field
+
+
+
+Sign In button
+
+
+
+"Forgot Password?" text link (non-functional)
+
+
+
+Divider
+
+
+
+Google Sign-In button (UI only)
+
+
+
+Link to Sign Up
+
+Use rounded inputs, soft shadows, and premium SaaS styling.
+
+
+
+3. Signup (/signup)
+
+Design a signup page matching the login page.
+
+Include:
+
+
+
+
+
+Full Name
+
+
+
+Email
+
+
+
+Password
+
+
+
+Create Account button
+
+
+
+Google signup button (visual only)
+
+
+
+Terms & Conditions link (non-functional)
+
+
+
+Privacy Policy link (non-functional)
+
+
+
+Login link
+
+Keep identical visual style to Login.
+
+
+
+4. Assessment / Onboarding (/onboarding-new)
+
+Design a multi-step onboarding experience for an AI career assessment platform.
+
+Total screens:
+
+
+
+
+
+Registration form
+
+
+
+20 assessment questions divided into six modules
+
+
+
+Progress indicator
+
+
+
+AI processing animation
+
+
+
+Six AI feedback summary cards
+
+
+
+Four interactive aptitude games
+
+
+
+Fifth game containing three behavioural subtasks
+
+Include:
+
+
+
+
+
+Top navbar
+
+
+
+Progress rail
+
+
+
+Previous / Next controls
+
+
+
+Large centered question cards
+
+
+
+Minimal distractions
+
+
+
+Friendly illustrations
+
+The internal stages are numbered 0–7 although the visible progress indicator displays seven stages.
+
+
+
+5. Recommendations Dashboard (/recommendations)
+
+Design a personalized recommendations dashboard after assessment completion.
+
+Include:
+
+
+
+
+
+Hero header
+
+
+
+AI analysis completed message
+
+
+
+Animated progress loader
+
+
+
+Three large career recommendation cards
+
+
+
+Each card contains:
+
+
+
+
+
+Career emoji
+
+
+
+Match percentage
+
+
+
+Career title
+
+
+
+Short description
+
+
+
+"Know More" CTA leading to payment
+
+
+
+Retake Assessment panel
+
+
+
+Three informational cards explaining recommendation methodology
+
+Modern dashboard with cards and gradients.
+
+
+
+6. Payment (/payment)
+
+Design a premium checkout page.
+
+Two-column layout.
+
+Left:
+
+
+
+
+
+Secure payment form
+
+
+
+Card number
+
+
+
+Name
+
+
+
+Expiry
+
+
+
+CVV
+
+
+
+Pay button
+
+Right:
+
+
+
+
+
+Order summary
+
+
+
+Career Report ₹499
+
+
+
+GST 18%
+
+
+
+Final Total ₹589
+
+
+
+Eight-item checklist describing included features
+
+Submission simply navigates forward without processing payment.
+
+
+
+7. Career Deep Dive (/role/:roleId)
+
+Design a detailed career exploration page.
+
+Desktop:
+
+
+
+
+
+Left sidebar navigation
+
+Mobile:
+
+
+
+
+
+Slide-out drawer navigation
+
+Sticky header:
+
+
+
+
+
+Career title
+
+
+
+Match percentage
+
+
+
+Average salary
+
+
+
+Growth indicator
+
+
+
+Download PDF button
+
+Main content sections:
+
+
+
+
+
+Career Overview
+
+
+
+Career Pathway
+
+
+
+Top Institutes
+
+
+
+Course Fees
+
+
+
+Scholarships
+
+
+
+Job Market
+
+
+
+Industry Experts
+
+Display content in elegant cards with timelines, charts, and statistics.
+
+
+
+8. Career Report (/career-report)
+
+Design a comprehensive AI-generated career mindset report.
+
+Long scrolling page containing ten stacked report sections:
+
+
+
+
+
+Motivation Analysis
+
+
+
+Cognitive Style
+
+
+
+Academic Profile
+
+
+
+Behaviour Analysis
+
+
+
+Constraints
+
+
+
+Persistence Score
+
+
+
+Aptitude Tiles
+
+
+
+Game 5 Behavioural Breakdown
+
+
+
+Counselor Flags
+
+
+
+Calibration Summary
+
+
+
+Final Career Match
+
+Each section should use premium cards, charts, progress bars, radar charts, icons, and AI-generated insights.
+
+
+
+9. Profile Hub (/profile)
+
+Design a modern user profile dashboard.
+
+Hero section:
+
+
+
+
+
+Gradient background
+
+
+
+Avatar
+
+
+
+User name
+
+
+
+Premium plan badge
+
+
+
+Settings button
+
+
+
+Logout button
+
+Below:
+
+
+
+
+
+Recent Assessment card
+
+
+
+Quick Actions grid
+
+
+
+Upgrade to Pro promotional card
+
+Dashboard should feel similar to Notion AI or Linear.
+
+
+
+10. Settings (/settings)
+
+Design an account settings page.
+
+Sections:
+
+
+
+
+
+Profile image URL input
+
+
+
+Display name input
+
+
+
+Password change form
+
+
+
+Immutable email information notice
+
+
+
+Save Changes button
+
+Minimal clean settings interface with grouped cards.
+
+
+
+11. 404 Page
+
+Design a friendly 404 error page.
+
+Include:
+
+
+
+
+
+Large logo
+
+
+
+Big "404" illustration
+
+
+
+Message explaining the page wasn't found
+
+
+
+Primary button to Home
+
+
+
+Secondary button to Go Back
+
+
+
+Helper row containing four useful navigation links
+
+Use playful illustrations while maintaining premium SaaS branding.
+
+
+
+enhance the existing pages based on the given cohesive design system for an AI-powered career guidance platform for students and young professionals using the GNZ brand identity.The interface should feel trustworthy, premium, academic, and intelligent while remaining welcoming and easy to navigate. Support both Light Mode and Dark Mode with seamless theme switching while preserving accessibility and brand consistency. The design should combine modern SaaS aesthetics with subtle educational elements, emphasizing clarity, confidence, and personalized guidance. 
+
+
+
+Use a modern SaaS aesthetic with rounded corners (16–24px), subtle glassmorphism, soft shadows, premium typography (Inter or Manrope), colorful illustrations, responsive layouts, and accessible spacing. Navbar appears on Landing, Assessment, Recommendations, Payment, Career Deep Dive, Profile, and Settings pages, but is intentionally hidden on Login, Signup, Career Report, and 404 pages. Maintain consistent cards, buttons, forms, icons, and animations across all screens.
+
+
+
+Build the entire design system with complete support for Light Mode and Dark Mode, ensuring every component automatically adapts while maintaining accessibility, readability, and brand consistency.
+
+Brand Colors
+
+Primary
+
+
+
+
+
+Deep Navy (#060433)
+
+
+
+Academic Gold (#F9C400)
+
+Light Theme
+
+
+
+
+
+Background: #F8FAFC
+
+
+
+Surface: #FFFFFF
+
+
+
+Secondary Surface: #F1F5F9
+
+
+
+Primary Text: #060433
+
+
+
+Secondary Text: #475569
+
+
+
+Border: #E2E8F0
+
+Dark Theme
+
+
+
+
+
+Background: #05031E
+
+
+
+Surface: #0B0A2A
+
+
+
+Elevated Surface: #16143A
+
+
+
+Primary Text: #FFFFFF
+
+
+
+Secondary Text: #CBD5E1
+
+
+
+Border: #2A2F55
+
+
+
+Accent: #F9C400
+
+Typography
+
+Use Inter, Manrope, or Plus Jakarta Sans.
+
+Create typography tokens for:
+
+
+
+
+
+Display Hero
+
+
+
+H1
+
+
+
+H2
+
+
+
+H3
+
+
+
+H4
+
+
+
+Body Large
+
+
+
+Body
+
+
+
+Caption
+
+
+
+Labels
+
+
+
+Buttons
+
+Typography should feel modern, spacious, and easy to read.
+
+Design Principles
+
+
+
+
+
+Minimal interfaces
+
+
+
+Large white space
+
+
+
+Rounded corners (16–24px)
+
+
+
+Soft shadows
+
+
+
+Elegant spacing
+
+
+
+Premium SaaS styling
+
+
+
+Responsive layouts
+
+
+
+Consistent visual hierarchy
+
+Components
+
+Generate reusable components for:
+
+Navigation
+
+
+
+
+
+Desktop Navbar
+
+
+
+Mobile Navigation Drawer
+
+
+
+Footer
+
+
+
+Breadcrumbs
+
+Buttons
+
+
+
+
+
+Primary
+
+
+
+Secondary
+
+
+
+Outline
+
+
+
+Ghost
+
+
+
+Icon Button
+
+
+
+Loading Button
+
+
+
+Disabled States
+
+Forms
+
+
+
+
+
+Text Input
+
+
+
+Password Input
+
+
+
+Email Input
+
+
+
+Text Area
+
+
+
+Dropdown
+
+
+
+Checkbox
+
+
+
+Radio Button
+
+
+
+Toggle Switch
+
+
+
+Search Field
+
+
+
+File Upload
+
+
+
+OTP Input
+
+Cards
+
+
+
+
+
+Feature Card
+
+
+
+Career Card
+
+
+
+Dashboard Card
+
+
+
+Recommendation Card
+
+
+
+Testimonial Card
+
+
+
+Pricing Card
+
+
+
+Statistics Card
+
+
+
+Profile Card
+
+
+
+AI Insight Card
+
+Feedback
+
+
+
+
+
+Alert
+
+
+
+Toast
+
+
+
+Snackbar
+
+
+
+Success Message
+
+
+
+Error Message
+
+
+
+Empty State
+
+
+
+Loading State
+
+
+
+Skeleton Loader
+
+Data Display
+
+
+
+
+
+Progress Bar
+
+
+
+Circular Progress
+
+
+
+Progress Stepper
+
+
+
+Timeline
+
+
+
+Accordion
+
+
+
+Tabs
+
+
+
+Charts
+
+
+
+Skill Meter
+
+
+
+Score Cards
+
+
+
+KPI Widgets
+
+Modals
+
+
+
+
+
+Confirmation Dialog
+
+
+
+Success Modal
+
+
+
+Payment Modal
+
+
+
+AI Processing Modal
+
+Miscellaneous
+
+
+
+
+
+Avatar
+
+
+
+Badge
+
+
+
+Chips
+
+
+
+Tooltip
+
+
+
+Pagination
+
+
+
+Calendar
+
+
+
+Notification
+
+Dashboard Style
+
+Create premium dashboard layouts inspired by modern SaaS products.
+
+Include:
+
+
+
+
+
+Analytics cards
+
+
+
+AI recommendation cards
+
+
+
+Progress widgets
+
+
+
+Career match cards
+
+
+
+Charts
+
+
+
+Timelines
+
+
+
+Recent activity
+
+
+
+Achievement badges
+
+
+
+Quick actions
+
+Career Platform Components
+
+Include dedicated components for:
+
+
+
+
+
+AI Career Match Card
+
+
+
+Career Overview
+
+
+
+Salary Card
+
+
+
+Growth Indicator
+
+
+
+Skill Analysis
+
+
+
+Aptitude Score Card
+
+
+
+Personality Report
+
+
+
+University Card
+
+
+
+Scholarship Card
+
+
+
+Job Market Insights
+
+
+
+Career Timeline
+
+
+
+Download Report Card
+
+Illustrations
+
+Use modern flat or soft 3D illustrations featuring:
+
+
+
+
+
+Students
+
+
+
+Graduation caps
+
+
+
+Career paths
+
+
+
+Artificial Intelligence
+
+
+
+Universities
+
+
+
+Learning
+
+
+
+Professional workplaces
+
+
+
+Analytics dashboards
+
+Keep illustrations aligned with the navy and gold brand palette.
+
+Iconography
+
+Use rounded outline icons with a consistent stroke weight.
+
+Icons should represent:
+
+
+
+
+
+Education
+
+
+
+AI
+
+
+
+Careers
+
+
+
+Reports
+
+
+
+Universities
+
+
+
+Assessment
+
+
+
+Analytics
+
+
+
+Growth
+
+
+
+Profile
+
+
+
+Payments
+
+Motion
+
+Use subtle animations:
+
+
+
+
+
+Fade-in
+
+
+
+Slide-up
+
+
+
+Card hover lift
+
+
+
+Progress animations
+
+
+
+Skeleton loading
+
+
+
+Smooth page transitions
+
+
+
+AI analysis loading effects
+
+Duration: 200–300ms with ease-in-out easing.
+
+Accessibility
+
+Ensure:
+
+
+
+
+
+WCAG AA color contrast
+
+
+
+Keyboard navigation
+
+
+
+Visible focus states
+
+
+
+Responsive design
+
+
+
+Minimum 44px touch targets
+
+
+
+Dark mode readability
+
+
+
+The final design should combine the clarity of Linear, the polish of Stripe, the simplicity of Notion, the educational feel of Coursera, and the dashboard elegance of Vercel, while remaining unique to the GNZ brand. Every component should be scalable, reusable, responsive, and consistent across both Light and Dark themes, creating a cohesive experience that reflects trust, intelligence, and career growth.

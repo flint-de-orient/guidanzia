@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intake Form | Guidanzia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Be+Vietnam+Pro:wght@400;500&family=Hanken+Grotesk:wght@700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Hanken+Grotesk:wght@100..900&family=Sora:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#0a1229",
+                    "inverse-primary": "#785a00",
+                    "secondary-container": "#89b100",
+                    "secondary": "#abd533",
+                    "tertiary-fixed-dim": "#45dada",
+                    "surface-bright": "#313851",
+                    "on-primary-fixed": "#251a00",
+                    "background": "#0a1229",
+                    "tertiary": "#6efcfc",
+                    "primary-fixed": "#ffdf9d",
+                    "on-tertiary-fixed-variant": "#004f50",
+                    "primary-container": "#f5c451",
+                    "primary": "#ffe4af",
+                    "on-tertiary-fixed": "#002020",
+                    "on-tertiary": "#003737",
+                    "primary-fixed-dim": "#f0c04d",
+                    "outline": "#9b8f7c",
+                    "on-error": "#690005",
+                    "on-background": "#dbe1ff",
+                    "surface-container": "#171f36",
+                    "on-secondary-container": "#2f3f00",
+                    "secondary-fixed-dim": "#abd533",
+                    "on-primary": "#3f2e00",
+                    "surface-tint": "#f0c04d",
+                    "on-primary-container": "#6d5100",
+                    "error": "#ffb4ab",
+                    "surface-container-lowest": "#050d24",
+                    "surface-container-highest": "#2c344c",
+                    "tertiary-fixed": "#69f7f7",
+                    "outline-variant": "#4e4635",
+                    "surface-container-low": "#131b32",
+                    "on-tertiary-container": "#006060",
+                    "inverse-on-surface": "#282f48",
+                    "on-surface": "#dbe1ff",
+                    "inverse-surface": "#dbe1ff",
+                    "error-container": "#93000a",
+                    "on-secondary-fixed": "#151f00",
+                    "surface": "#0a1229",
+                    "on-secondary-fixed-variant": "#3a4d00",
+                    "surface-variant": "#2c344c",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#222941",
+                    "on-surface-variant": "#d2c5b0",
+                    "on-primary-fixed-variant": "#5b4300",
+                    "tertiary-container": "#4bdfdf",
+                    "secondary-fixed": "#c6f24e",
+                    "on-secondary": "#273500"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-md": "24px",
+                    "margin-mobile": "20px",
+                    "stack-lg": "48px",
+                    "stack-sm": "8px",
+                    "margin-desktop": "40px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Sora"],
+                    "headline-sm": ["Sora"],
+                    "body-md": ["Be Vietnam Pro"],
+                    "body-lg": ["Be Vietnam Pro"],
+                    "headline-md": ["Sora"],
+                    "display-xl": ["Sora"],
+                    "headline-md-mobile": ["Sora"],
+                    "display-lg-mobile": ["Sora"],
+                    "label-bold": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.7", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "headline-md-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                    "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0a1229;
+            color: #dbe1ff;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Custom Floating Label Styles */
+        .field-container {
+            position: relative;
+            height: 56px;
+            background-color: #131b32;
+            border: 2px solid #243056;
+            border-radius: 12px;
+            transition: border-color 0.2s ease;
+        }
+
+        .field-container:focus-within {
+            border-color: #f5c451;
+        }
+
+        .floating-label {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.2s ease;
+            pointer-events: none;
+            color: #9b8f7c;
+        }
+
+        input:focus + .floating-label,
+        input:not(:placeholder-shown) + .floating-label,
+        .field-active .floating-label {
+            top: 12px;
+            font-size: 10px;
+            color: #f5c451;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            height: 100%;
+            padding: 24px 16px 8px 16px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #dbe1ff;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+
+        input::placeholder {
+            color: transparent;
+        }
+
+        /* Bottom Sheet Animation */
+        .bottom-sheet {
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bottom-sheet.open {
+            transform: translateY(0);
+        }
+
+        /* Gold Checkbox Custom Style */
+        .custom-checkbox {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid #243056;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            background: transparent;
+        }
+        .custom-checkbox:checked {
+            background-color: #f5c451;
+            border-color: #f5c451;
+        }
+        .custom-checkbox:checked::after {
+            content: 'check';
+            font-family: 'Material Symbols Outlined';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #0a1229;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Primary Button Glow */
+        .btn-glow:not(:disabled) {
+            box-shadow: 0 0 20px rgba(245, 196, 81, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen font-body-md">
+<!-- Header Section -->
+<header class="pt-12 px-margin-mobile pb-stack-md">
+<h1 class="font-display-lg-mobile text-display-lg-mobile text-on-background">
+            First, the basics
+        </h1>
+<p class="text-on-surface-variant font-body-md mt-1">
+            Takes about a minute.
+        </p>
+</header>
+<!-- Form Section -->
+<main class="flex-grow px-margin-mobile">
+<form class="space-y-[20px]" id="intakeForm">
+<!-- Full Name -->
+<div class="field-container">
+<input id="fullName" name="fullName" placeholder=" " required="" type="text"/>
+<label class="floating-label font-label-bold" for="fullName">Full Name</label>
+</div>
+<!-- Class Level (Dropdown Trigger) -->
+<div class="field-container cursor-pointer" onclick="openSheet('classSheet')">
+<div class="pt-[24px] px-[16px] text-on-background font-body-md" id="classDisplay"></div>
+<label class="floating-label font-label-bold" id="classLabel">Class Level</label>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant">keyboard_arrow_down</span>
+</div>
+<!-- Board (Dropdown Trigger) -->
+<div class="field-container cursor-pointer" onclick="openSheet('boardSheet')">
+<div class="pt-[24px] px-[16px] text-on-background font-body-md" id="boardDisplay"></div>
+<label class="floating-label font-label-bold" id="boardLabel">Board</label>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant">keyboard_arrow_down</span>
+</div>
+<!-- District -->
+<div class="field-container">
+<input id="district" name="district" placeholder=" " required="" type="text"/>
+<label class="floating-label font-label-bold" for="district">District</label>
+</div>
+<!-- Parent's Mobile -->
+<div class="field-container flex items-center">
+<div class="ml-4 px-2 py-0.5 bg-surface-container-highest rounded text-primary-container font-label-bold text-[12px] mt-4">
+                    +91
+                </div>
+<input class="!pl-2" id="mobile" maxlength="10" name="mobile" pattern="[0-9]{10}" placeholder=" " required="" type="tel"/>
+<label class="floating-label font-label-bold !left-[58px]" for="mobile">Parent's Mobile</label>
+</div>
+<!-- Consent Row -->
+<div class="flex gap-4 pt-2">
+<input class="custom-checkbox shrink-0" id="consent" type="checkbox"/>
+<label class="text-[13px] leading-tight text-on-surface-variant font-body-md select-none" for="consent">
+                    I agree to the <span class="underline text-on-surface">Terms of Service</span> and authorize Guidanzia to contact me regarding my career path.
+                </label>
+</div>
+</form>
+</main>
+<!-- Bottom Action Area -->
+<footer class="p-margin-mobile pt-stack-md pb-10">
+<button class="w-full h-[56px] rounded-full bg-primary-container text-on-primary-container font-label-bold text-[18px] flex items-center justify-center gap-2 opacity-50 btn-glow transition-all active:scale-95" disabled="" id="submitBtn">
+            Let's begin
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</footer>
+<!-- Bottom Sheet: Class Level -->
+<div class="fixed inset-0 z-[100] hidden" id="classSheet">
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeSheet('classSheet')"></div>
+<div class="bottom-sheet absolute bottom-0 left-0 w-full bg-surface-container rounded-t-[24px] p-margin-mobile border-t-2 border-outline-variant">
+<div class="w-12 h-1.5 bg-outline-variant rounded-full mx-auto mb-6"></div>
+<h3 class="font-headline-sm text-on-background mb-4">Select Class Level</h3>
+<div class="space-y-1">
+<div class="py-4 border-b border-outline-variant text-on-background hover:text-primary transition-colors cursor-pointer" onclick="selectOption('class', '9th Standard')">9th Standard</div>
+<div class="py-4 border-b border-outline-variant text-on-background hover:text-primary transition-colors cursor-pointer" onclick="selectOption('class', '10th Standard')">10th Standard</div>
+<div class="py-4 border-b border-outline-variant text-on-background hover:text-primary transition-colors cursor-pointer" onclick="selectOption('class', '11th Standard')">11th Standard</div>
+<div class="py-4 text-on-background hover:text-primary transition-colors cursor-pointer" onclick="selectOption('class', '12th Standard')">12th Standard</div>
+</div>
+</div>
+</div>
+<!-- Bottom Sheet: Board -->
+<div class="fixed inset-0 z-[100] hidden" id="boardSheet">
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeSheet('boardSheet')"></div>
+<div class="bottom-sheet absolute bottom-0 left-0 w-full bg-surface-container rounded-t-[24px] p-margin-mobile border-t-2 border-outline-variant">
+<div class="w-12 h-1.5 bg-outline-variant rounded-full mx-auto mb-6"></div>
+<h3 class="font-headline-sm text-on-background mb-4">Select Board</h3>
+<div class="space-y-1">
+<div class="py-4 border-b border-outline-variant text-on-background hover:text-primary transition-colors cursor-pointer" onclick="selectOption('board', 'CBSE')">CBSE</div>
+<div class="py-4 border-b border-outline-variant text-on-background hover:text-primary transition-colors cursor-pointer" onclick="selectOption('board', 'ICSE')">ICSE</div>
+<div class="py-4 border-b border-outline-variant text-on-background hover:text-primary transition-colors cursor-pointer" onclick="selectOption('board', 'State Board')">State Board</div>
+<div class="py-4 text-on-background hover:text-primary transition-colors cursor-pointer" onclick="selectOption('board', 'IB / IGCSE')">IB / IGCSE</div>
+</div>
+</div>
+</div>
+<script>
+        const form = document.getElementById('intakeForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const inputs = form.querySelectorAll('input');
+        const checkbox = document.getElementById('consent');
+
+        const state = {
+            fullName: '',
+            classLevel: '',
+            board: '',
+            district: '',
+            mobile: '',
+            consent: false
+        };
+
+        function openSheet(id) {
+            const sheet = document.getElementById(id);
+            const content = sheet.querySelector('.bottom-sheet');
+            sheet.classList.remove('hidden');
+            setTimeout(() => content.classList.add('open'), 10);
+        }
+
+        function closeSheet(id) {
+            const sheet = document.getElementById(id);
+            const content = sheet.querySelector('.bottom-sheet');
+            content.classList.remove('open');
+            setTimeout(() => sheet.classList.add('hidden'), 300);
+        }
+
+        function selectOption(type, value) {
+            state[type === 'class' ? 'classLevel' : 'board'] = value;
+            const display = document.getElementById(type + 'Display');
+            const container = display.parentElement;
+            display.textContent = value;
+            container.classList.add('field-active');
+            closeSheet(type + 'Sheet');
+            checkForm();
+        }
+
+        function checkForm() {
+            state.fullName = document.getElementById('fullName').value;
+            state.district = document.getElementById('district').value;
+            state.mobile = document.getElementById('mobile').value;
+            state.consent = checkbox.checked;
+
+            const isValid = 
+                state.fullName.length > 2 &&
+                state.classLevel !== '' &&
+                state.board !== '' &&
+                state.district.length > 2 &&
+                state.mobile.length === 10 &&
+                state.consent === true;
+
+            if (isValid) {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50');
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-50');
+            }
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', checkForm);
+        });
+
+        checkbox.addEventListener('change', checkForm);
+
+        // Limit mobile input to numbers only
+        document.getElementById('mobile').addEventListener('keypress', (e) => {
+            if (!/[0-9]/.test(e.key)) e.preventDefault();
+        });
+
+        submitBtn.addEventListener('click', () => {
+            if (!submitBtn.disabled) {
+                submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Processing...';
+                setTimeout(() => {
+                    alert('Registration Started! Welcome to Guidanzia.');
+                    location.reload();
+                }, 1500);
+            }
+        });
+    </script>
+</body></html>
