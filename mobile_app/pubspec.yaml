@@ -34,11 +34,11 @@ dependencies:
   file_saver: ^0.2.14
   url_launcher: ^6.3.1
   intl: any
+  flutter_native_splash: ^2.4.8
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-
 flutter:
   uses-material-design: true
 
@@ -57,3 +57,22 @@ flutter:
     - family: NotoBengali
       fonts:
         - asset: assets/fonts/NotoSansBengali-Regular.ttf
+
+# Native launch / splash screen (branded, theme-aware). Generated with:
+#   dart run flutter_native_splash:create
+# Static logo on the brand field (white in light, navy in dark); the OS renders
+# it. The in-app "arrival" animation (LandingBody) provides the motion. No
+# runtime Dart from this package — config/CLI only.
+flutter_native_splash:
+  color: "#FFFFFF"
+  color_dark: "#0B1020"
+  image: assets/images/splash_logo_light.png
+  image_dark: assets/images/splash_logo_dark.png
+  android: true
+  ios: false
+  web: false
+  android_12:
+    color: "#FFFFFF"
+    color_dark: "#0B1020"
+    image: assets/images/splash_android12_light.png
+    image_dark: assets/images/splash_android12_dark.png

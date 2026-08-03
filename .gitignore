@@ -13,8 +13,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
 parts/
 sdist/
 var/
@@ -27,6 +25,13 @@ wheels/
 .venv
 venv/
 ENV/
+
+# Flutter / Dart (build output is covered by build/ above; keep lib/ — it's the
+# Dart SOURCE, which must NOT be ignored)
+.dart_tool/
+**/.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
 
 # Node.js
 node_modules/
