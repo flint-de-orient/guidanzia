@@ -61,11 +61,13 @@ class _CareerReportScreenState extends ConsumerState<CareerReportScreen> {
       body: GradientBackground(
         child: SafeArea(
           child: _loading
-              ? const LoadingState(message: 'Building your mindset report…')
+              ? const RotatingLoader(phrases: LoaderPhrases.report)
               : _error != null
                   ? ErrorStateView(
-                      message:
-                          'Could not load your report.\nComplete the assessment first.\n\n$_error',
+                      // Deliberate empty state — a new user, a mid-first-attempt
+                      // user, and a mid-retake user all reach here (no answers on
+                      // the server). Keep it a friendly prompt, not a raw error.
+                      message: 'Complete your assessment to see your report.',
                       onRetry: _load,
                     )
                   : _content(),
@@ -101,6 +103,11 @@ class _CareerReportScreenState extends ConsumerState<CareerReportScreen> {
       children: [
         _Header(name: (onboarding['name'] ?? 'Your').toString()),
         const SizedBox(height: 18),
+
+        if (_report['dataComplete'] == false) ...[
+          _incompleteNote(),
+          const SizedBox(height: 16),
+        ],
 
         if (strengths.isNotEmpty) ...[
           _capabilitySummary(strengths),
@@ -152,12 +159,14 @@ class _CareerReportScreenState extends ConsumerState<CareerReportScreen> {
           _row('Top career values',
               labelsForField('careerValues', constraints['careerValues'] as List?).join('  →  ').ifEmpty('—')),
         ], insight: moduleInsights['module5']?.toString()),
-        _section('6. Persistence Profile', Icons.shield_outlined, [
-          _row('Effort rating', _orText(persistence['effortRating'], 'Not completed yet')),
-          _row('Approach style', _orText(persistence['approachStyle'], 'Not completed yet')),
-          _row('Highest tier reached', _orText(persistence['highestTier'], 'N/A')),
-          _flags(persistence['counselorFlags'] as List?),
-        ]),
+        // Final Calibration is questionnaire module 6, so it belongs right after
+        // the other five modules (sections 1-5). Persistence and the game/aptitude
+        // analyses follow. (Serials renumbered to read 1→9 in this order.)
+        _section('6. Final Calibration', Icons.bolt_outlined, [
+          _row('Planning style', labelForField('planningStyle', calibration['planningStyle']?.toString())),
+          _row('Stress response', labelForField('stressResponse', calibration['stressResponse']?.toString())),
+          _row('Surprise reaction', labelForField('surpriseReaction', calibration['surpriseReaction']?.toString())),
+        ], insight: moduleInsights['module6']?.toString()),
         _section('7. Aptitude Pattern', Icons.insights_outlined, [
           _aptBar('Quantitative (Number)', aptitude['numberSense'], const Color(0xFFE0A92E)),
           _aptBar('Verbal (Word)', aptitude['wordSense'], const Color(0xFF7FA300)),
@@ -169,11 +178,12 @@ class _CareerReportScreenState extends ConsumerState<CareerReportScreen> {
           _row('Task 2', _orText(game5['task2'], 'Not completed yet')),
           _row('Task 3', _orText(game5['task3'], 'Not completed yet')),
         ]),
-        _section('9. Final Calibration', Icons.bolt_outlined, [
-          _row('Planning style', labelForField('planningStyle', calibration['planningStyle']?.toString())),
-          _row('Stress response', labelForField('stressResponse', calibration['stressResponse']?.toString())),
-          _row('Surprise reaction', labelForField('surpriseReaction', calibration['surpriseReaction']?.toString())),
-        ], insight: moduleInsights['module6']?.toString()),
+        _section('9. Persistence Profile', Icons.shield_outlined, [
+          _row('Effort rating', _orText(persistence['effortRating'], 'Not completed yet')),
+          _row('Approach style', _orText(persistence['approachStyle'], 'Not completed yet')),
+          _row('Highest tier reached', _orText(persistence['highestTier'], 'N/A')),
+          _flags(persistence['counselorFlags'] as List?),
+        ]),
       ],
     );
   }
@@ -196,6 +206,35 @@ class _CareerReportScreenState extends ConsumerState<CareerReportScreen> {
   }
 
   String _joinOrDash(List<String> items) => items.isEmpty ? '—' : items.join(', ');
+
+  /// Honest note shown when the student left core questions blank — so the
+  /// report reads as "directional" rather than implying a complete profile.
+  Widget _incompleteNote() {
+    final g = Theme.of(context).guidanzia;
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: g.gold.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: g.gold.withValues(alpha: 0.35)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.info_outline_rounded, size: 18, color: g.gold),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              'Based on the sections you completed — a few questions were left '
+              'unanswered, so treat these results as directional.',
+              style: TextStyle(
+                  color: g.onSurfaceVariant, fontSize: 12.5, height: 1.4),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   /// Client-side capability snapshot — strength labels derived from the
   /// aptitude scores the report already loads (no extra backend call).

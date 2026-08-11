@@ -19,10 +19,14 @@ export function Login() {
     
     const result = await loginUser({ username, password });
     if (result.success) {
-      // Check if user has existing session data
-      const recommendations = sessionStorage.getItem('recommendations');
-      const lastRole = localStorage.getItem('lastRole');
-      
+      // Check if the user has existing session data. Use the keys the rest of
+      // the app actually writes (careerRecommendations / edubot_last_role) so a
+      // returning user lands on Home instead of being sent back to onboarding.
+      const recommendations =
+        sessionStorage.getItem('careerRecommendations') ||
+        localStorage.getItem('careerRecommendations');
+      const lastRole = localStorage.getItem('edubot_last_role');
+
       if (recommendations || lastRole) {
         navigate('/');
       } else {

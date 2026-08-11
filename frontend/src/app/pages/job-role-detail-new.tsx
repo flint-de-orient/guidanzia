@@ -682,6 +682,9 @@ export function JobRoleDetail() {
     setIsGenerating(true);
     setPdfProgress(0);
     setPdfStatus('Initializing...');
+    // Hoisted so the catch can clear it — otherwise a failed PDF fetch leaves
+    // this interval running forever, calling setState on every 200ms tick.
+    let progressInterval: ReturnType<typeof setInterval> | undefined;
     try {
       const targetLanguage = (localStorage.getItem('edubot_language') || 'en') as 'en' | 'hi' | 'bn';
       setPdfProgress(10);
@@ -784,7 +787,7 @@ export function JobRoleDetail() {
       }
       setPdfProgress(70);
       setPdfStatus('Generating PDF...');
-      const progressInterval = setInterval(() => {
+      progressInterval = setInterval(() => {
         setPdfProgress(prev => prev < 85 ? prev + 1 : prev);
       }, 200);
       const response = await fetch(`${API_BASE}/api/generate-pdf`, {
@@ -811,6 +814,7 @@ export function JobRoleDetail() {
       setPdfProgress(0);
       setPdfStatus('');
     } catch (error) {
+      if (progressInterval) clearInterval(progressInterval);
       setIsGenerating(false);
       setPdfProgress(0);
       setPdfStatus('');

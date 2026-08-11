@@ -45,6 +45,7 @@ class _GamesScreenState extends ConsumerState<GamesScreen> {
 
   // Word Sense (game 2) items, pre-fetched from the backend.
   List<AptQuestion?> _wordItems = [null, null, null, null];
+  int _wordLoaded = 0; // how many of the 4 word items have finished (real progress)
 
   String? _saveError;
 
@@ -97,6 +98,7 @@ class _GamesScreenState extends ConsumerState<GamesScreen> {
     setState(() {
       _phase = _Phase.wordLoading;
       _wordItems = [null, null, null, null];
+      _wordLoaded = 0;
     });
     final api = ref.read(apiClientProvider);
     final results = await Future.wait(
@@ -116,6 +118,9 @@ class _GamesScreenState extends ConsumerState<GamesScreen> {
           );
         } catch (_) {
           return null;
+        } finally {
+          // Each item resolves independently → honest "X of 4" progress.
+          if (mounted) setState(() => _wordLoaded++);
         }
       }),
     );
@@ -197,6 +202,11 @@ class _GamesScreenState extends ConsumerState<GamesScreen> {
         questionId: 'W2-missing', isCorrect: false, responseTimeMs: 0, difficulty: 3));
     if (_round >= 3) {
       _scores.add(weightedScore(_responses));
+      // Mirror the normal answer path: write this game's score and checkpoint
+      // progress, so a skipped final item doesn't silently drop the result.
+      _writeScores();
+      ref.read(assessmentStatusProvider.notifier).setGameIndex(_gameType);
+      persistAssessment(ref);
       setState(() => _phase = _Phase.gameDone);
     } else {
       setState(() => _round++);
@@ -302,8 +312,10 @@ class _GamesScreenState extends ConsumerState<GamesScreen> {
         child: SafeArea(
           child: switch (_phase) {
             _Phase.intro => _introView(),
-            _Phase.wordLoading => const LoadingState(
-                message: 'Generating your Word Sense questions with AI…'),
+            _Phase.wordLoading => CountLoader(
+                loaded: _wordLoaded,
+                total: 4,
+                label: 'Preparing your Word Sense questions'),
             _Phase.wordError => ErrorStateView(
                 message: 'Could not generate the Word Sense questions.',
                 onRetry: () => _startGame(2),

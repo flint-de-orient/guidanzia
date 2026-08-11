@@ -33,7 +33,6 @@ class BottomActionBar extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             color: g.surface.withValues(alpha: 0.85),
-            border: Border(top: BorderSide(color: g.outline)),
           ),
           padding: EdgeInsets.fromLTRB(
             20,

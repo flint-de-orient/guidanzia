@@ -441,13 +441,37 @@ class _SlidingTileGameState extends State<SlidingTileGame> {
               ],
             ),
           ),
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: g.lime.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: g.lime.withValues(alpha: 0.4)),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.info_outline_rounded, size: 18, color: g.lime),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "You'll start with a quick PRACTICE round — just to get familiar "
+                    "with the controls. It won't count toward your recommendations.",
+                    style: TextStyle(
+                        color: g.onSurfaceVariant, fontSize: 13, height: 1.4),
+                  ),
+                ),
+              ],
+            ),
+          ),
           const SizedBox(height: 24),
           Row(
             children: [
               Expanded(child: _ghostButton('Skip this game', widget.onSkip)),
               const SizedBox(width: 12),
               Expanded(
-                child: PrimaryButton(label: 'Start Puzzle', onPressed: () => _startTier(0)),
+                child: PrimaryButton(
+                    label: 'Start practice', onPressed: () => _startTier(0)),
               ),
             ],
           ),
@@ -458,6 +482,46 @@ class _SlidingTileGameState extends State<SlidingTileGame> {
 
   Widget _tierCompleteView() {
     final g = Theme.of(context).guidanzia;
+    // The warm-up (tier 0) just finished → this is the boundary into the REAL
+    // assessment. Show a dedicated page making clear THIS round counts.
+    if (_isWarmup) {
+      return SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(24, 40, 24, 28),
+        child: Column(
+          children: [
+            Container(
+              width: 64,
+              height: 64,
+              decoration: BoxDecoration(color: g.gold, shape: BoxShape.circle),
+              child: Icon(Icons.rocket_launch_rounded, color: g.goldInk, size: 32),
+            ),
+            const SizedBox(height: 18),
+            const Text('Practice done — now the real one.',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800)),
+            const SizedBox(height: 10),
+            Text(
+              'This round DOES count toward your recommendations. Same rules — no '
+              'time limit, no pressure. Just do your best.',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: g.onSurfaceVariant, height: 1.45),
+            ),
+            const SizedBox(height: 24),
+            Row(
+              children: [
+                Expanded(child: _ghostButton('Skip this game', widget.onSkip)),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: PrimaryButton(
+                      label: 'Start the real puzzle',
+                      onPressed: () => _startTier(_tierIdx + 1)),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
     return SingleChildScrollView(
       padding: const EdgeInsets.fromLTRB(24, 40, 24, 28),
       child: Column(

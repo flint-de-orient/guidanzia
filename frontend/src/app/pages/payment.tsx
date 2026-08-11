@@ -7,17 +7,6 @@ import { Label } from '../components/ui/label';
 import { CreditCard, Lock, ArrowLeft, Check } from 'lucide-react';
 import { Navbar } from '../components/navbar';
 
-// Session management function
-const clearSession = () => {
-  const keysToRemove = [];
-  for (let i = 0; i < sessionStorage.length; i++) {
-    const key = sessionStorage.key(i);
-    if (key && (key === 'careerRecommendations' || key === 'userProfile' || key.startsWith('jobDetail_'))) {
-      keysToRemove.push(key);
-    }
-  }
-  keysToRemove.forEach((k) => sessionStorage.removeItem(k));
-};
 export function Payment() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();

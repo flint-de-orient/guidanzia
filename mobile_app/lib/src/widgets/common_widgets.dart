@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import '../theme/guidanzia_colors.dart';
 
@@ -268,6 +270,145 @@ class LoadingState extends StatelessWidget {
       ),
     );
   }
+}
+
+/// A loader for indeterminate AI waits, where an honest percentage is
+/// impossible. It cycles through a set of status phrases that DESCRIBE the work
+/// (mixed calm + light tone) and rotate for liveliness — without ever claiming
+/// measured, step-by-step progress.
+class RotatingLoader extends StatefulWidget {
+  const RotatingLoader({super.key, required this.phrases});
+  final List<String> phrases;
+
+  @override
+  State<RotatingLoader> createState() => _RotatingLoaderState();
+}
+
+class _RotatingLoaderState extends State<RotatingLoader> {
+  int _i = 0;
+  Timer? _t;
+
+  @override
+  void initState() {
+    super.initState();
+    _t = Timer.periodic(const Duration(milliseconds: 2200), (_) {
+      if (!mounted) return;
+      setState(() => _i = (_i + 1) % widget.phrases.length);
+    });
+  }
+
+  @override
+  void dispose() {
+    _t?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final g = Theme.of(context).guidanzia;
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircularProgressIndicator(color: g.gold),
+          const SizedBox(height: 18),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 350),
+              child: Text(
+                widget.phrases[_i.clamp(0, widget.phrases.length - 1)],
+                key: ValueKey(_i),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: g.onSurfaceVariant),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// A determinate loader for genuinely countable work (e.g. "3 of 4 loaded") —
+/// an HONEST percentage, used only where we truly know the progress.
+class CountLoader extends StatelessWidget {
+  const CountLoader({super.key, required this.loaded, required this.total, this.label});
+  final int loaded;
+  final int total;
+  final String? label;
+
+  @override
+  Widget build(BuildContext context) {
+    final g = Theme.of(context).guidanzia;
+    final pct = total == 0 ? 0.0 : (loaded / total).clamp(0.0, 1.0);
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: 56,
+            height: 56,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                CircularProgressIndicator(value: pct, color: g.gold, strokeWidth: 5),
+                Text('$loaded/$total',
+                    style: TextStyle(
+                        color: g.onSurface,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800)),
+              ],
+            ),
+          ),
+          if (label != null) ...[
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: Text(label!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: g.onSurfaceVariant)),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+/// Per-loader phrase sets — each tailored to what that operation is actually
+/// doing, in a mixed professional + light tone. They rotate for engagement and
+/// never imply a measured step count.
+class LoaderPhrases {
+  const LoaderPhrases._();
+
+  static const recommendations = [
+    'Reading your answers…',
+    'Weighing your strengths…',
+    'Considering your constraints…',
+    'Matching careers across India…',
+    'Almost there — good things take a sec ✨',
+  ];
+
+  static const report = [
+    'Gathering your responses…',
+    'Mapping your mindset…',
+    'Spotting the patterns…',
+    'Putting your profile together…',
+  ];
+
+  static const section = [
+    'Researching this for you…',
+    'Pulling the details together…',
+    'Double-checking the specifics…',
+    'Almost ready…',
+  ];
+
+  static const moduleFeedback = [
+    'Noticing how you think…',
+    'Connecting the dots…',
+    'Jotting down what stands out…',
+  ];
 }
 
 /// Generic error state with a retry button.

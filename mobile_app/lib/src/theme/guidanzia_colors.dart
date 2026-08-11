@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// The Guidanzia semantic token layer, as a [ThemeExtension] so it resolves
-/// per-theme at runtime (unlike the compile-time `static const` AppColors).
+/// per-theme at runtime (rather than as compile-time `static const` values).
 ///
 /// This is the Dart equivalent of a CSS-variable layer: widgets read roles via
 /// `Theme.of(context).guidanzia`, and the SAME role name yields a light or dark

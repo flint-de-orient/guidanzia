@@ -6,6 +6,8 @@ import { Navbar } from '../components/navbar';
 import { TranslatedText } from '../components/TranslatedText';
 import { useAuth } from '../contexts/AuthContext';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+
 const DOMAIN_ICONS = ['💼', '🎯', '🌐'];
 const JOB_ICONS = ['📊', '🔬', '⚙️', '🤖', '📈', '💡', '🏆', '🚀'];
 
@@ -29,6 +31,12 @@ export function RecommendationsDashboard() {
   const [loadingPct, setLoadingPct] = useState(0);
 
   useEffect(() => {
+    let ticker: ReturnType<typeof setInterval> | undefined;
+    const controller = new AbortController();
+    // Cap the wait so a slow/hung backend can't leave the page spinning forever
+    // (the AI generation path can legitimately take up to ~2 min).
+    const timeoutId = setTimeout(() => controller.abort(), 130000);
+
     const fetchTopCareers = async () => {
       try {
         const username = sessionStorage.getItem('username') || user?.email;
@@ -51,17 +59,17 @@ export function RecommendationsDashboard() {
 
         // Simulate progress while waiting for API
         setLoadingPct(10);
-        const ticker = setInterval(() => {
+        ticker = setInterval(() => {
           setLoadingPct(prev => prev < 85 ? prev + 5 : prev);
         }, 600);
 
-        const response = await fetch('http://localhost:8080/api/get-top-3-careers', {
+        const response = await fetch(`${API_BASE}/api/get-top-3-careers`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username })
+          body: JSON.stringify({ username }),
+          signal: controller.signal,
         });
 
-        clearInterval(ticker);
         setLoadingPct(95);
 
         const result = await response.json();
@@ -74,11 +82,21 @@ export function RecommendationsDashboard() {
       } catch (error) {
         console.error('Failed to fetch career recommendations:', error);
       } finally {
+        // Always clear the ticker — the old code only cleared it on the happy
+        // path, so any fetch error leaked a forever-running interval.
+        if (ticker) clearInterval(ticker);
         setLoading(false);
       }
     };
 
     fetchTopCareers();
+
+    // Cancel in-flight work if the user navigates away mid-load.
+    return () => {
+      if (ticker) clearInterval(ticker);
+      clearTimeout(timeoutId);
+      controller.abort();
+    };
   }, [navigate, user]);
 
   return (

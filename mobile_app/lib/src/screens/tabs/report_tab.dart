@@ -66,7 +66,7 @@ class ReportTab extends ConsumerWidget {
         const SizedBox(height: 24),
         const SectionHeader(title: 'Career reports'),
         async.when(
-          loading: () => const LoadingState(message: 'Loading your matches…'),
+          loading: () => const RotatingLoader(phrases: LoaderPhrases.recommendations),
           error: (e, _) => Text('Complete the assessment to unlock reports.',
               style: TextStyle(color: g.onSurfaceVariant)),
           data: (careers) {

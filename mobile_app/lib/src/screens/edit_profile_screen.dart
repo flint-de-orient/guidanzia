@@ -55,9 +55,11 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
             _error = 'Enter your current password to set a new one.');
         return;
       }
-      if (_newPassword.text.length < 4) {
+      if (_newPassword.text.length < 8 ||
+          !RegExp(r'[a-zA-Z]').hasMatch(_newPassword.text) ||
+          !RegExp(r'[0-9]').hasMatch(_newPassword.text)) {
         setState(() => _error =
-            'New password is too short — use at least 4 characters.');
+            'New password must be at least 8 characters and include both letters and numbers.');
         return;
       }
     }
@@ -123,10 +125,13 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                       ),
                       const SizedBox(height: 16),
                       const AuthLabel('Username'),
-                      TextField(
+                      TextFormField(
+                        // Disabled display field — use TextFormField's own
+                        // managed controller (via initialValue) instead of
+                        // allocating a new TextEditingController on every rebuild
+                        // that never gets disposed.
                         enabled: false,
-                        controller: TextEditingController(
-                            text: user?.username ?? ''),
+                        initialValue: user?.username ?? '',
                         decoration: const InputDecoration(
                           prefixIcon: Icon(Icons.person_outline),
                           helperText: 'Username cannot be changed',
@@ -170,7 +175,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                         controller: _newPassword,
                         obscureText: _obscure,
                         decoration: const InputDecoration(
-                          hintText: 'At least 4 characters',
+                          hintText: 'At least 8 characters, letters and numbers',
                           prefixIcon: Icon(Icons.lock_reset_outlined),
                         ),
                       ),

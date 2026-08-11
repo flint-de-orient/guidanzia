@@ -168,6 +168,34 @@ class ApiClient {
     return null;
   }
 
+  /// The most-recently explored career role — the profile's "chosen career".
+  /// Null if the user hasn't opened any role's deep-dive yet.
+  Future<({String roleId, String roleTitle})?> getRecentJobRole(
+      String username) async {
+    try {
+      final json = await _post('/api/get-recent-job-role', {'username': username});
+      final jr = json['jobRole'];
+      if (json['success'] == true && jr is Map) {
+        final m = jr.cast<String, dynamic>();
+        final title = (m['roleTitle'] ?? '').toString();
+        if (title.isEmpty) return null;
+        return (roleId: (m['roleId'] ?? '').toString(), roleTitle: title);
+      }
+      return null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /// Retake commit: drop the server's stored assessment answers (recommendations
+  /// and saved role details are kept). Best-effort — a failure must not block
+  /// the retake the user has already started.
+  Future<void> clearAssessmentAnswers(String username) async {
+    try {
+      await _post('/api/clear-assessment-answers', {'username': username});
+    } catch (_) {/* best-effort */}
+  }
+
   // ---- Onboarding ----
 
   Future<void> saveOnboarding(String username, OnboardingData data) async {

@@ -31,26 +31,3 @@ export function useAuth(): AuthContextType {
   }
   return context;
 }
-
-// Higher-order component for protected routes
-export function withAuth(Component: React.ComponentType<any>) {
-  return function AuthenticatedComponent(props: any) {
-    const { isAuthenticated, loading } = useAuth();
-
-    if (loading) {
-      return (
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-indigo-600"></div>
-        </div>
-      );
-    }
-
-    if (!isAuthenticated) {
-      // Redirect to login or show login form
-      window.location.href = '/login';
-      return null;
-    }
-
-    return <Component {...props} />;
-  };
-}

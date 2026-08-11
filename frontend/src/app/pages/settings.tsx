@@ -50,8 +50,15 @@ export function Settings() {
           setLoading(false);
           return;
         }
-        if (formData.newPassword.length < 3) {
-          setMessage({ type: 'error', text: 'Password must be at least 3 characters' });
+        if (
+          formData.newPassword.length < 8 ||
+          !/[a-zA-Z]/.test(formData.newPassword) ||
+          !/[0-9]/.test(formData.newPassword)
+        ) {
+          setMessage({
+            type: 'error',
+            text: 'Password must be at least 8 characters and include both letters and numbers.',
+          });
           setLoading(false);
           return;
         }

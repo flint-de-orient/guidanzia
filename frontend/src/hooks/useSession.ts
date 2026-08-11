@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 
+// Use the configured API base so production builds don't hit a dev-only host.
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+
 interface User {
   email: string;
   name?: string;
@@ -41,10 +44,9 @@ export function useSession(): SessionData {
             const storedRecommendations = localStorage.getItem('careerRecommendations');
             if (storedRecommendations) {
               sessionStorage.setItem('careerRecommendations', storedRecommendations);
-            } else {
-              // If no local data, try to fetch from database
-              await fetchUserSessionData(userData.email);
             }
+            // No server-side session endpoint exists; recommendations live in
+            // localStorage and are regenerated on demand when absent.
           }
           
           if (!sessionStorage.getItem('userProfile')) {
@@ -64,39 +66,6 @@ export function useSession(): SessionData {
     initializeSession();
   }, []);
 
-  // Fetch user session data from database
-  const fetchUserSessionData = async (username: string) => {
-    try {
-      const response = await fetch('http://localhost:8080/api/get-user-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username }),
-      });
-      
-      const result = await response.json();
-      if (result.success && result.session) {
-        // Restore recommendations if available
-        if (result.session.recommendations) {
-          sessionStorage.setItem('careerRecommendations', JSON.stringify(result.session.recommendations));
-          localStorage.setItem('careerRecommendations', JSON.stringify(result.session.recommendations));
-        }
-        
-        // Restore user profile if available
-        if (result.session.userProfile) {
-          sessionStorage.setItem('userProfile', JSON.stringify(result.session.userProfile));
-          localStorage.setItem('userProfile', JSON.stringify(result.session.userProfile));
-        }
-        
-        // Restore last role if available
-        if (result.session.lastRole) {
-          localStorage.setItem('edubot_last_role', JSON.stringify(result.session.lastRole));
-        }
-      }
-    } catch (error) {
-      console.error('Error fetching user session data:', error);
-    }
-  };
-
   const login = (userData: User) => {
     setUser(userData);
     localStorage.setItem('edubot_user', JSON.stringify(userData));
@@ -107,7 +76,7 @@ export function useSession(): SessionData {
     setError(null);
     
     try {
-      const response = await fetch('http://localhost:8080/login', {
+      const response = await fetch(`${API_BASE}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,9 +88,12 @@ export function useSession(): SessionData {
       
       if (result.success) {
         const userData = {
+          // The backend returns name/profileImage flat (not nested under a
+          // `session` object), so the old result.session?.name read always fell
+          // through to the username and the real display name was dropped.
           email: credentials.username,
-          name: result.session?.name || credentials.username,
-          profileImage: result.session?.profileImage
+          name: result.name || credentials.username,
+          profileImage: result.profileImage,
         };
         
         login(userData);
@@ -168,7 +140,7 @@ export function useSession(): SessionData {
     // Call backend logout API if user exists
     if (currentUser?.email) {
       try {
-        await fetch('http://localhost:8080/logout', {
+        await fetch(`${API_BASE}/logout`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

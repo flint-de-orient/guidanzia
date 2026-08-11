@@ -33,14 +33,16 @@ class _RoleDetailScreenState extends ConsumerState<RoleDetailScreen> {
   static const _sections = <({String type, String title, IconData icon})>[
     (type: 'overview', title: 'Overview', icon: Icons.person_search_outlined),
     (type: 'pathway', title: 'Pathway', icon: Icons.route_outlined),
-    (type: 'skills', title: 'Skills', icon: Icons.psychology_outlined),
-    (type: 'roadmap', title: '90-Day Plan', icon: Icons.map_outlined),
+    // DISABLED for now (uncomment to re-enable):
+    // (type: 'skills', title: 'Skills', icon: Icons.psychology_outlined),
+    // (type: 'roadmap', title: '90-Day Plan', icon: Icons.map_outlined),
     (type: 'institute', title: 'Institutes', icon: Icons.account_balance_outlined),
     (type: 'fees', title: 'Fees', icon: Icons.payments_outlined),
     (type: 'scholarships', title: 'Scholarships', icon: Icons.volunteer_activism_outlined),
     (type: 'jobmarket', title: 'Market', icon: Icons.insights_outlined),
-    (type: 'salary', title: 'Salary', icon: Icons.trending_up_rounded),
-    (type: 'certifications', title: 'Certifications', icon: Icons.workspace_premium_outlined),
+    // DISABLED for now (uncomment to re-enable):
+    // (type: 'salary', title: 'Salary', icon: Icons.trending_up_rounded),
+    // (type: 'certifications', title: 'Certifications', icon: Icons.workspace_premium_outlined),
     (type: 'experts', title: 'Experts', icon: Icons.groups_outlined),
   ];
 
@@ -55,14 +57,16 @@ class _RoleDetailScreenState extends ConsumerState<RoleDetailScreen> {
   static const _serverKey = {
     'overview': 'overview',
     'pathway': 'careerPathway',
-    'skills': 'skillsLearning',
-    'roadmap': 'roadmap90Days',
+    // DISABLED for now — keep out of restore/persist/PDF so they can't resurface
+    // (uncomment to re-enable, alongside _sections above):
+    // 'skills': 'skillsLearning',
+    // 'roadmap': 'roadmap90Days',
     'institute': 'topInstitutes',
     'fees': 'feesInvestment',
     'scholarships': 'scholarships',
     'jobmarket': 'jobMarket',
-    'salary': 'salaryGrowth',
-    'certifications': 'certifications',
+    // 'salary': 'salaryGrowth',
+    // 'certifications': 'certifications',
     'experts': 'industryExperts',
   };
 
@@ -119,6 +123,9 @@ class _RoleDetailScreenState extends ConsumerState<RoleDetailScreen> {
             roleTitle: widget.career.title,
             detailData: detailData,
           );
+      // This role is now the most-recently explored — refresh the provider so
+      // the Profile "chosen career" card updates to it.
+      ref.invalidate(recentJobRoleProvider);
     } catch (_) {
       // Caching is best-effort — never block the user on it.
     }
@@ -316,15 +323,22 @@ class _RoleDetailScreenState extends ConsumerState<RoleDetailScreen> {
   }
 
   Future<void> _exportPdf() async {
-    final wanted = ['overview', 'pathway', 'skills', 'salary'];
     try {
       showDialog(
         context: context,
         barrierDismissible: false,
         builder: (_) => const Center(child: CircularProgressIndicator()),
       );
-      for (final t in wanted) {
-        await _loadSection(t);
+      // Export only the sections the user has already opened (in `_loaded`),
+      // but ensure the Overview is present so the report is never empty.
+      if (!_loaded.containsKey('overview')) {
+        try {
+          await _loadSection('overview');
+        } catch (_) {
+          // Skip a section that fails to load — the PDF builder handles missing
+          // sections, so one slow/failed call still yields a usable report
+          // instead of aborting the whole export.
+        }
       }
       final path = await CareerPdfExport.generateAndSave(
         career: widget.career,
@@ -607,7 +621,7 @@ class _SectionCardState extends State<_SectionCard> {
     if (_loading) {
       return const Padding(
         padding: EdgeInsets.symmetric(vertical: 24),
-        child: LoadingState(message: 'Generating with AI…'),
+        child: RotatingLoader(phrases: LoaderPhrases.section),
       );
     }
     if (_error != null) {

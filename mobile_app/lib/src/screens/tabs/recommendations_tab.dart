@@ -105,7 +105,12 @@ class RecommendationsTab extends ConsumerWidget {
                   ],
                   const SizedBox(height: 8),
                   _RetakeCard(
-                    onTap: () => Navigator.of(context).pushNamed(Routes.questionnaire),
+                    onTap: () async {
+                      await startRetake(ref);
+                      if (context.mounted) {
+                        Navigator.of(context).pushNamed(Routes.questionnaire);
+                      }
+                    },
                   ),
                 ],
               );
@@ -184,10 +189,7 @@ class _ResultCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 10),
-          Text(career.description,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: g.onSurfaceVariant, fontSize: 14, height: 1.45)),
+          _ExpandableDescription(text: career.description),
           const SizedBox(height: 18),
           GestureDetector(
             onTap: onTap,
@@ -212,6 +214,49 @@ class _ResultCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// The fit-reason text, truncated to 2 lines with a "Read more" toggle to reveal
+/// the full reasoning (the same text also shows in the role deep-dive header).
+class _ExpandableDescription extends StatefulWidget {
+  const _ExpandableDescription({required this.text});
+  final String text;
+
+  @override
+  State<_ExpandableDescription> createState() => _ExpandableDescriptionState();
+}
+
+class _ExpandableDescriptionState extends State<_ExpandableDescription> {
+  bool _expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final g = Theme.of(context).guidanzia;
+    final canExpand = widget.text.trim().length > 90;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.text,
+          maxLines: _expanded ? null : 2,
+          overflow: _expanded ? TextOverflow.visible : TextOverflow.ellipsis,
+          style: TextStyle(color: g.onSurfaceVariant, fontSize: 14, height: 1.45),
+        ),
+        if (canExpand)
+          GestureDetector(
+            onTap: () => setState(() => _expanded = !_expanded),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: Text(
+                _expanded ? 'Read less' : 'Read more',
+                style: TextStyle(
+                    color: g.gold, fontSize: 13, fontWeight: FontWeight.w700),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }
@@ -261,9 +306,7 @@ class _LoadingCareers extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 8),
-        const LoadingState(
-            message:
-                'Analysing your profile and generating career matches…\nThis can take up to a minute.'),
+        const RotatingLoader(phrases: LoaderPhrases.recommendations),
         const SizedBox(height: 20),
         ...List.generate(
           3,

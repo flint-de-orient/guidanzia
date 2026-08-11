@@ -11,14 +11,12 @@ def truncate_database():
         # Delete all data from all tables
         cursor.execute('DELETE FROM users')
         cursor.execute('DELETE FROM user_session')
-        cursor.execute('DELETE FROM user_sessions')
         cursor.execute('DELETE FROM job_role_details')
         cursor.execute('DELETE FROM onboarding_data')
         cursor.execute('DELETE FROM career_recommendations')
         
         # Reset auto-increment counters
         cursor.execute('DELETE FROM sqlite_sequence WHERE name="users"')
-        cursor.execute('DELETE FROM sqlite_sequence WHERE name="user_sessions"')
         cursor.execute('DELETE FROM sqlite_sequence WHERE name="job_role_details"')
         cursor.execute('DELETE FROM sqlite_sequence WHERE name="user_session"')
         cursor.execute('DELETE FROM sqlite_sequence WHERE name="onboarding_data"')

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../models/career_recommendation.dart';
 import '../../router/app_routes.dart';
 import '../../state/providers.dart';
 import '../../theme/app_text.dart';
@@ -8,6 +9,7 @@ import '../../theme/guidanzia_colors.dart';
 import '../../widgets/theme_toggle.dart';
 import '../career_report_screen.dart';
 import '../edit_profile_screen.dart';
+import '../role_detail_screen.dart';
 import '../settings_screen.dart';
 import '../payment_screen.dart';
 
@@ -30,6 +32,14 @@ class ProfileTab extends ConsumerWidget {
         ? 'Aspiring $interest'
         : 'Student';
 
+    // The assessment tile names itself by state: Resume (a draft is open),
+    // Retake (completed, no draft), or Start (never assessed).
+    final aStatus = ref.watch(assessmentStatusProvider);
+    final aCompleted = aStatus.completed ||
+        ref
+            .watch(recommendationsProvider)
+            .maybeWhen(data: (l) => l.isNotEmpty, orElse: () => false);
+
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 12, 20, 110),
       children: [
@@ -40,7 +50,6 @@ class ProfileTab extends ConsumerWidget {
           onSettings: () => Navigator.of(context).push(
             MaterialPageRoute(builder: (_) => const SettingsScreen()),
           ),
-          onLogout: () => _logout(context, ref),
         ),
         const SizedBox(height: 24),
         const _RecentProgress(),
@@ -59,9 +68,32 @@ class ProfileTab extends ConsumerWidget {
             const SizedBox(width: 12),
             Expanded(
               child: _QuickTile(
-                icon: Icons.replay_rounded,
-                label: 'Retake Assessment',
-                onTap: () => Navigator.of(context).pushNamed(Routes.questionnaire),
+                icon: aStatus.inProgress
+                    ? Icons.play_arrow_rounded
+                    : Icons.replay_rounded,
+                label: aStatus.inProgress
+                    ? 'Resume assessment'
+                    : (aCompleted ? 'Retake Assessment' : 'Start assessment'),
+                onTap: () async {
+                  if (aStatus.inProgress) {
+                    final route = switch (aStatus.stage) {
+                      AssessmentStage.questionnaire => Routes.questionnaire,
+                      AssessmentStage.games => Routes.games,
+                      _ => Routes.onboarding,
+                    };
+                    Navigator.of(context).pushNamed(route);
+                  } else if (aCompleted) {
+                    await startRetake(ref);
+                    if (context.mounted) {
+                      Navigator.of(context).pushNamed(Routes.questionnaire);
+                    }
+                  } else {
+                    ref
+                        .read(assessmentStatusProvider.notifier)
+                        .enter(AssessmentStage.onboarding);
+                    Navigator.of(context).pushNamed(Routes.onboarding);
+                  }
+                },
               ),
             ),
           ],
@@ -120,13 +152,11 @@ class _Header extends StatelessWidget {
     required this.initial,
     required this.subtitle,
     required this.onSettings,
-    required this.onLogout,
   });
   final String name;
   final String initial;
   final String subtitle;
   final VoidCallback onSettings;
-  final VoidCallback onLogout;
 
   @override
   Widget build(BuildContext context) {
@@ -153,8 +183,6 @@ class _Header extends StatelessWidget {
             const ThemeToggle(),
             const SizedBox(width: 10),
             _CircleIcon(icon: Icons.settings_outlined, onTap: onSettings),
-            const SizedBox(width: 10),
-            _CircleIcon(icon: Icons.logout_rounded, danger: true, onTap: onLogout),
           ],
         ),
         const SizedBox(height: 16),
@@ -185,15 +213,14 @@ class _Header extends StatelessWidget {
 }
 
 class _CircleIcon extends StatelessWidget {
-  const _CircleIcon({required this.icon, required this.onTap, this.danger = false});
+  const _CircleIcon({required this.icon, required this.onTap});
   final IconData icon;
   final VoidCallback onTap;
-  final bool danger;
 
   @override
   Widget build(BuildContext context) {
     final g = Theme.of(context).guidanzia;
-    final c = danger ? g.danger : g.onSurface;
+    final c = g.onSurface;
     return InkWell(
       borderRadius: BorderRadius.circular(30),
       onTap: onTap,
@@ -242,11 +269,40 @@ class _RecentProgress extends ConsumerWidget {
       onTap = () => Navigator.of(context).pushNamed(route);
     } else if (status.completed || hasMatches) {
       pct = 1.0;
-      title = 'Assessment complete';
-      sub = 'Your career matches are ready';
-      action = 'View';
-      // Jump to the Matches tab (index 2 in the shell).
-      onTap = () => ref.read(shellTabProvider.notifier).state = 2;
+      // Once the user has explored a career, show that as their chosen path and
+      // open ITS deep-dive on tap; otherwise fall back to the generic
+      // "complete → view matches" state.
+      final recent = ref.watch(recentJobRoleProvider).maybeWhen(
+            data: (r) => r,
+            orElse: () => null,
+          );
+      if (recent != null && recent.roleTitle.trim().isNotEmpty) {
+        title = recent.roleTitle;
+        sub = 'Your chosen career path';
+        action = 'Open';
+        onTap = () {
+          // Prefer the matching recommendation so the deep-dive's fit-reason
+          // header shows; fall back to a minimal one if it's no longer listed.
+          final recs = ref.read(recommendationsProvider).maybeWhen(
+                data: (l) => l,
+                orElse: () => const <CareerRecommendation>[],
+              );
+          final match = recs.firstWhere(
+            (c) => c.roleId == recent.roleId,
+            orElse: () => CareerRecommendation(
+                title: recent.roleTitle, description: '', matchScore: 0),
+          );
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => RoleDetailScreen(career: match)),
+          );
+        };
+      } else {
+        title = 'Assessment complete';
+        sub = 'Your career matches are ready';
+        action = 'View';
+        // Jump to the Matches tab (index 2 in the shell).
+        onTap = () => ref.read(shellTabProvider.notifier).state = 2;
+      }
     } else {
       pct = 0.0;
       title = 'Start your assessment';

@@ -94,6 +94,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     // Wipe the saved assessment so the next user starts clean.
     await _storage.clearAssessment();
     _ref.read(assessmentStatusProvider.notifier).reset();
+    _ref.read(pendingRetakeCommitProvider.notifier).state = false;
     _ref.invalidate(questionnaireProvider);
     state = const AuthState(user: null, loading: false);
   }
@@ -251,6 +252,15 @@ final assessmentRestoreProvider = FutureProvider<void>((ref) async {
 /// Persists the current assessment (answers + progress) to local storage.
 /// Call after each answered question and after each game.
 Future<void> persistAssessment(WidgetRef ref) async {
+  // Clear-on-commit: the first time the user answers during a retake, drop the
+  // previous answers from the server (recommendations + role details are kept).
+  if (ref.read(pendingRetakeCommitProvider)) {
+    ref.read(pendingRetakeCommitProvider.notifier).state = false;
+    final username = ref.read(authProvider).user?.username;
+    if (username != null) {
+      await ref.read(apiClientProvider).clearAssessmentAnswers(username);
+    }
+  }
   final q = ref.read(questionnaireProvider);
   final st = ref.read(assessmentStatusProvider);
   final payload = jsonEncode({
@@ -267,6 +277,24 @@ Future<void> persistAssessment(WidgetRef ref) async {
 /// logout).
 Future<void> clearPersistedAssessment(WidgetRef ref) async {
   await ref.read(storageProvider).clearAssessment();
+}
+
+/// True while a completed user has started a retake but not yet answered its
+/// first question. Drives clear-on-commit: the server answers are dropped only
+/// once they actually commit (first answer), not on the Retake tap.
+final pendingRetakeCommitProvider = StateProvider<bool>((ref) => false);
+
+/// Begin a fresh retake. Resets the answers at EVERY durable layer so nothing
+/// (in-memory or the persisted blob) can re-hydrate the previous attempt, while
+/// KEEPING [AssessmentStatus.completed] true (the user keeps the full nav). The
+/// server answers are left untouched here — they're cleared on first commit.
+Future<void> startRetake(WidgetRef ref) async {
+  ref.read(questionnaireProvider).reset(); // explicit, deterministic reset
+  await ref.read(storageProvider).clearAssessment(); // clear the durable blob
+  final notifier = ref.read(assessmentStatusProvider.notifier);
+  notifier.setQuestionIndex(0);
+  notifier.setGameIndex(1);
+  ref.read(pendingRetakeCommitProvider.notifier).state = true;
 }
 
 // ---------------------------------------------------------------------------
@@ -328,8 +356,19 @@ final themeModeProvider =
 /// `ref.invalidate(recommendationsProvider)` to regenerate.
 final recommendationsProvider =
     FutureProvider<List<CareerRecommendation>>((ref) async {
-  final auth = ref.watch(authProvider);
-  final username = auth.user?.username;
+  // Watch ONLY the username, not the whole AuthState — otherwise a profile
+  // rename (which emits a new AuthState with the same username) needlessly
+  // re-fires the ~120s Gemini call and drops the Matches tab into loading.
+  final username = ref.watch(authProvider.select((s) => s.user?.username));
   if (username == null) return [];
   return ref.read(apiClientProvider).getTop3Careers(username);
+});
+
+/// The user's last-explored career role (their "chosen career"), or null if
+/// they haven't opened any yet. Watched by the Profile "Recent Progress" card.
+final recentJobRoleProvider =
+    FutureProvider<({String roleId, String roleTitle})?>((ref) async {
+  final username = ref.watch(authProvider.select((s) => s.user?.username));
+  if (username == null) return null;
+  return ref.read(apiClientProvider).getRecentJobRole(username);
 });

@@ -18,8 +18,14 @@ class StorageService {
   );
 
   Future<void> saveUser(String username, String name) async {
-    await _secure.write(key: _kUsername, value: username);
-    await _secure.write(key: _kName, value: name);
+    // Same keystore hazard as readUser: a write can hang/throw on a corrupted
+    // keystore. Cap it and swallow failures so login can never freeze — the
+    // in-memory auth state still proceeds even if the persist fails.
+    try {
+      const limit = Duration(seconds: 4);
+      await _secure.write(key: _kUsername, value: username).timeout(limit);
+      await _secure.write(key: _kName, value: name).timeout(limit);
+    } catch (_) {/* non-fatal: user stays logged in for this session */}
   }
 
   Future<({String username, String name})?> readUser() async {
@@ -41,8 +47,12 @@ class StorageService {
   }
 
   Future<void> clearUser() async {
-    await _secure.delete(key: _kUsername);
-    await _secure.delete(key: _kName);
+    // Never let logout hang on a flaky keystore.
+    try {
+      const limit = Duration(seconds: 4);
+      await _secure.delete(key: _kUsername).timeout(limit);
+      await _secure.delete(key: _kName).timeout(limit);
+    } catch (_) {/* non-fatal */}
   }
 
   Future<void> saveLocale(String code) async {

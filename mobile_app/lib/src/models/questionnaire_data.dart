@@ -228,6 +228,53 @@ class QuestionnaireData {
         'cipherCounselorFlags': cipherCounselorFlags,
       };
 
+  /// Reset every answer to its default — starts a clean retake by mutating this
+  /// instance in place (deterministic, unlike invalidating the provider).
+  void reset() {
+    whyHere = null;
+    fiveYearVision = null;
+    careerThinking = '';
+    careerRuledOut = '';
+    freeSunday = null;
+    groupRole = null;
+    jobBothers = null;
+    favoriteSubjects = [];
+    difficultSubject = null;
+    subjectMarks = {};
+    studyExperience = null;
+    outsideActivities = [];
+    externalValidation = null;
+    selfInitiated = '';
+    studyLocation = [];
+    familyBudget = null;
+    careerValues = [];
+    planningStyle = null;
+    stressResponse = null;
+    surpriseReaction = null;
+    module1Insight = null;
+    module2Insight = null;
+    module3Insight = null;
+    module4Insight = null;
+    module5Insight = null;
+    module6Insight = null;
+    numberSenseScore = null;
+    wordSenseScore = null;
+    shapeSenseScore = null;
+    logicSenseScore = null;
+    persistenceEffortRating = null;
+    persistenceApproachStyle = null;
+    persistenceCounselorFlags = [];
+    persistenceHighestTier = null;
+    constraintGridApproach = null;
+    constraintGridSolved = false;
+    constraintGridCounselorFlag = null;
+    cipherInformationGathering = null;
+    cipherPersistence = null;
+    cipherRuleAdaptability = null;
+    cipherSolved = false;
+    cipherCounselorFlags = [];
+  }
+
   /// Applies a previously-saved [toJson] map onto this instance in place
   /// (the provider holds a single mutable instance).
   void applyJson(Map<String, dynamic> j) {

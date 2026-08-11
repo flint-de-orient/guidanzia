@@ -77,7 +77,9 @@ class _LandingBodyState extends ConsumerState<LandingBody> {
 
     final Widget body = ListView(
       controller: _scroll,
-      padding: const EdgeInsets.fromLTRB(20, 6, 20, 40),
+      // Extra bottom padding so the last card clears the floating bottom nav
+      // (the shell uses extendBody), matching the other tabs.
+      padding: const EdgeInsets.fromLTRB(20, 6, 20, 110),
       children: [
         _BrandRow(loggedIn: loggedIn),
         const SizedBox(height: 22),
@@ -205,15 +207,10 @@ class _BrandRow extends ConsumerWidget {
         ),
         const Spacer(),
         const ThemeToggle(),
-        const SizedBox(width: 4),
-        if (loggedIn)
-          IconButton(
-            icon: Icon(Icons.account_circle_outlined,
-                color: g.gold),
-            // Jump to the Profile tab (index 3 in the shell).
-            onPressed: () => ref.read(shellTabProvider.notifier).state = 3,
-          )
-        else
+        // Profile lives in the bottom nav for logged-in users, so no profile
+        // button here; only the public landing shows a Sign in.
+        if (!loggedIn) ...[
+          const SizedBox(width: 4),
           TextButton(
             onPressed: () => Navigator.of(context).pushNamed(Routes.login),
             style: TextButton.styleFrom(
@@ -228,6 +225,7 @@ class _BrandRow extends ConsumerWidget {
             child: Text(s.get('signIn'),
                 style: const TextStyle(fontWeight: FontWeight.w700)),
           ),
+        ],
       ],
     );
   }

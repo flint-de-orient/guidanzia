@@ -81,8 +81,9 @@ export function Profile() {
         return;
       }
       
-      // Check if user has saved recommendations in database
-      fetchUserRecommendations(user.email);
+      // No recommendations stored locally, and there is no server-side session
+      // endpoint to fall back to — treat as none until the user generates them.
+      setHasRecommendations(false);
     };
     
     // Fetch recent job role from database
@@ -96,29 +97,6 @@ export function Profile() {
     checkRecommendations();
     loadRecentJobRole();
   }, [navigate, isAuthenticated, user]);
-
-  // Fetch user recommendations from database
-  const fetchUserRecommendations = async (username: string) => {
-    try {
-      const response = await fetch(`${API_BASE}/api/get-user-session`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username }),
-      });
-      
-      const result = await response.json();
-      if (result.success && result.session?.recommendations) {
-        setHasRecommendations(true);
-        // Restore recommendations to sessionStorage
-        sessionStorage.setItem('careerRecommendations', JSON.stringify(result.session.recommendations));
-      } else {
-        setHasRecommendations(false);
-      }
-    } catch (error) {
-      console.error('Error fetching user recommendations:', error);
-      setHasRecommendations(false);
-    }
-  };
 
   const handleLogout = () => {
     logout(); // This will now automatically refresh and redirect

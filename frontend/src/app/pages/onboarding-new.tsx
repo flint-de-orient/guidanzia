@@ -340,11 +340,11 @@ export function OnboardingNew() {
       const result = await response.json();
       clearInterval(ticker);
       setFeedbackLoadingPct(100);
-      setFeedbackMessage(result.success ? result.feedback : "Let's keep going â€” your profile is taking shape.");
+      setFeedbackMessage(result.success ? result.feedback : "Let's keep going — your profile is taking shape.");
     } catch {
       clearInterval(ticker);
       setFeedbackLoadingPct(100);
-      setFeedbackMessage("Let's keep going â€” your profile is taking shape.");
+      setFeedbackMessage("Let's keep going — your profile is taking shape.");
     } finally {
       setFeedbackLoading(false);
     }

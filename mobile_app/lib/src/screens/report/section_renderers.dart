@@ -82,12 +82,14 @@ class SectionRenderer {
     }
     final uri = Uri.tryParse(raw);
     if (uri == null) return;
-    // Launch directly (don't gate on canLaunchUrl, which can be falsely
-    // negative); fall back to the in-app browser if the external app fails.
+    // Prefer an IN-APP browser (Chrome Custom Tabs) so the link opens inside the
+    // app's own task and the Flutter engine stays alive. Leaving to an external
+    // browser fully backgrounds the app, which on low-memory devices gets the
+    // process killed and cold-starts it on return. Fall back if unavailable.
     try {
-      final ok = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      final ok = await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
       if (!ok) {
-        await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
       }
     } catch (_) {
       try {
@@ -149,6 +151,32 @@ class SectionRenderer {
   }
 
   // ---- sections ----
+
+  /// A subtle inline caption for honest framing (e.g. "estimated, not live
+  /// data") shown at the top of a section that shouldn't read as hard fact.
+  static Widget _note(BuildContext context, String text) {
+    final g = Theme.of(context).guidanzia;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: g.surfaceMuted,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(Icons.info_outline_rounded, size: 15, color: g.onSurfaceVariant),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(text,
+                style: TextStyle(
+                    color: g.onSurfaceVariant, fontSize: 11.5, height: 1.35)),
+          ),
+        ],
+      ),
+    );
+  }
 
   static Widget _overview(BuildContext context, Map<String, dynamic> c) {
     final g = Theme.of(context).guidanzia;
@@ -459,6 +487,8 @@ class SectionRenderer {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        _note(context,
+            'Estimated from general market knowledge — not live vacancy data.'),
         // Equal-height stat tiles so the row never goes ragged when one value
         // is longer than the other.
         IntrinsicHeight(
@@ -579,8 +609,12 @@ class SectionRenderer {
     final g = Theme.of(context).guidanzia;
     final list = _mapList(c['experts']);
     return Column(
-      children: list.map((m) {
-        return _subCard(context, 
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _note(context,
+            'Representative profiles — typical senior professionals in this field, not specific named individuals.'),
+        ...list.map((m) {
+        return _subCard(context,
           title: m['name']?.toString() ?? '',
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -626,7 +660,8 @@ class SectionRenderer {
             ],
           ),
         );
-      }).toList(),
+      }),
+      ],
     );
   }
 

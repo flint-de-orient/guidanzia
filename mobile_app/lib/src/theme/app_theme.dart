@@ -9,8 +9,7 @@ import 'guidanzia_colors.dart';
 ///
 /// The brand token layer ([GuidanziaColors]) is attached to BOTH themes via
 /// `extensions`, so widgets read `Theme.of(context).guidanzia` and get the
-/// right value per theme. `AppColors` remains as light-only constants that
-/// not-yet-migrated screens keep referencing — dark rolls out screen by screen.
+/// right value per theme.
 class AppTheme {
   const AppTheme._();
 

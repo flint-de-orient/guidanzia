@@ -20,6 +20,12 @@ export function Signup() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    // Enforce the policy the UI already promises ("at least 8 characters with
+    // numbers and letters") — previously it was claimed but never checked.
+    if (password.length < 8 || !/[a-zA-Z]/.test(password) || !/[0-9]/.test(password)) {
+      setError('Password must be at least 8 characters and include both letters and numbers.');
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch(

@@ -45,9 +45,11 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
       setState(() => _error = 'Please enter a password.');
       return;
     }
-    if (_password.text.length < 4) {
+    if (_password.text.length < 8 ||
+        !RegExp(r'[a-zA-Z]').hasMatch(_password.text) ||
+        !RegExp(r'[0-9]').hasMatch(_password.text)) {
       setState(() => _error =
-          'Password is too short — use at least 4 characters (you entered ${_password.text.length}).');
+          'Password must be at least 8 characters and include both letters and numbers.');
       return;
     }
     if (_confirm.text.isEmpty) {
