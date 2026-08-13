@@ -40,7 +40,10 @@ Then fill in the values:
 | `VITE_API_BASE_URL` | frontend | Backend URL, e.g. `http://localhost:8080` |
 | `MONGO_URI` | backend | MongoDB connection string (default `mongodb://localhost:27017`; use a credentialed URI in production) |
 | `MONGO_DB` | backend | Database name (default `guidenzia`) |
-| `GEMINI_MODEL` | backend | *optional* — model id override |
+| `GEMINI_FAST_MODEL` | backend | *optional* — override the non-thinking model used for most calls |
+| `GEMINI_LITE_MODEL` | backend | *optional* — override the cheapest model used for trivial validation |
+| `GEMINI_THINKING_MODEL` | backend | *optional* — override the reasoning model (e.g. a `pro` alias if you have quota) |
+| `GEMINI_MODEL` | backend | *optional* — legacy alias for `GEMINI_FAST_MODEL` |
 | `GEMINI_MAX_CONCURRENCY` | backend | *optional* — parallel-request cap |
 
 > The **mobile app does NOT use `.env`** — it receives the backend URL at launch via
@@ -64,6 +67,14 @@ backend ensures its indexes on startup; no seed data is needed.
 > **Reset the database:** `python truncate_db.py` empties all collections
 > (keeps indexes + validators); `python truncate_db.py --drop` removes the
 > whole database.
+
+**AI model tiers.** To control cost, Gemini calls are routed to one of three
+tiers: `fast`/`lite` use a **non-thinking** model (no hidden reasoning tokens)
+for describe/list/generate and validation, while `think` uses a **reasoning**
+model reserved for genuine judgment tasks (career recommendation, job-market
+estimate, game-5 insights, pathway). The backend resolves each tier against the
+models your keys can actually serve and falls back automatically if one is
+gated; override any tier with the `GEMINI_*_MODEL` variables above.
 
 ## 3. Frontend (Vite web app)
 
