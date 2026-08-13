@@ -79,7 +79,12 @@ class _RoleDetailScreenState extends ConsumerState<RoleDetailScreen> {
   Future<void> _init() async {
     // 1) Reuse anything the server already generated for this role (cheap DB
     //    read) so we never re-run slow AI calls for content we already have.
+    //    This also bumps last_visited_at server-side, making THIS role the
+    //    Profile's "most recently visited" — refresh the provider so a revisit
+    //    of an already-cached role (which never triggers a save) still updates
+    //    the Profile card.
     await _restoreCachedSections();
+    ref.invalidate(recentJobRoleProvider);
     // 2) Build the profile needed to generate any *missing* sections.
     await _buildProfile();
     if (!mounted) return;
