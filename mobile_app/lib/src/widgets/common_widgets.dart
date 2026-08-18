@@ -342,6 +342,10 @@ class CountLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     final g = Theme.of(context).guidanzia;
     final pct = total == 0 ? 0.0 : (loaded / total).clamp(0.0, 1.0);
+    // Before the first item resolves (loaded == 0) a determinate ring at 0.0
+    // draws nothing and reads as "no loader". Show an INDETERMINATE (animated)
+    // spinner until the first item lands, then switch to the honest X/total ring.
+    final double? ringValue = loaded == 0 ? null : pct;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -352,7 +356,7 @@ class CountLoader extends StatelessWidget {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                CircularProgressIndicator(value: pct, color: g.gold, strokeWidth: 5),
+                CircularProgressIndicator(value: ringValue, color: g.gold, strokeWidth: 5),
                 Text('$loaded/$total',
                     style: TextStyle(
                         color: g.onSurface,

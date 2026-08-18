@@ -28,6 +28,11 @@ class Question {
     this.maxLen = 50,
     this.placeholder = '',
     this.ranked = false,
+    this.followupField,
+    this.followupHint = '',
+    this.followupShownFor = const [],
+    this.followupMaxLen = 60,
+    this.inlineBlank = false,
   });
 
   final int number; // 1..20
@@ -43,6 +48,19 @@ class Question {
   final int maxLen;
   final String placeholder;
   final bool ranked;
+
+  // Optional free-text companion shown BELOW a single-select question's options
+  // (e.g. Q13: name the role others expect). Rendered only when the currently
+  // selected option value is in [followupShownFor]. [followupField] is the
+  // QuestionnaireData field it writes to.
+  final String? followupField;
+  final String followupHint;
+  final List<String> followupShownFor;
+  final int followupMaxLen;
+  // When true, the title contains a '___' token that is replaced by an inline
+  // editable blank (writes to [followupField]); the blank is part of the
+  // sentence, not a separate box below the options.
+  final bool inlineBlank;
 }
 
 const moduleTitles = <int, String>{
@@ -185,7 +203,10 @@ const kQuestions = <Question>[
   ),
   Question(
     number: 13, module: 4, field: 'externalValidation',
-    title: 'Has anyone ever told you "you\'d be great at ___"?',
+    // Inline blank: the '___' is replaced by an editable field for the role the
+    // family expects. The options capture what the student thinks of it.
+    title: 'Does your family expect you to become ___?',
+    note: 'Type the expected job role beside — optional',
     kind: QKind.single,
     options: [
       QOption('agree', 'Yes, and I agree', Icons.thumb_up_outlined),
@@ -193,6 +214,13 @@ const kQuestions = <Question>[
       QOption('disagree', "Yes, but I don't want to do that", Icons.thumb_down_outlined),
       QOption('no', 'No, not really', Icons.help_outline),
     ],
+    // Optional free-text stored in QuestionnaireData.expectedRole. Rendered as an
+    // inline blank in the title; ignored in the report when the stance is "no".
+    inlineBlank: true,
+    followupField: 'expectedRole',
+    followupHint: 'job role',
+    followupShownFor: ['agree', 'unsure', 'disagree'],
+    followupMaxLen: 40,
   ),
   Question(
     number: 14, module: 4, field: 'selfInitiated',

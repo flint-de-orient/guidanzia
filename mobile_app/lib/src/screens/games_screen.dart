@@ -100,6 +100,9 @@ class _GamesScreenState extends ConsumerState<GamesScreen> {
       _wordItems = [null, null, null, null];
       _wordLoaded = 0;
     });
+    // Keep the loader on screen a beat even when generation is near-instant
+    // (fast on the flash-lite model) so it doesn't flicker in and out.
+    final sw = Stopwatch()..start();
     final api = ref.read(apiClientProvider);
     final results = await Future.wait(
       List.generate(4, (i) async {
@@ -124,6 +127,10 @@ class _GamesScreenState extends ConsumerState<GamesScreen> {
         }
       }),
     );
+    final remaining = 400 - sw.elapsedMilliseconds;
+    if (remaining > 0) {
+      await Future.delayed(Duration(milliseconds: remaining));
+    }
     if (!mounted) return;
     _wordItems = results;
     if (results.every((r) => r == null)) {

@@ -66,6 +66,7 @@ class _QuestionnaireScreenState extends ConsumerState<QuestionnaireScreen> {
         'careerThinking' => q.careerThinking,
         'careerRuledOut' => q.careerRuledOut,
         'selfInitiated' => q.selfInitiated,
+        'expectedRole' => q.expectedRole,
         _ => '',
       };
       return TextEditingController(text: initial);
@@ -158,6 +159,14 @@ class _QuestionnaireScreenState extends ConsumerState<QuestionnaireScreen> {
   }
 
   void _saveText() {
+    // Optional free-text companion on a single-select question (Q13 expectedRole):
+    // keep it only when the chosen stance is one that shows the blank, else clear.
+    if (_q.followupField != null) {
+      final selected = _single(_q.field);
+      final show = selected != null && _q.followupShownFor.contains(selected);
+      final ft = show ? _controllerFor(_q.followupField!).text.trim() : '';
+      if (_q.followupField == 'expectedRole') q.expectedRole = ft;
+    }
     if (_q.kind != QKind.text) return;
     final t = _controllerFor(_q.field).text;
     switch (_q.field) {
@@ -349,7 +358,10 @@ class _QuestionnaireScreenState extends ConsumerState<QuestionnaireScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(_q.title, style: AppText.hero(30)),
+          if (_q.inlineBlank && _q.followupField != null)
+            _inlineBlankTitle()
+          else
+            Text(_q.title, style: AppText.hero(30)),
           const SizedBox(height: 20),
           _questionBody().animate().fadeIn(duration: 220.ms),
         ],
@@ -401,6 +413,51 @@ class _QuestionnaireScreenState extends ConsumerState<QuestionnaireScreen> {
                 onTap: () => _setSingle(_q.field, o.value),
               ))
           .toList(),
+    );
+  }
+
+  /// Renders a question title that contains a '___' token as a flowing sentence
+  /// with an INLINE editable blank (Q13: the family-expected role). The blank
+  /// writes to [followupField]; it's part of the sentence, not a box below.
+  Widget _inlineBlankTitle() {
+    final g = Theme.of(context).guidanzia;
+    final parts = _q.title.split('___');
+    final before = parts.isNotEmpty ? parts.first : _q.title;
+    final after = parts.length > 1 ? parts.sublist(1).join('___') : '';
+    final controller = _controllerFor(_q.followupField!);
+    final style = AppText.hero(30);
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        if (before.isNotEmpty) Text(before, style: style),
+        // The inline blank — grows with content, underlined to read as "___".
+        IntrinsicWidth(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minWidth: 90),
+            child: TextField(
+              controller: controller,
+              maxLength: _q.followupMaxLen,
+              textCapitalization: TextCapitalization.words,
+              inputFormatters: [LengthLimitingTextInputFormatter(_q.followupMaxLen)],
+              onChanged: (_) => setState(() {}),
+              style: style.copyWith(color: g.gold),
+              cursorColor: g.gold,
+              decoration: InputDecoration(
+                isDense: true,
+                hintText: _q.followupHint,
+                hintStyle: style.copyWith(color: g.onSurfaceVariant),
+                contentPadding: const EdgeInsets.only(bottom: 2),
+                enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: g.gold, width: 2)),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: g.gold, width: 2)),
+                counterText: '',
+              ),
+            ),
+          ),
+        ),
+        if (after.isNotEmpty) Text(after, style: style),
+      ],
     );
   }
 

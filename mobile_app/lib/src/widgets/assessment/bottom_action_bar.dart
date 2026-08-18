@@ -32,7 +32,8 @@ class BottomActionBar extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
         child: Container(
           decoration: BoxDecoration(
-            color: g.surface.withValues(alpha: 0.85),
+            // Near-transparent: keep the blur for legibility, drop the fill to 25%.
+            color: g.surface.withValues(alpha: 0.25),
           ),
           padding: EdgeInsets.fromLTRB(
             20,

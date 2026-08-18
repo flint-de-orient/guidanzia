@@ -32,6 +32,9 @@ dependencies:
   printing: ^5.13.4
   pdf: ^3.11.1
   file_saver: ^0.2.14
+  open_filex: ^4.5.0
+  path_provider: ^2.1.4
+  flutter_local_notifications: ^18.0.1
   url_launcher: ^6.3.1
   intl: any
   flutter_native_splash: ^2.4.8
@@ -39,6 +42,17 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.1
+
+# App launcher icon (generated: `dart run flutter_launcher_icons`).
+# Uses the provided logo as-is. White background; navy+gold logo.
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon/gnzaligned.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/icon/gnzaligned.png"
+  min_sdk_android: 21
 flutter:
   uses-material-design: true
 
@@ -64,6 +78,8 @@ flutter:
 # it. The in-app "arrival" animation (LandingBody) provides the motion. No
 # runtime Dart from this package — config/CLI only.
 flutter_native_splash:
+  # Light = white bg + navy emblem; dark = navy bg + inverted (white) emblem.
+  # Both emblems are transparent cut-outs so they sit on the theme background.
   color: "#FFFFFF"
   color_dark: "#0B1020"
   image: assets/images/splash_logo_light.png

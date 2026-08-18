@@ -25,10 +25,9 @@ class _SplashOverlayState extends State<SplashOverlay>
   late final AnimationController _fade; // exit fade to the app
   static const _hold = Duration(milliseconds: 2000); // total on-screen time
 
-  // Measured against the system splash on-device: the logo mark is 43.3% of
-  // screen width, dead-centre. Our knockout PNG has ~11% transparent padding,
-  // so the Image itself is a touch wider than the mark it contains.
-  static const _logoWidthFrac = 0.485;
+  // Enlarged brand mark, dead-centre. The emblems are now tight-cropped (no
+  // transparent padding), so this fraction is the actual visible mark width.
+  static const _logoWidthFrac = 0.6;
 
   @override
   void initState() {
@@ -70,6 +69,7 @@ class _SplashOverlayState extends State<SplashOverlay>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    // Light = white bg + navy emblem; dark = navy bg + inverted (white) emblem.
     final bg = isDark ? const Color(0xFF0B1020) : Colors.white;
     final wordColor = isDark ? const Color(0xFFF5C451) : const Color(0xFF0B0A3D);
     final logo = isDark
@@ -91,7 +91,9 @@ class _SplashOverlayState extends State<SplashOverlay>
               children: [
                 ColoredBox(color: bg),
                 // Logo: dead-centre, static — matches the system splash exactly.
-                Center(child: Image.asset(logo, width: logoW, height: logoW)),
+                Center(
+                    child: Image.asset(logo,
+                        width: logoW, height: logoW, fit: BoxFit.contain)),
                 // Wordmark: floats up + fades into place just under the logo.
                 Align(
                   alignment: const Alignment(0, 0.26),

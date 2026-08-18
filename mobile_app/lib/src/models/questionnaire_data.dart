@@ -22,6 +22,10 @@ class QuestionnaireData {
   // --- Module 4: Life Outside Marks ---
   List<String> outsideActivities = [];
   String? externalValidation;
+  // Optional free-text companion to externalValidation (Q13): the job role
+  // others expect / said the student would be great at. Used as soft-de-emphasis
+  // context in the report (never a ranking lever). Empty = not provided.
+  String expectedRole = '';
   String selfInitiated = '';
 
   // --- Module 5: The Constraints ---
@@ -96,6 +100,7 @@ class QuestionnaireData {
           'studyExperience': studyExperience,
           'outsideActivities': outsideActivities,
           'externalValidation': externalValidation,
+          'expectedRole': expectedRole.trim().isEmpty ? null : expectedRole.trim(),
           'selfInitiated': selfInitiated.trim().isEmpty ? 'Not specified' : selfInitiated.trim(),
           'studyLocation': studyLocation,
           'familyBudget': familyBudget,
@@ -197,6 +202,7 @@ class QuestionnaireData {
         'studyExperience': studyExperience,
         'outsideActivities': outsideActivities,
         'externalValidation': externalValidation,
+        'expectedRole': expectedRole,
         'selfInitiated': selfInitiated,
         'studyLocation': studyLocation,
         'familyBudget': familyBudget,
@@ -244,6 +250,7 @@ class QuestionnaireData {
     studyExperience = null;
     outsideActivities = [];
     externalValidation = null;
+    expectedRole = '';
     selfInitiated = '';
     studyLocation = [];
     familyBudget = null;
@@ -296,6 +303,7 @@ class QuestionnaireData {
     studyExperience = j['studyExperience'] as String?;
     outsideActivities = strList(j['outsideActivities']);
     externalValidation = j['externalValidation'] as String?;
+    expectedRole = (j['expectedRole'] ?? '') as String;
     selfInitiated = (j['selfInitiated'] ?? '') as String;
     studyLocation = strList(j['studyLocation']);
     familyBudget = j['familyBudget'] as String?;

@@ -1,7 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:path_provider/path_provider.dart';
+
+import '../services/notification_service.dart';
 
 import '../models/career_recommendation.dart';
 import '../state/providers.dart';
@@ -328,12 +333,9 @@ class _RoleDetailScreenState extends ConsumerState<RoleDetailScreen> {
   }
 
   Future<void> _exportPdf() async {
+    final notifier = DownloadNotifier.instance;
     try {
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (_) => const Center(child: CircularProgressIndicator()),
-      );
+      await notifier.showProgress('Gathering sections…');
       // Export only the sections the user has already opened (in `_loaded`),
       // but ensure the Overview is present so the report is never empty.
       if (!_loaded.containsKey('overview')) {
@@ -345,25 +347,39 @@ class _RoleDetailScreenState extends ConsumerState<RoleDetailScreen> {
           // instead of aborting the whole export.
         }
       }
-      final path = await CareerPdfExport.generateAndSave(
+      await notifier.showProgress('Building PDF…');
+      final result = await CareerPdfExport.generateAndSave(
         career: widget.career,
         sections: _loaded,
       );
+      await notifier.showProgress('Saving…');
+
+      // Write an app-owned copy that the OS "Open with" chooser can read
+      // reliably (the MediaStore path from FileSaver isn't openable on
+      // Android 11+). The public copy still lives in Downloads.
+      final safe = widget.career.title.replaceAll(RegExp(r'[^A-Za-z0-9]+'), '-');
+      final dir = await getTemporaryDirectory();
+      final file = File('${dir.path}/Guidenzia-Career-Report-$safe.pdf');
+      await file.writeAsBytes(result.bytes, flush: true);
+
+      await notifier.showComplete(file.path);
+      // Immediately present the native "Open with" chooser.
+      await OpenFilex.open(file.path);
+
       if (mounted) {
-        Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             behavior: SnackBarBehavior.floating,
-            content: Text('Report downloaded to Downloads\n$path'),
-            duration: const Duration(seconds: 4),
+            content: Text('Report saved to Downloads'),
+            duration: Duration(seconds: 3),
           ),
         );
       }
     } catch (e) {
+      await notifier.showFailed();
       if (mounted) {
-        Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Could not save PDF: $e')),
+          const SnackBar(content: Text('Could not generate the report. Please try again.')),
         );
       }
     }
